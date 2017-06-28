@@ -11,5 +11,11 @@ namespace Hablame.Repositories
     public interface IMistakeRepository
     {
         List<Mistake> GetAllMistakes();
+
+        List<Mistake> GetTopMistakesForLanguage(string languageName);
+
+        List<Mistake> GetLatestSessionMistakes(string conversationId);
+
+        List<Mistake> GetTopMistakesForSession(string conversationId);
     }
 }

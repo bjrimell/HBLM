@@ -10,6 +10,9 @@ namespace Hablame.Services.Viewmodels
 {
     public class ConversationViewModel
     {
+        public Conversation SavedConversation { get; set; }
+
+        public string ConversationId { get; set; }
         public User Teacher { get; set; }
 
         public User Student { get; set; }
@@ -20,7 +23,11 @@ namespace Hablame.Services.Viewmodels
 
         public int DurationMinutes { get; set; }
 
-        public List<Mistake> Mistakes { get; set; }
+        public List<Mistake> TopGlobalMistakesForLanguage { get; set; }
+
+        public List<Mistake> MostCommonSessionMistakes { get; set; }
+
+        public List<Mistake> LatestSessionMistakes { get; set; }
 
         public Language Language { get; set; }
 

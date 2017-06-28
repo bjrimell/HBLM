@@ -50,10 +50,10 @@
   <ItemGroup>
     <Compile Include="IMistakeService.cs" />
     <Compile Include="MistakeService.cs" />
-    <Compile Include="TalkService.cs" />
+    <Compile Include="ConversationService.cs" />
     <Compile Include="FriendService.cs" />
     <Compile Include="IFriendService.cs" />
-    <Compile Include="ITalkService.cs" />
+    <Compile Include="IConversationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

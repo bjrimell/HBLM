@@ -13,7 +13,7 @@ namespace Hablame.Repositories
     public class MistakeRepository : IMistakeRepository
     {
 
-        private string mockUserDataPath = @"D:\Code\priv\language\Hablame\Hablame.Repositories\Content\mock\Mistakes.xml";
+        private string mockUserDataPath = @"D:\Code\priv\language\HBLM\Hablame.Repositories\Content\mock\Mistakes.xml";
 
         public List<Mistake> GetAllMistakes()
         {
@@ -25,6 +25,24 @@ namespace Hablame.Repositories
             }
 
             return mistakes;
+        }
+
+        public List<Mistake> GetTopMistakesForLanguage(string languageName)
+        {
+            var allMistakes = this.GetAllMistakes();
+            return allMistakes.Where(m => m.LanguageId == languageName).ToList();
+        }
+
+        public List<Mistake> GetLatestSessionMistakes(string conversationId)
+        {
+            var allMistakes = this.GetAllMistakes();
+            return allMistakes.Where(m => m.ConversationId == conversationId).ToList();
+        }
+
+        public List<Mistake> GetTopMistakesForSession(string conversationId)
+        {
+            var allMistakes = this.GetAllMistakes();
+            return allMistakes.Where(m => m.ConversationId == conversationId).ToList();
         }
     }
 }

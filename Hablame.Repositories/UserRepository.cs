@@ -12,7 +12,7 @@ namespace Hablame.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private string mockUserDataPath = @"D:\Code\priv\language\Hablame\Hablame.Repositories\Content\mock\User.xml";
+        private string mockUserDataPath = @"D:\Code\priv\language\HBLM\Hablame.Repositories\Content\mock\User.xml";
         public List<User> GetAllMockUsers()
         {
             List<User> users;

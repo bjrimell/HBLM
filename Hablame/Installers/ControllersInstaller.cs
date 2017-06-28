@@ -19,7 +19,7 @@ namespace Hablame.Installers
             // Services
             container.Register(Component.For<IFriendService>().ImplementedBy<FriendService>().LifestylePerWebRequest());
 
-            container.Register(Component.For<ITalkService>().ImplementedBy<TalkService>().LifestylePerWebRequest());
+            container.Register(Component.For<IConversationService>().ImplementedBy<ConversationService>().LifestylePerWebRequest());
 
             container.Register(Component.For<IMistakeService>().ImplementedBy<MistakeService>().LifestylePerWebRequest());
 
@@ -27,6 +27,8 @@ namespace Hablame.Installers
             container.Register(Component.For<IUserRepository>().ImplementedBy<UserRepository>().LifestylePerWebRequest());
 
             container.Register(Component.For<IMistakeRepository>().ImplementedBy<MistakeRepository>().LifestylePerWebRequest());
+
+            container.Register(Component.For<IConversationRepository>().ImplementedBy<ConversationRepository>().LifestylePerWebRequest());
         }
     }
 }

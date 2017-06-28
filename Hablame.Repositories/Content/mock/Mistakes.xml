@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ArrayOfMistake xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Mistake>
+    <Id>0001</Id>
     <StudentId>Es01</StudentId>
     <TeacherId>En01</TeacherId>
     <ConversationId>0001</ConversationId>
@@ -13,6 +14,7 @@
     <Comment></Comment>
   </Mistake>
   <Mistake>
+    <Id>0002</Id>
     <StudentId>Es01</StudentId>
     <TeacherId>En01</TeacherId>
     <ConversationId>0001</ConversationId>
@@ -25,6 +27,7 @@
     <Comment></Comment>
   </Mistake>
   <Mistake>
+    <Id>0003</Id>
     <StudentId>Es01</StudentId>
     <TeacherId>En01</TeacherId>
     <ConversationId>0001</ConversationId>
@@ -37,6 +40,7 @@
     <Comment></Comment>
   </Mistake>
   <Mistake>
+    <Id>0004</Id>
     <StudentId>Es01</StudentId>
     <TeacherId>En01</TeacherId>
     <ConversationId>0001</ConversationId>

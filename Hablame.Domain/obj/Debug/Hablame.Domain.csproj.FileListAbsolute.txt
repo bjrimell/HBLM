@@ -7,3 +7,12 @@ D:\Code\priv\language\Hablame\Hablame.Domain\bin\Debug\Castle.Windsor.xml
 D:\Code\priv\language\Hablame\Hablame.Domain\obj\Debug\Hablame.Domain.dll
 D:\Code\priv\language\Hablame\Hablame.Domain\obj\Debug\Hablame.Domain.pdb
 D:\Code\priv\language\Hablame\Hablame.Domain\obj\Debug\Hablame.Domain.csprojResolveAssemblyReference.cache
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Debug\Hablame.Domain.dll
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Debug\Hablame.Domain.pdb
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Debug\Castle.Core.dll
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Debug\Castle.Windsor.dll
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Debug\Castle.Core.xml
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Debug\Castle.Windsor.xml
+D:\Code\priv\language\HBLM\Hablame.Domain\obj\Debug\Hablame.Domain.csprojResolveAssemblyReference.cache
+D:\Code\priv\language\HBLM\Hablame.Domain\obj\Debug\Hablame.Domain.dll
+D:\Code\priv\language\HBLM\Hablame.Domain\obj\Debug\Hablame.Domain.pdb

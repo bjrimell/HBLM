@@ -13,6 +13,8 @@ namespace Hablame.Domain.Entities
         public string TeacherId { get; set; }
         public string ConversationId { get; set; }
 
+        public string LanguageId { get; set; }
+
         public bool IsWordMistake { get; set; }
 
         public bool IsPhraseMistake { get; set; }

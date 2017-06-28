@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArrayOfConversation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Conversation>
+    <ConversationId>123456</ConversationId>
+    <TeacherId>En01</TeacherId>
+    <StudentId>Es01</StudentId>
+    <StartDateTime>2017-06-26T12:00:00Z</StartDateTime>
+    <EndDateTime>2017-06-26T14:00:00Z</EndDateTime>
+    <DurationMinutes>25</DurationMinutes>
+    <Mistakes>
+      <Mistake>
+        <Id>0001</Id>
+        <Language>
+          <Name>Spanish</Name>
+        </Language>
+        <StudentId>Es01</StudentId>
+        <TeacherId>En01</TeacherId>
+        <ConversationId>0001</ConversationId>
+        <IsWordMistake>true</IsWordMistake>
+        <IsPhraseMistake>false</IsPhraseMistake>
+        <IsGrammarMistake>true</IsGrammarMistake>
+        <IsPronunciationMistake>false</IsPronunciationMistake>
+        <SpokenValue>Talk</SpokenValue>
+        <CorrectValue>Speak</CorrectValue>
+        <Comment></Comment>
+      </Mistake>
+      <Mistake>
+        <Id>0002</Id>
+        <Language>
+          <Name>Spanish</Name>
+        </Language>
+        <StudentId>Es01</StudentId>
+        <TeacherId>En01</TeacherId>
+        <ConversationId>0001</ConversationId>
+        <IsWordMistake>false</IsWordMistake>
+        <IsPhraseMistake>true</IsPhraseMistake>
+        <IsGrammarMistake>true</IsGrammarMistake>
+        <IsPronunciationMistake>false</IsPronunciationMistake>
+        <SpokenValue>I want meet with you</SpokenValue>
+        <CorrectValue>I want to meet you</CorrectValue>
+        <Comment></Comment>
+      </Mistake>
+      <Mistake>
+        <Id>0003</Id>
+        <Language>
+          <Name>Spanish</Name>
+        </Language>
+        <StudentId>Es01</StudentId>
+        <TeacherId>En01</TeacherId>
+        <ConversationId>0001</ConversationId>
+        <IsWordMistake>false</IsWordMistake>
+        <IsPhraseMistake>true</IsPhraseMistake>
+        <IsGrammarMistake>true</IsGrammarMistake>
+        <IsPronunciationMistake>false</IsPronunciationMistake>
+        <SpokenValue>Is nice eat vegetables</SpokenValue>
+        <CorrectValue>Eating vegetables is nice</CorrectValue>
+        <Comment></Comment>
+      </Mistake>
+      <Mistake>
+        <Id>0004</Id>
+        <Language>
+          <Name>Spanish</Name>
+        </Language>
+        <StudentId>Es01</StudentId>
+        <TeacherId>En01</TeacherId>
+        <ConversationId>0001</ConversationId>
+        <IsWordMistake>true</IsWordMistake>
+        <IsPhraseMistake>false</IsPhraseMistake>
+        <IsGrammarMistake>false</IsGrammarMistake>
+        <IsPronunciationMistake>true</IsPronunciationMistake>
+        <SpokenValue>Estation</SpokenValue>
+        <CorrectValue>Station</CorrectValue>
+        <Comment></Comment>
+      </Mistake>
+     </Mistakes>
+    <Language></Language>
+  </Conversation>
+</ArrayOfConversation>

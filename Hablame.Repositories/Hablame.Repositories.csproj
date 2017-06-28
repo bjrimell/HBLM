@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConversationRepository.cs" />
+    <Compile Include="IConversationRepository.cs" />
     <Compile Include="IMistakeRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="MistakeRepository.cs" />
@@ -58,6 +60,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\mock\Conversations.xml" />
     <Content Include="Content\mock\Mistakes.xml" />
     <Content Include="Content\mock\User.xml" />
   </ItemGroup>
