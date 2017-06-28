@@ -6,6 +6,14 @@
     <edmx:Diagrams>
       <Diagram DiagramId="31142e9fa1334a05b7ccb22370ef2fbe" Name="Diagram1">
         <EntityTypeShape EntityType="HablameModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HablameModel.Language" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HablameModel.Conversation" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HablameModel.LanguageFamily" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HablameModel.Mistake" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HablameModel.Person" Width="1.5" PointX="0.75" PointY="8.125" />
+        <AssociationConnector Association="HablameModel.FK_Conversation_Language" />
+        <AssociationConnector Association="HablameModel.FK_Conversation_Student" />
+        <AssociationConnector Association="HablameModel.FK_Conversation_Teacher" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

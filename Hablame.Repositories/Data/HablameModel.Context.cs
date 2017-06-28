@@ -26,5 +26,9 @@ namespace Hablame.Repositories.Data
         }
     
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<Conversation> Conversations { get; set; }
+        public virtual DbSet<LanguageFamily> LanguageFamilies { get; set; }
+        public virtual DbSet<Mistake> Mistakes { get; set; }
     }
 }
