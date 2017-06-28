@@ -5,22 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HablameModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Hablame.dbo.Conversation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Conversation">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="TeacherId" />
-            <PropertyRef Name="StudentId" />
-            <PropertyRef Name="StartDateTime" />
-            <PropertyRef Name="DurationMinutes" />
-            <PropertyRef Name="LanguageId" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TeacherId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="StartDateTime" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="EndDateTime" Type="datetime2" Precision="7" />
+          <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="EndDateTime" Type="datetime" />
           <Property Name="DurationMinutes" Type="int" Nullable="false" />
           <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
@@ -32,83 +25,71 @@ warning 6002: The table/view 'Hablame.dbo.Conversation' does not have a primary 
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LanguageFamilyId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Hablame.dbo.LanguageFamily' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="LanguageFamily">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Hablame.dbo.Mistake' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Mistake">
           <Key>
-            <PropertyRef Name="ConversationId" />
-            <PropertyRef Name="SpokenValue" />
-            <PropertyRef Name="IsSuperfluousAuxVerb" />
-            <PropertyRef Name="IsMissingAuxVerb" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ConversationId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CorrectValue" Type="nvarchar(max)" />
-          <Property Name="Comment" Type="nvarchar(max)" />
           <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
           <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Hablame.dbo.User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="User">
+        <EntityType Name="Person">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Forename" />
-            <PropertyRef Name="Surname" />
-            <PropertyRef Name="EmailAddress" />
           </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Forename" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Language_Family">
+          <End Role="LanguageFamily" Type="Self.LanguageFamily" Multiplicity="1" />
+          <End Role="Language" Type="Self.Language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LanguageFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Language">
+              <PropertyRef Name="LanguageFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mistake_Conversation">
+          <End Role="Conversation" Type="Self.Conversation" Multiplicity="1" />
+          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mistake">
+              <PropertyRef Name="ConversationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HablameModelStoreContainer">
+          <EntitySet Name="Conversation" EntityType="Self.Conversation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Conversation" EntityType="Self.Conversation" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Conversation].[Id] AS [Id], 
-    [Conversation].[TeacherId] AS [TeacherId], 
-    [Conversation].[StudentId] AS [StudentId], 
-    [Conversation].[StartDateTime] AS [StartDateTime], 
-    [Conversation].[EndDateTime] AS [EndDateTime], 
-    [Conversation].[DurationMinutes] AS [DurationMinutes], 
-    [Conversation].[LanguageId] AS [LanguageId]
-    FROM [dbo].[Conversation] AS [Conversation]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="LanguageFamily" EntityType="Self.LanguageFamily" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [LanguageFamily].[Id] AS [Id], 
-    [LanguageFamily].[Name] AS [Name]
-    FROM [dbo].[LanguageFamily] AS [LanguageFamily]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Mistake" EntityType="Self.Mistake" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Mistake].[ConversationId] AS [ConversationId], 
-    [Mistake].[SpokenValue] AS [SpokenValue], 
-    [Mistake].[CorrectValue] AS [CorrectValue], 
-    [Mistake].[Comment] AS [Comment], 
-    [Mistake].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
-    [Mistake].[IsMissingAuxVerb] AS [IsMissingAuxVerb]
-    FROM [dbo].[Mistake] AS [Mistake]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [User].[Id] AS [Id], 
-    [User].[Forename] AS [Forename], 
-    [User].[Surname] AS [Surname], 
-    [User].[EmailAddress] AS [EmailAddress]
-    FROM [dbo].[User] AS [User]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="LanguageFamily" EntityType="Self.LanguageFamily" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Language_Family" Association="Self.FK_Language_Family">
+            <End Role="LanguageFamily" EntitySet="LanguageFamily" />
+            <End Role="Language" EntitySet="Language" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mistake_Conversation" Association="Self.FK_Mistake_Conversation">
+            <End Role="Conversation" EntitySet="Conversation" />
+            <End Role="Mistake" EntitySet="Mistake" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -132,6 +113,27 @@ warning 6002: The table/view 'Hablame.dbo.User' does not have a primary key defi
           <EntitySet Name="Conversations" EntityType="HablameModel.Conversation" />
           <EntitySet Name="LanguageFamilies" EntityType="HablameModel.LanguageFamily" />
           <EntitySet Name="Mistakes" EntityType="HablameModel.Mistake" />
+          <EntitySet Name="People" EntityType="HablameModel.Person" />
+          <AssociationSet Name="FK_Conversation_Language" Association="HablameModel.FK_Conversation_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="Conversation" EntitySet="Conversations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversation_Student" Association="HablameModel.FK_Conversation_Student">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Conversation" EntitySet="Conversations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversation_Teacher" Association="HablameModel.FK_Conversation_Teacher">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Conversation" EntitySet="Conversations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mistake_Conversation" Association="HablameModel.FK_Mistake_Conversation">
+            <End Role="Conversation" EntitySet="Conversations" />
+            <End Role="Mistake" EntitySet="Mistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Language_Family" Association="HablameModel.FK_Language_Family">
+            <End Role="LanguageFamily" EntitySet="LanguageFamilies" />
+            <End Role="Language" EntitySet="Languages" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Language">
           <Key>
@@ -140,6 +142,8 @@ warning 6002: The table/view 'Hablame.dbo.User' does not have a primary key defi
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LanguageFamilyId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Conversations" Relationship="HablameModel.FK_Conversation_Language" FromRole="Language" ToRole="Conversation" />
+          <NavigationProperty Name="LanguageFamily" Relationship="HablameModel.FK_Language_Family" FromRole="Language" ToRole="LanguageFamily" />
         </EntityType>
         <EntityType Name="Conversation">
           <Key>
@@ -153,10 +157,14 @@ warning 6002: The table/view 'Hablame.dbo.User' does not have a primary key defi
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="TeacherId" Type="Guid" Nullable="false" />
           <Property Name="StudentId" Type="Guid" Nullable="false" />
-          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="EndDateTime" Type="DateTime" Precision="7" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
           <Property Name="DurationMinutes" Type="Int32" Nullable="false" />
           <Property Name="LanguageId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Language" Relationship="HablameModel.FK_Conversation_Language" FromRole="Conversation" ToRole="Language" />
+          <NavigationProperty Name="Person" Relationship="HablameModel.FK_Conversation_Student" FromRole="Conversation" ToRole="Person" />
+          <NavigationProperty Name="Person1" Relationship="HablameModel.FK_Conversation_Teacher" FromRole="Conversation" ToRole="Person" />
+          <NavigationProperty Name="Mistakes" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Conversation" ToRole="Mistake" />
         </EntityType>
         <EntityType Name="LanguageFamily">
           <Key>
@@ -165,6 +173,7 @@ warning 6002: The table/view 'Hablame.dbo.User' does not have a primary key defi
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Languages" Relationship="HablameModel.FK_Language_Family" FromRole="LanguageFamily" ToRole="Language" />
         </EntityType>
         <EntityType Name="Mistake">
           <Key>
@@ -172,30 +181,94 @@ warning 6002: The table/view 'Hablame.dbo.User' does not have a primary key defi
             <PropertyRef Name="SpokenValue" />
             <PropertyRef Name="IsSuperfluousAuxVerb" />
             <PropertyRef Name="IsMissingAuxVerb" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ConversationId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConversationId" Type="String" Nullable="false" />
           <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
           <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Conversation" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Mistake" ToRole="Conversation" />
         </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Forename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Conversations" Relationship="HablameModel.FK_Conversation_Student" FromRole="Person" ToRole="Conversation" />
+          <NavigationProperty Name="Conversations1" Relationship="HablameModel.FK_Conversation_Teacher" FromRole="Person" ToRole="Conversation" />
+        </EntityType>
+        <Association Name="FK_Conversation_Language">
+          <End Type="HablameModel.Language" Role="Language" Multiplicity="1" />
+          <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversation_Student">
+          <End Type="HablameModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversation_Teacher">
+          <End Type="HablameModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mistake_Conversation">
+          <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="1" />
+          <End Type="HablameModel.Mistake" Role="Mistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mistake">
+              <PropertyRef Name="ConversationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Language_Family">
+          <End Type="HablameModel.LanguageFamily" Role="LanguageFamily" Multiplicity="1" />
+          <End Type="HablameModel.Language" Role="Language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LanguageFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Language">
+              <PropertyRef Name="LanguageFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HablameModelStoreContainer" CdmEntityContainer="HablameEntities">
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="HablameModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Forename" ColumnName="Forename" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Languages">
             <EntityTypeMapping TypeName="HablameModel.Language">
               <MappingFragment StoreEntitySet="Language">
@@ -229,12 +302,22 @@ warning 6002: The table/view 'Hablame.dbo.User' does not have a primary key defi
           <EntitySetMapping Name="Mistakes">
             <EntityTypeMapping TypeName="HablameModel.Mistake">
               <MappingFragment StoreEntitySet="Mistake">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
                 <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
                 <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
                 <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="HablameModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Forename" ColumnName="Forename" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
