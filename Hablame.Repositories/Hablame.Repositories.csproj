@@ -38,8 +38,19 @@
       <HintPath>..\packages\Castle.Windsor.3.4.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +60,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConversationRepository.cs" />
+    <Compile Include="Data\HablameModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HablameModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\HablameModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HablameModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\HablameModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HablameModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\User.cs">
+      <DependentUpon>HablameModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IConversationRepository.cs" />
     <Compile Include="IMistakeRepository.cs" />
     <Compile Include="IUserRepository.cs" />
@@ -57,18 +86,39 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Data\HablameModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HablameModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="Data\HablameModel.edmx.diagram">
+      <DependentUpon>HablameModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\mock\Conversations.xml" />
     <Content Include="Content\mock\Mistakes.xml" />
     <Content Include="Content\mock\User.xml" />
+    <Content Include="Data\HablameModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HablameModel.edmx</DependentUpon>
+      <LastGenOutput>HablameModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\HablameModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HablameModel.edmx</DependentUpon>
+      <LastGenOutput>HablameModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hablame.Domain\Hablame.Domain.csproj">
       <Project>{28435a35-77d2-4365-ae01-51c5ec5893d6}</Project>
       <Name>Hablame.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

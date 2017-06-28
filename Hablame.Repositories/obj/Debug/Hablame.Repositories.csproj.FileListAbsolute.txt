@@ -20,3 +20,8 @@ D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\Castle.Windsor.xml
 D:\Code\priv\language\HBLM\Hablame.Repositories\obj\Debug\Hablame.Repositories.csprojResolveAssemblyReference.cache
 D:\Code\priv\language\HBLM\Hablame.Repositories\obj\Debug\Hablame.Repositories.dll
 D:\Code\priv\language\HBLM\Hablame.Repositories\obj\Debug\Hablame.Repositories.pdb
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\Hablame.Repositories.dll.config
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\EntityFramework.dll
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\EntityFramework.SqlServer.dll
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\EntityFramework.xml
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\EntityFramework.SqlServer.xml
