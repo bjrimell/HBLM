@@ -1,0 +1,11 @@
+D:\Code\priv\language\Hablame\Hablame.Repositories\bin\Debug\Hablame.Repositories.dll
+D:\Code\priv\language\Hablame\Hablame.Repositories\bin\Debug\Hablame.Repositories.pdb
+D:\Code\priv\language\Hablame\Hablame.Repositories\obj\Debug\Hablame.Repositories.csprojResolveAssemblyReference.cache
+D:\Code\priv\language\Hablame\Hablame.Repositories\obj\Debug\Hablame.Repositories.dll
+D:\Code\priv\language\Hablame\Hablame.Repositories\obj\Debug\Hablame.Repositories.pdb
+D:\Code\priv\language\Hablame\Hablame.Repositories\bin\Debug\Castle.Core.dll
+D:\Code\priv\language\Hablame\Hablame.Repositories\bin\Debug\Castle.Windsor.dll
+D:\Code\priv\language\Hablame\Hablame.Repositories\bin\Debug\Castle.Core.xml
+D:\Code\priv\language\Hablame\Hablame.Repositories\bin\Debug\Castle.Windsor.xml
+D:\Code\priv\language\Hablame\Hablame.Repositories\bin\Debug\Hablame.Domain.dll
+D:\Code\priv\language\Hablame\Hablame.Repositories\bin\Debug\Hablame.Domain.pdb

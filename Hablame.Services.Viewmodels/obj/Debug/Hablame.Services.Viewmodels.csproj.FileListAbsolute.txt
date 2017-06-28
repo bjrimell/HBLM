@@ -1,0 +1,11 @@
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\bin\Debug\Hablame.Services.Viewmodels.dll
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\bin\Debug\Hablame.Services.Viewmodels.pdb
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\obj\Debug\Hablame.Services.Viewmodels.dll
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\obj\Debug\Hablame.Services.Viewmodels.pdb
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\bin\Debug\Castle.Core.dll
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\bin\Debug\Castle.Windsor.dll
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\bin\Debug\Castle.Core.xml
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\bin\Debug\Castle.Windsor.xml
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\obj\Debug\Hablame.Services.Viewmodels.csprojResolveAssemblyReference.cache
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\bin\Debug\Hablame.Domain.dll
+D:\Code\priv\language\Hablame\Hablame.Services.Viewmodels\bin\Debug\Hablame.Domain.pdb

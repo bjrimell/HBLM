@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hablame", "Hablame\Hablame.csproj", "{C36BEE7A-0CF2-4A93-9F38-C39722D82C0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hablame.Tests", "Hablame.Tests\Hablame.Tests.csproj", "{2D01894F-0813-4AFC-A6F2-62E6EC3A3AA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hablame.Services", "Hablame.Services\Hablame.Services.csproj", "{B11655B4-7656-4D23-8493-209F2D32986E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hablame.Services.Viewmodels", "Hablame.Services.Viewmodels\Hablame.Services.Viewmodels.csproj", "{3311E1A5-9D80-43AE-820B-4EC02FB071A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hablame.Domain", "Hablame.Domain\Hablame.Domain.csproj", "{28435A35-77D2-4365-AE01-51C5EC5893D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hablame.Repositories", "Hablame.Repositories\Hablame.Repositories.csproj", "{480F6F84-D1D2-4F26-AFE8-AF555A4DDD86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C36BEE7A-0CF2-4A93-9F38-C39722D82C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C36BEE7A-0CF2-4A93-9F38-C39722D82C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C36BEE7A-0CF2-4A93-9F38-C39722D82C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C36BEE7A-0CF2-4A93-9F38-C39722D82C0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D01894F-0813-4AFC-A6F2-62E6EC3A3AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D01894F-0813-4AFC-A6F2-62E6EC3A3AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D01894F-0813-4AFC-A6F2-62E6EC3A3AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D01894F-0813-4AFC-A6F2-62E6EC3A3AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B11655B4-7656-4D23-8493-209F2D32986E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B11655B4-7656-4D23-8493-209F2D32986E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B11655B4-7656-4D23-8493-209F2D32986E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B11655B4-7656-4D23-8493-209F2D32986E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3311E1A5-9D80-43AE-820B-4EC02FB071A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3311E1A5-9D80-43AE-820B-4EC02FB071A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3311E1A5-9D80-43AE-820B-4EC02FB071A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3311E1A5-9D80-43AE-820B-4EC02FB071A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28435A35-77D2-4365-AE01-51C5EC5893D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28435A35-77D2-4365-AE01-51C5EC5893D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28435A35-77D2-4365-AE01-51C5EC5893D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28435A35-77D2-4365-AE01-51C5EC5893D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{480F6F84-D1D2-4F26-AFE8-AF555A4DDD86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{480F6F84-D1D2-4F26-AFE8-AF555A4DDD86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{480F6F84-D1D2-4F26-AFE8-AF555A4DDD86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{480F6F84-D1D2-4F26-AFE8-AF555A4DDD86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,15 @@
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Hablame.Services.dll
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Hablame.Services.pdb
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Hablame.Repositories.dll
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Hablame.Services.Viewmodels.dll
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Hablame.Repositories.pdb
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Hablame.Services.Viewmodels.pdb
+D:\Code\priv\language\Hablame\Hablame.Services\obj\Debug\Hablame.Services.csprojResolveAssemblyReference.cache
+D:\Code\priv\language\Hablame\Hablame.Services\obj\Debug\Hablame.Services.dll
+D:\Code\priv\language\Hablame\Hablame.Services\obj\Debug\Hablame.Services.pdb
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Castle.Core.dll
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Castle.Windsor.dll
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Castle.Core.xml
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Castle.Windsor.xml
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Hablame.Domain.dll
+D:\Code\priv\language\Hablame\Hablame.Services\bin\Debug\Hablame.Domain.pdb
