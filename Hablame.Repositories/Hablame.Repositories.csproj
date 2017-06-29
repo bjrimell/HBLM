@@ -60,23 +60,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConversationRepository.cs" />
-    <Compile Include="Data\HablameModel.Context.cs">
+    <Compile Include="Data\Conversation.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\HablameDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HablameModel.Context.tt</DependentUpon>
+      <DependentUpon>HablameDataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\HablameModel.cs">
+    <Compile Include="Data\HablameDataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HablameModel.tt</DependentUpon>
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\HablameModel.Designer.cs">
+    <Compile Include="Data\HablameDataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HablameModel.edmx</DependentUpon>
+      <DependentUpon>HablameDataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Data\User.cs">
-      <DependentUpon>HablameModel.tt</DependentUpon>
+    <Compile Include="Data\Language.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\LanguageFamily.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Mistake.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Person.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IConversationRepository.cs" />
     <Compile Include="IMistakeRepository.cs" />
@@ -86,13 +98,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Data\HablameModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HablameModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="App.Config" />
-    <None Include="Data\HablameModel.edmx.diagram">
-      <DependentUpon>HablameModel.edmx</DependentUpon>
+    <EntityDeploy Include="Data\HablameDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HablameDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\HablameDataModel.edmx.diagram">
+      <DependentUpon>HablameDataModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -100,15 +112,15 @@
     <Content Include="Content\mock\Conversations.xml" />
     <Content Include="Content\mock\Mistakes.xml" />
     <Content Include="Content\mock\User.xml" />
-    <Content Include="Data\HablameModel.Context.tt">
+    <Content Include="Data\HablameDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HablameModel.edmx</DependentUpon>
-      <LastGenOutput>HablameModel.Context.cs</LastGenOutput>
+      <DependentUpon>HablameDataModel.edmx</DependentUpon>
+      <LastGenOutput>HablameDataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Data\HablameModel.tt">
+    <Content Include="Data\HablameDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HablameModel.edmx</DependentUpon>
-      <LastGenOutput>HablameModel.cs</LastGenOutput>
+      <DependentUpon>HablameDataModel.edmx</DependentUpon>
+      <LastGenOutput>HablameDataModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
