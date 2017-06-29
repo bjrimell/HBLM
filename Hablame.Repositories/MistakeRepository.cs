@@ -10,6 +10,8 @@ using System.IO;
 
 using Hablame.Repositories.Data;
 
+using AutoMapper;
+
 
 namespace Hablame.Repositories
 {
@@ -21,7 +23,7 @@ namespace Hablame.Repositories
         public List<Domain.Entities.Mistake> GetAllMistakes()
         {
             bool useMockData = false;
-            List<Domain.Entities.Mistake> allMistakes = new List<Domain.Entities.Mistake>();
+            var allMistakes = new List<Domain.Entities.Mistake>();
 
             if (useMockData)
             {
@@ -34,29 +36,38 @@ namespace Hablame.Repositories
             else
             {
                 HablameDatabaseEntities db = new HablameDatabaseEntities();
-                var allMistakesFromDB = db.Mistakes;
-                allMistakes = allMistakesFromDb
+                var allMistakesFromDb = db.Mistakes;
+
+                var mistakeList = new List<Domain.Entities.Mistake>();
+
+                Mapper.Initialize(
+                    cfg =>
+                    {
+                        cfg.CreateMap<Data.Mistake, Domain.Entities.Mistake>();
+                    });
+
+                allMistakes = Mapper.Map(allMistakesFromDb, mistakeList);
+                
             }
 
             return allMistakes;
         }
 
-        public List<Mistake> GetTopMistakesForLanguage(string languageName)
+        public List<Domain.Entities.Mistake> GetTopMistakesForLanguage(string languageName)
         {
             var allMistakes = this.GetAllMistakes();
             return allMistakes.Where(m => m.LanguageId == languageName).ToList();
         }
 
-        public List<Mistake> GetLatestSessionMistakes(string conversationId)
+        public List<Domain.Entities.Mistake> GetLatestSessionMistakes(string conversationId)
         {
             var allMistakes = this.GetAllMistakes();
             return allMistakes.Where(m => m.ConversationId == conversationId).ToList();
         }
 
-        public List<Mistake> GetTopMistakesForSession(string conversationId)
+        public List<Domain.Entities.Mistake> GetTopMistakesForSession(string conversationId)
         {
             HablameDatabaseEntities db = new HablameDatabaseEntities();
-            var allMistakes = db.Mistakes.Where(m => m.ConversationId == conversationId);
 
             var allMistakes = this.GetAllMistakes();
             return allMistakes.Where(m => m.ConversationId == conversationId).ToList();

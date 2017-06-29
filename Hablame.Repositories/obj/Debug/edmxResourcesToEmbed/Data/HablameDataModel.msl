@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HablameModelStoreContainer" CdmEntityContainer="HablameDatabaseEntities">
+    <EntitySetMapping Name="Conversations">
+      <EntityTypeMapping TypeName="HablameModel.Conversation">
+        <MappingFragment StoreEntitySet="Conversation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+          <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+          <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="HablameModel.Language">
+        <MappingFragment StoreEntitySet="Language">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LanguageFamilyId" ColumnName="LanguageFamilyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LanguageFamilies">
+      <EntityTypeMapping TypeName="HablameModel.LanguageFamily">
+        <MappingFragment StoreEntitySet="LanguageFamily">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mistakes">
+      <EntityTypeMapping TypeName="HablameModel.Mistake">
+        <MappingFragment StoreEntitySet="Mistake">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+          <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+          <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+          <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
+          <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="HablameModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Forename" ColumnName="Forename" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HablameModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Conversation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TeacherId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+    <Property Name="EndDateTime" Type="datetime" />
+    <Property Name="DurationMinutes" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LanguageFamilyId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LanguageFamily">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mistake">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Forename" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Language_Family">
+    <End Role="LanguageFamily" Type="Self.LanguageFamily" Multiplicity="1" />
+    <End Role="Language" Type="Self.Language" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LanguageFamily">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Language">
+        <PropertyRef Name="LanguageFamilyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mistake_Conversation">
+    <End Role="Conversation" Type="Self.Conversation" Multiplicity="1" />
+    <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conversation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mistake">
+        <PropertyRef Name="ConversationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HablameModelStoreContainer">
+    <EntitySet Name="Conversation" EntityType="Self.Conversation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LanguageFamily" EntityType="Self.LanguageFamily" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Language_Family" Association="Self.FK_Language_Family">
+      <End Role="LanguageFamily" EntitySet="LanguageFamily" />
+      <End Role="Language" EntitySet="Language" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mistake_Conversation" Association="Self.FK_Mistake_Conversation">
+      <End Role="Conversation" EntitySet="Conversation" />
+      <End Role="Mistake" EntitySet="Mistake" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

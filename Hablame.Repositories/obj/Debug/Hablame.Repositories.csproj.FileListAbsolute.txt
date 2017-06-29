@@ -25,3 +25,5 @@ D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\EntityFramework.dll
 D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\EntityFramework.SqlServer.dll
 D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\EntityFramework.xml
 D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\EntityFramework.SqlServer.xml
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\AutoMapper.dll
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\AutoMapper.xml

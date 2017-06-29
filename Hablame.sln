@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hablame.Domain", "Hablame.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hablame.Repositories", "Hablame.Repositories\Hablame.Repositories.csproj", "{480F6F84-D1D2-4F26-AFE8-AF555A4DDD86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hablame.Common", "Hablame.Common\Hablame.Common.csproj", "{45A8AACC-B745-4719-8A52-3383FE71FFAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{480F6F84-D1D2-4F26-AFE8-AF555A4DDD86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{480F6F84-D1D2-4F26-AFE8-AF555A4DDD86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{480F6F84-D1D2-4F26-AFE8-AF555A4DDD86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45A8AACC-B745-4719-8A52-3383FE71FFAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45A8AACC-B745-4719-8A52-3383FE71FFAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45A8AACC-B745-4719-8A52-3383FE71FFAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45A8AACC-B745-4719-8A52-3383FE71FFAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

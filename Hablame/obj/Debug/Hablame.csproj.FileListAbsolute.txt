@@ -186,3 +186,5 @@ D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.Owin.Security.MicrosoftAccount.
 D:\Code\priv\language\HBLM\Hablame\obj\Debug\Hablame.csprojResolveAssemblyReference.cache
 D:\Code\priv\language\HBLM\Hablame\obj\Debug\Hablame.dll
 D:\Code\priv\language\HBLM\Hablame\obj\Debug\Hablame.pdb
+D:\Code\priv\language\HBLM\Hablame\bin\AutoMapper.dll
+D:\Code\priv\language\HBLM\Hablame\bin\AutoMapper.xml
