@@ -28,5 +28,3 @@ D:\Code\priv\language\HBLM\Hablame.Services\bin\Debug\Castle.Windsor.xml
 D:\Code\priv\language\HBLM\Hablame.Services\obj\Debug\Hablame.Services.csprojResolveAssemblyReference.cache
 D:\Code\priv\language\HBLM\Hablame.Services\obj\Debug\Hablame.Services.dll
 D:\Code\priv\language\HBLM\Hablame.Services\obj\Debug\Hablame.Services.pdb
-D:\Code\priv\language\HBLM\Hablame.Services\bin\Debug\EntityFramework.dll
-D:\Code\priv\language\HBLM\Hablame.Services\bin\Debug\EntityFramework.xml

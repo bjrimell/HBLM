@@ -14,5 +14,158 @@
   </EntityType>
   <EntityContainer Name="HablameEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Languages" EntityType="HablameModel.Language" />
+    <EntitySet Name="Conversations" EntityType="HablameModel.Conversation" />
+    <EntitySet Name="LanguageFamilies" EntityType="HablameModel.LanguageFamily" />
+    <EntitySet Name="Mistakes" EntityType="HablameModel.Mistake" />
+    <EntitySet Name="People" EntityType="HablameModel.Person" />
+    <AssociationSet Name="FK_Conversation_Language" Association="HablameModel.FK_Conversation_Language">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="Conversation" EntitySet="Conversations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Conversation_Student" Association="HablameModel.FK_Conversation_Student">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Conversation" EntitySet="Conversations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Conversation_Teacher" Association="HablameModel.FK_Conversation_Teacher">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Conversation" EntitySet="Conversations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mistake_Conversation" Association="HablameModel.FK_Mistake_Conversation">
+      <End Role="Conversation" EntitySet="Conversations" />
+      <End Role="Mistake" EntitySet="Mistakes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Language_Family" Association="HablameModel.FK_Language_Family">
+      <End Role="LanguageFamily" EntitySet="LanguageFamilies" />
+      <End Role="Language" EntitySet="Languages" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LanguageFamilyId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Conversations" Relationship="HablameModel.FK_Conversation_Language" FromRole="Language" ToRole="Conversation" />
+    <NavigationProperty Name="LanguageFamily" Relationship="HablameModel.FK_Language_Family" FromRole="Language" ToRole="LanguageFamily" />
+  </EntityType>
+  <EntityType Name="Conversation">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="TeacherId" />
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="StartDateTime" />
+      <PropertyRef Name="DurationMinutes" />
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="TeacherId" Type="Guid" Nullable="false" />
+    <Property Name="StudentId" Type="Guid" Nullable="false" />
+    <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+    <Property Name="DurationMinutes" Type="Int32" Nullable="false" />
+    <Property Name="LanguageId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Language" Relationship="HablameModel.FK_Conversation_Language" FromRole="Conversation" ToRole="Language" />
+    <NavigationProperty Name="Person" Relationship="HablameModel.FK_Conversation_Student" FromRole="Conversation" ToRole="Person" />
+    <NavigationProperty Name="Person1" Relationship="HablameModel.FK_Conversation_Teacher" FromRole="Conversation" ToRole="Person" />
+    <NavigationProperty Name="Mistakes" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Conversation" ToRole="Mistake" />
+  </EntityType>
+  <EntityType Name="LanguageFamily">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Languages" Relationship="HablameModel.FK_Language_Family" FromRole="LanguageFamily" ToRole="Language" />
+  </EntityType>
+  <EntityType Name="Mistake">
+    <Key>
+      <PropertyRef Name="ConversationId" />
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="IsSuperfluousAuxVerb" />
+      <PropertyRef Name="IsMissingAuxVerb" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="ConversationId" Type="String" Nullable="false" />
+    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Conversation" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Mistake" ToRole="Conversation" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Forename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Conversations" Relationship="HablameModel.FK_Conversation_Student" FromRole="Person" ToRole="Conversation" />
+    <NavigationProperty Name="Conversations1" Relationship="HablameModel.FK_Conversation_Teacher" FromRole="Person" ToRole="Conversation" />
+  </EntityType>
+  <Association Name="FK_Conversation_Language">
+    <End Type="HablameModel.Language" Role="Language" Multiplicity="1" />
+    <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Conversation">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Conversation_Student">
+    <End Type="HablameModel.Person" Role="Person" Multiplicity="1" />
+    <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Conversation">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Conversation_Teacher">
+    <End Type="HablameModel.Person" Role="Person" Multiplicity="1" />
+    <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Conversation">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mistake_Conversation">
+    <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="1" />
+    <End Type="HablameModel.Mistake" Role="Mistake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conversation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mistake">
+        <PropertyRef Name="ConversationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Language_Family">
+    <End Type="HablameModel.LanguageFamily" Role="LanguageFamily" Multiplicity="1" />
+    <End Type="HablameModel.Language" Role="Language" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LanguageFamily">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Language">
+        <PropertyRef Name="LanguageFamilyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

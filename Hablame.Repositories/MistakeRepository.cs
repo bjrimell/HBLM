@@ -8,6 +8,9 @@ using Hablame.Domain.Entities;
 using System.Xml.Serialization;
 using System.IO;
 
+using Hablame.Repositories.Data;
+
+
 namespace Hablame.Repositories
 {
     public class MistakeRepository : IMistakeRepository
@@ -15,16 +18,27 @@ namespace Hablame.Repositories
 
         private string mockUserDataPath = @"D:\Code\priv\language\HBLM\Hablame.Repositories\Content\mock\Mistakes.xml";
 
-        public List<Mistake> GetAllMistakes()
+        public List<Domain.Entities.Mistake> GetAllMistakes()
         {
-            List<Mistake> mistakes;
-            using (var fs = new FileStream(mockUserDataPath, FileMode.Open, FileAccess.Read))
+            bool useMockData = false;
+            List<Domain.Entities.Mistake> allMistakes = new List<Domain.Entities.Mistake>();
+
+            if (useMockData)
             {
-                var serializer = new XmlSerializer(typeof(List<Mistake>));
-                mistakes = (List<Mistake>)serializer.Deserialize(fs);
+                using (var fs = new FileStream(mockUserDataPath, FileMode.Open, FileAccess.Read))
+                {
+                    var serializer = new XmlSerializer(typeof(List<Domain.Entities.Mistake>));
+                    allMistakes = (List<Domain.Entities.Mistake>)serializer.Deserialize(fs);
+                }
+            }
+            else
+            {
+                HablameDatabaseEntities db = new HablameDatabaseEntities();
+                var allMistakesFromDB = db.Mistakes;
+                allMistakes = allMistakesFromDb
             }
 
-            return mistakes;
+            return allMistakes;
         }
 
         public List<Mistake> GetTopMistakesForLanguage(string languageName)
@@ -41,6 +55,9 @@ namespace Hablame.Repositories
 
         public List<Mistake> GetTopMistakesForSession(string conversationId)
         {
+            HablameDatabaseEntities db = new HablameDatabaseEntities();
+            var allMistakes = db.Mistakes.Where(m => m.ConversationId == conversationId);
+
             var allMistakes = this.GetAllMistakes();
             return allMistakes.Where(m => m.ConversationId == conversationId).ToList();
         }
