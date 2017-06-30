@@ -44,13 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\Configuration.cs" />
+    <Compile Include="Mapping\EntityMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Mapping\" />
+    <ProjectReference Include="..\Hablame.Domain\Hablame.Domain.csproj">
+      <Project>{28435a35-77d2-4365-ae01-51c5ec5893d6}</Project>
+      <Name>Hablame.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hablame.Repositories\Hablame.Repositories.csproj">
+      <Project>{480f6f84-d1d2-4f26-afe8-af555a4ddd86}</Project>
+      <Name>Hablame.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

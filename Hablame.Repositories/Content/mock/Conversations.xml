@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ArrayOfConversation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Conversation>
-    <ConversationId>123456</ConversationId>
-    <TeacherId>En01</TeacherId>
-    <StudentId>Es01</StudentId>
+    <ConversationId>5474707c-1ea9-4111-9111-a7ce57c70f85</ConversationId>
+    <TeacherId>a3250996-fa99-4299-b44a-8fb0be5386e5</TeacherId>
+    <StudentId>10766ac7-a101-4265-9233-16c50c6f6186</StudentId>
     <StartDateTime>2017-06-26T12:00:00Z</StartDateTime>
     <EndDateTime>2017-06-26T14:00:00Z</EndDateTime>
     <DurationMinutes>25</DurationMinutes>

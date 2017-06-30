@@ -8,12 +8,13 @@ namespace Hablame.Domain.Entities
 {
     public class Mistake
     {
-        public string StudentId { get; set; }
+        public Guid Id { get; set; }
+        public Guid StudentId { get; set; }
 
-        public string TeacherId { get; set; }
-        public string ConversationId { get; set; }
+        public Guid TeacherId { get; set; }
+        public Guid ConversationId { get; set; }
 
-        public string LanguageId { get; set; }
+        public Guid LanguageId { get; set; }
 
         public bool IsWordMistake { get; set; }
 
@@ -28,5 +29,7 @@ namespace Hablame.Domain.Entities
         public string CorrectValue { get; set; }
 
         public string Comment { get; set; }
+
+        public int Count { get; set; }
     }
 }

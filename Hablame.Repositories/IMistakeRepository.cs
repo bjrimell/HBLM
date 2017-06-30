@@ -12,10 +12,14 @@ namespace Hablame.Repositories
     {
         List<Mistake> GetAllMistakes();
 
-        List<Mistake> GetTopMistakesForLanguage(string languageName);
+        List<Mistake> GetTopMistakesForLanguage(Guid languageId);
 
-        List<Mistake> GetLatestSessionMistakes(string conversationId);
+        List<Mistake> GetLatestSessionMistakes(Guid conversationId);
 
-        List<Mistake> GetTopMistakesForSession(string conversationId);
+        List<Mistake> GetTopMistakesForSession(Guid conversationId);
+
+        List<Mistake> GetTopMistakesForStudent(Guid studentId);
+
+        bool CreateNewMistake(Mistake mistake);
     }
 }

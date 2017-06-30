@@ -17,8 +17,14 @@ namespace Hablame.Repositories
 {
     public class MistakeRepository : IMistakeRepository
     {
-
+        private HablameDatabaseEntities db = new HablameDatabaseEntities();
         private string mockUserDataPath = @"D:\Code\priv\language\HBLM\Hablame.Repositories\Content\mock\Mistakes.xml";
+
+        public MistakeRepository()
+        {
+            var mapper = new Mapping.EntityMapper();
+            mapper.Initialize();
+        }
 
         public List<Domain.Entities.Mistake> GetAllMistakes()
         {
@@ -35,42 +41,60 @@ namespace Hablame.Repositories
             }
             else
             {
-                HablameDatabaseEntities db = new HablameDatabaseEntities();
                 var allMistakesFromDb = db.Mistakes;
 
                 var mistakeList = new List<Domain.Entities.Mistake>();
 
-                Mapper.Initialize(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Data.Mistake, Domain.Entities.Mistake>();
-                    });
-
                 allMistakes = Mapper.Map(allMistakesFromDb, mistakeList);
-                
             }
 
             return allMistakes;
         }
 
-        public List<Domain.Entities.Mistake> GetTopMistakesForLanguage(string languageName)
+        public List<Domain.Entities.Mistake> GetTopMistakesForLanguage(Guid languageId)
         {
-            var allMistakes = this.GetAllMistakes();
-            return allMistakes.Where(m => m.LanguageId == languageName).ToList();
+            var mistakes = new List<Domain.Entities.Mistake>();
+            var response = db.vw_MistakesByLanguage.Where(m => m.LanguageId == languageId).Take(10);
+            return Mapper.Map(response, mistakes);
         }
 
-        public List<Domain.Entities.Mistake> GetLatestSessionMistakes(string conversationId)
+        public List<Domain.Entities.Mistake> GetLatestSessionMistakes(Guid conversationId)
         {
-            var allMistakes = this.GetAllMistakes();
-            return allMistakes.Where(m => m.ConversationId == conversationId).ToList();
+            var mistakes = new List<Domain.Entities.Mistake>();
+            var response = db.vw_MistakesByConversation.Where(m => m.ConversationId == conversationId).Take(10);//.OrderBy(m => m.DateTime);
+            return Mapper.Map(response, mistakes);
         }
 
-        public List<Domain.Entities.Mistake> GetTopMistakesForSession(string conversationId)
+        public List<Domain.Entities.Mistake> GetTopMistakesForSession(Guid conversationId)
         {
-            HablameDatabaseEntities db = new HablameDatabaseEntities();
+            var mistakes = new List<Domain.Entities.Mistake>();
+            var response = db.vw_MistakesByConversation.Where(m => m.ConversationId == conversationId).OrderBy(m => m.Count).Take(10);
+            return Mapper.Map(response, mistakes);
+        }
 
-            var allMistakes = this.GetAllMistakes();
-            return allMistakes.Where(m => m.ConversationId == conversationId).ToList();
+        public List<Domain.Entities.Mistake> GetTopMistakesForStudent(Guid studentId)
+        {
+            var mistakes = new List<Domain.Entities.Mistake>();
+            var response = db.vw_MistakesByStudent.Where(m => m.StudentId == studentId).OrderBy(m => m.Count).Take(10);
+            return Mapper.Map(response, mistakes);
+        }
+
+        public bool CreateNewMistake(Domain.Entities.Mistake mistake)
+        {
+            var dbMistake = new Data.Mistake();
+            var dbMistake2 = Mapper.Map(mistake, dbMistake);
+
+            try
+            {
+                db.Mistakes.Add(dbMistake2);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
         }
     }
 }

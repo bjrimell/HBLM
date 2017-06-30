@@ -10,13 +10,13 @@ namespace Hablame.Services
 {
     public interface IConversationService
     {
-        ConversationViewModel CreateConversationViewModel(string studentId);
+        ConversationViewModel CreateConversationViewModel(Guid studentId);
 
-        ConversationViewModel RecreateConversationViewModel(string conversationId, string spokenValue, string correctValue, bool IsSuperfluousAuxVerb, bool IsMissingAuxVerb);
+        ConversationViewModel RecreateConversationViewModel(Guid conversationId, string spokenValue, string correctValue, bool IsSuperfluousAuxVerb, bool IsMissingAuxVerb);
 
-        string GetConversationStudentId(string conversationId);
+        Guid GetConversationStudentId(Guid conversationId);
 
-        string GetConversationTeacherId(string conversationId);
+        Guid GetConversationTeacherId(Guid conversationId);
 
     }
 }

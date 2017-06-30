@@ -67,6 +67,12 @@
     <Compile Include="Data\Conversation.cs">
       <DependentUpon>HablameDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\getTopMistakesByConversationId_Result.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\getTopMistakesByLanguageId_Result.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\HablameDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -94,9 +100,22 @@
     <Compile Include="Data\Person.cs">
       <DependentUpon>HablameDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\vw_Mistakes.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\vw_MistakesByConversation.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\vw_MistakesByLanguage.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\vw_MistakesByStudent.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IConversationRepository.cs" />
     <Compile Include="IMistakeRepository.cs" />
     <Compile Include="IUserRepository.cs" />
+    <Compile Include="Mapping\EntityMapper.cs" />
     <Compile Include="MistakeRepository.cs" />
     <Compile Include="UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,9 +155,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mapping\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

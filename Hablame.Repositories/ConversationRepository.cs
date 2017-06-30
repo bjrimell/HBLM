@@ -8,29 +8,47 @@ using Hablame.Domain.Entities;
 using System.Xml.Serialization;
 using System.IO;
 
+using Hablame.Repositories.Data;
+
+using AutoMapper;
+
 namespace Hablame.Repositories
 {
     public class ConversationRepository : IConversationRepository
     {
+        private HablameDatabaseEntities db = new HablameDatabaseEntities();
         private string mockUserDataPath = @"D:\Code\priv\language\HBLM\Hablame.Repositories\Content\mock\Conversations.xml";
 
         public string CreateNewConversation()
         {
             // TODO:
-            return "123456";
+            return "10766ac7-a101-4265-9233-16c50c6f6186";
         }
 
-        public Conversation RetrieveConversation(string sessionId)
+        public Domain.Entities.Conversation RetrieveConversation(Guid sessionId)
         {
-            var conversations = new List<Conversation>();
+            var response = db.Conversations.FirstOrDefault(m => m.Id == sessionId);
 
-            using (var fs = new FileStream(mockUserDataPath, FileMode.Open, FileAccess.Read))
+            var conversation = new Domain.Entities.Conversation();
+
+            return Mapper.Map(response, conversation);
+        }
+
+        public string CreateNewConversation(Domain.Entities.Conversation conversation)
+        {
+            var dbConversation = new Data.Conversation();
+            var dbConversation2 = Mapper.Map(conversation, dbConversation);
+
+            try
             {
-                var serializer = new XmlSerializer(typeof(List<Conversation>));
-                conversations = (List<Conversation>)serializer.Deserialize(fs);
+                db.Conversations.Add(dbConversation2);
+                db.SaveChanges();
+                return dbConversation2.Id.ToString();
             }
-
-            return conversations.FirstOrDefault(m => m.ConversationId == sessionId);
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

@@ -4,7 +4,7 @@
      List of users
     -->
   <User>
-    <Id>En01</Id>
+    <Id>a3250996-fa99-4299-b44a-8fb0be5386e5</Id>
     <EmailAddress>barryrimell@gmail.com</EmailAddress>
     <Forename>Barry</Forename>
     <Surname>Rimell</Surname>
@@ -20,7 +20,7 @@
     </Skillset>
   </User>
   <User>
-    <Id>Es01</Id>
+    <Id>10766ac7-a101-4265-9233-16c50c6f6186</Id>
     <EmailAddress>cperez@gmail.com</EmailAddress>
     <Forename>Carolina</Forename>
     <Surname>Perez</Surname>
@@ -36,7 +36,7 @@
     </Skillset>
   </User>
   <User>
-    <Id>Es02</Id>
+    <Id>e0528db4-d365-480b-b9a5-8ca56168edab</Id>
     <EmailAddress>maria@gmail.com</EmailAddress>
     <Forename>Maria</Forename>
     <Surname>Perez</Surname>
@@ -52,7 +52,7 @@
     </Skillset>
   </User>
   <User>
-    <Id>Es03</Id>
+    <Id>c8c64949-46c7-4a66-abe6-028b5a43c26d</Id>
     <EmailAddress>lina@gmail.com</EmailAddress>
     <Forename>Lina</Forename>
     <Surname>Perez</Surname>

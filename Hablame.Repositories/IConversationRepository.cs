@@ -10,8 +10,8 @@ namespace Hablame.Repositories
 {
     public interface IConversationRepository
     {
-        string CreateNewConversation();
+        string CreateNewConversation(Conversation conversation);
 
-        Conversation RetrieveConversation(string sessionId);
+        Conversation RetrieveConversation(Guid sessionId);
     }
 }

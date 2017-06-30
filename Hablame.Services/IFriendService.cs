@@ -11,8 +11,8 @@ namespace Hablame.Services
 {
     public interface IFriendService
     {
-        FriendListViewModel GetFriendListViewModel(string teacherId);
+        FriendListViewModel GetFriendListViewModel(Guid teacherId);
 
-        User GetUserById(string userId);
+        User GetUserById(Guid userId);
     }
 }

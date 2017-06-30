@@ -12,6 +12,8 @@ namespace Hablame.Repositories.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class HablameDatabaseEntities : DbContext
     {
@@ -30,5 +32,27 @@ namespace Hablame.Repositories.Data
         public virtual DbSet<LanguageFamily> LanguageFamilies { get; set; }
         public virtual DbSet<Mistake> Mistakes { get; set; }
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<vw_Mistakes> vw_Mistakes { get; set; }
+        public virtual DbSet<vw_MistakesByConversation> vw_MistakesByConversation { get; set; }
+        public virtual DbSet<vw_MistakesByLanguage> vw_MistakesByLanguage { get; set; }
+        public virtual DbSet<vw_MistakesByStudent> vw_MistakesByStudent { get; set; }
+    
+        public virtual ObjectResult<getTopMistakesByLanguageId_Result> getTopMistakesByLanguageId(Nullable<System.Guid> languageId)
+        {
+            var languageIdParameter = languageId.HasValue ?
+                new ObjectParameter("languageId", languageId) :
+                new ObjectParameter("languageId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopMistakesByLanguageId_Result>("getTopMistakesByLanguageId", languageIdParameter);
+        }
+    
+        public virtual ObjectResult<getTopMistakesByConversationId_Result> getTopMistakesByConversationId(Nullable<System.Guid> conversationId)
+        {
+            var conversationIdParameter = conversationId.HasValue ?
+                new ObjectParameter("conversationId", conversationId) :
+                new ObjectParameter("conversationId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getTopMistakesByConversationId_Result>("getTopMistakesByConversationId", conversationIdParameter);
+        }
     }
 }

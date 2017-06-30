@@ -47,6 +47,68 @@
     <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_Mistakes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Mistakes">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="IsSuperfluousAuxVerb" />
+      <PropertyRef Name="IsMissingAuxVerb" />
+    </Key>
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="Count" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_MistakesByConversation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_MistakesByConversation">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="IsSuperfluousAuxVerb" />
+      <PropertyRef Name="IsMissingAuxVerb" />
+      <PropertyRef Name="ConversationId" />
+    </Key>
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Count" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_MistakesByLanguage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_MistakesByLanguage">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="IsSuperfluousAuxVerb" />
+      <PropertyRef Name="IsMissingAuxVerb" />
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Count" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_MistakesByStudent">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="IsSuperfluousAuxVerb" />
+      <PropertyRef Name="IsMissingAuxVerb" />
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Count" Type="int" />
+  </EntityType>
   <Association Name="FK_Language_Family">
     <End Role="LanguageFamily" Type="Self.LanguageFamily" Multiplicity="1" />
     <End Role="Language" Type="Self.Language" Multiplicity="*" />
@@ -71,12 +133,57 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="getTopMistakesByConversationId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="conversationId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="getTopMistakesByLanguageId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="languageId" Type="uniqueidentifier" Mode="In" />
+  </Function>
   <EntityContainer Name="HablameModelStoreContainer">
     <EntitySet Name="Conversation" EntityType="Self.Conversation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LanguageFamily" EntityType="Self.LanguageFamily" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_Mistakes" EntityType="Self.vw_Mistakes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Mistakes].[SpokenValue] AS [SpokenValue], 
+    [vw_Mistakes].[CorrectValue] AS [CorrectValue], 
+    [vw_Mistakes].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
+    [vw_Mistakes].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
+    [vw_Mistakes].[Count] AS [Count]
+    FROM [dbo].[vw_Mistakes] AS [vw_Mistakes]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_MistakesByConversation" EntityType="Self.vw_MistakesByConversation" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_MistakesByConversation].[SpokenValue] AS [SpokenValue], 
+    [vw_MistakesByConversation].[CorrectValue] AS [CorrectValue], 
+    [vw_MistakesByConversation].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
+    [vw_MistakesByConversation].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
+    [vw_MistakesByConversation].[ConversationId] AS [ConversationId], 
+    [vw_MistakesByConversation].[Count] AS [Count]
+    FROM [dbo].[vw_MistakesByConversation] AS [vw_MistakesByConversation]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_MistakesByLanguage" EntityType="Self.vw_MistakesByLanguage" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_MistakesByLanguage].[SpokenValue] AS [SpokenValue], 
+    [vw_MistakesByLanguage].[CorrectValue] AS [CorrectValue], 
+    [vw_MistakesByLanguage].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
+    [vw_MistakesByLanguage].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
+    [vw_MistakesByLanguage].[LanguageId] AS [LanguageId], 
+    [vw_MistakesByLanguage].[Count] AS [Count]
+    FROM [dbo].[vw_MistakesByLanguage] AS [vw_MistakesByLanguage]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_MistakesByStudent" EntityType="Self.vw_MistakesByStudent" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_MistakesByStudent].[SpokenValue] AS [SpokenValue], 
+    [vw_MistakesByStudent].[CorrectValue] AS [CorrectValue], 
+    [vw_MistakesByStudent].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
+    [vw_MistakesByStudent].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
+    [vw_MistakesByStudent].[StudentId] AS [StudentId], 
+    [vw_MistakesByStudent].[Count] AS [Count]
+    FROM [dbo].[vw_MistakesByStudent] AS [vw_MistakesByStudent]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_Language_Family" Association="Self.FK_Language_Family">
       <End Role="LanguageFamily" EntitySet="LanguageFamily" />
       <End Role="Language" EntitySet="Language" />

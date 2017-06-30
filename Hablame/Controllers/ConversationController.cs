@@ -8,15 +8,15 @@ using Hablame.Services;
 
 namespace Hablame.Controllers
 {
-    public class TalkController : Controller
+    public class ConversationController : Controller
     {
-        private readonly IConversationService talkService;
+        private readonly IConversationService conversationService;
 
         private readonly IMistakeService mistakeService;
 
-        public TalkController(IConversationService talkService, IMistakeService mistakeService)
+        public ConversationController(IConversationService conversationService, IMistakeService mistakeService)
         {
-            this.talkService = talkService;
+            this.conversationService = conversationService;
             this.mistakeService = mistakeService;
         }
 
@@ -27,9 +27,9 @@ namespace Hablame.Controllers
         }
 
         [HttpGet]
-        public ActionResult StartConversation(string studentId)
+        public ActionResult StartConversation(Guid studentId)
         {
-            var viewModel = talkService.CreateConversationViewModel(studentId);
+            var viewModel = conversationService.CreateConversationViewModel(studentId);
             return this.PartialView("_Conversation", viewModel);
         }
 
@@ -41,14 +41,16 @@ namespace Hablame.Controllers
             bool IsSuperfluousAuxVerb = false,
             bool IsMissingAuxVerb = false)
         {
-            var viewModel = this.talkService.RecreateConversationViewModel(conversationId, spokenValue, correctValue, IsSuperfluousAuxVerb, IsMissingAuxVerb);
+            var conversationGuid = Guid.Parse(conversationId);
 
             var newMistake = this.mistakeService.CreateMistake(
-                conversationId,
+                conversationGuid,
                 spokenValue,
                 correctValue,
                 IsSuperfluousAuxVerb,
                 IsMissingAuxVerb);
+
+            var viewModel = this.conversationService.RecreateConversationViewModel(conversationGuid, spokenValue, correctValue, IsSuperfluousAuxVerb, IsMissingAuxVerb);
 
             viewModel.TopGlobalMistakesForLanguage.Add(newMistake);
 

@@ -208,7 +208,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MistakeController.cs" />
-    <Compile Include="Controllers\TalkController.cs" />
+    <Compile Include="Controllers\ConversationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -279,8 +279,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Friend\_FriendList.cshtml" />
-    <Content Include="Views\Talk\Index.cshtml" />
-    <Content Include="Views\Talk\_Conversation.cshtml" />
+    <Content Include="Views\Conversation\Index.cshtml" />
+    <Content Include="Views\Conversation\_Conversation.cshtml" />
     <Content Include="Views\Mistake\_EnteredMistake.cshtml" />
   </ItemGroup>
   <ItemGroup>

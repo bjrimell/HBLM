@@ -89,5 +89,85 @@
       <End Role="LanguageFamily" EntitySet="LanguageFamilies" />
       <End Role="Language" EntitySet="Languages" />
     </AssociationSet>
+    <FunctionImport Name="getTopMistakesByLanguageId" ReturnType="Collection(HablameModel.getTopMistakesByLanguageId_Result)">
+      <Parameter Name="languageId" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="getTopMistakesByConversationId" ReturnType="Collection(HablameModel.getTopMistakesByConversationId_Result)">
+      <Parameter Name="conversationId" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <EntitySet Name="vw_Mistakes" EntityType="HablameModel.vw_Mistakes" />
+    <EntitySet Name="vw_MistakesByConversation" EntityType="HablameModel.vw_MistakesByConversation" />
+    <EntitySet Name="vw_MistakesByLanguage" EntityType="HablameModel.vw_MistakesByLanguage" />
+    <EntitySet Name="vw_MistakesByStudent" EntityType="HablameModel.vw_MistakesByStudent" />
   </EntityContainer>
+  <ComplexType Name="getTopMistakesByLanguageId_Result">
+    <Property Type="Guid" Name="ConversationId" Nullable="false" />
+    <Property Type="String" Name="SpokenValue" Nullable="false" />
+    <Property Type="String" Name="CorrectValue" Nullable="true" />
+    <Property Type="Guid" Name="Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsMissingAuxVerb" Nullable="false" />
+    <Property Type="Boolean" Name="IsSuperfluousAuxVerb" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getTopMistakesByConversationId_Result">
+    <Property Type="Guid" Name="ConversationId" Nullable="false" />
+    <Property Type="String" Name="SpokenValue" Nullable="false" />
+    <Property Type="String" Name="CorrectValue" Nullable="true" />
+    <Property Type="Guid" Name="Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsMissingAuxVerb" Nullable="false" />
+    <Property Type="Boolean" Name="IsSuperfluousAuxVerb" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="vw_Mistakes">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="IsSuperfluousAuxVerb" />
+      <PropertyRef Name="IsMissingAuxVerb" />
+    </Key>
+    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vw_MistakesByConversation">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="IsSuperfluousAuxVerb" />
+      <PropertyRef Name="IsMissingAuxVerb" />
+      <PropertyRef Name="ConversationId" />
+    </Key>
+    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="ConversationId" Type="Guid" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vw_MistakesByLanguage">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="IsSuperfluousAuxVerb" />
+      <PropertyRef Name="IsMissingAuxVerb" />
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="LanguageId" Type="Guid" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vw_MistakesByStudent">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="IsSuperfluousAuxVerb" />
+      <PropertyRef Name="IsMissingAuxVerb" />
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="StudentId" Type="Guid" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+  </EntityType>
 </Schema>

@@ -25,7 +25,8 @@ namespace Hablame.Controllers
 
         public ActionResult FriendList(string teacherId)
         {
-            var viewModel = this.friendService.GetFriendListViewModel(teacherId);
+            var teacherGuid = new Guid(teacherId);
+            var viewModel = this.friendService.GetFriendListViewModel(teacherGuid);
             return this.PartialView("_FriendList", viewModel);
         }
     }

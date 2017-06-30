@@ -13,6 +13,6 @@ namespace Hablame.Services
     {
         EnteredMistakeViewModel CreateTypedMistakeViewModel();
 
-        Mistake CreateMistake(string conversationId, string spokenValue, string correctValue, bool IsSuperfluousAuxVerb, bool IsMissingAuxVerb);
+        Mistake CreateMistake(Guid conversationId, string spokenValue, string correctValue, bool IsSuperfluousAuxVerb, bool IsMissingAuxVerb);
     }
 }

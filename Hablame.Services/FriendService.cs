@@ -18,7 +18,7 @@ namespace Hablame.Services
         {
             this.userRepository = userRepository;
         }
-        public FriendListViewModel GetFriendListViewModel(string teacherId)
+        public FriendListViewModel GetFriendListViewModel(Guid teacherId)
         {
             var viewModel = new FriendListViewModel();
 
@@ -29,7 +29,7 @@ namespace Hablame.Services
             return viewModel;
         }
 
-        public User GetUserById(string userId)
+        public User GetUserById(Guid userId)
         {
             var allUsers = this.userRepository.GetAllMockUsers();
             return allUsers.SingleOrDefault(m => m.Id == userId);

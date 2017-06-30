@@ -8,11 +8,11 @@ namespace Hablame.Domain.Entities
 {
     public class Conversation
     {
-        public string ConversationId { get; set; }
+        public Guid Id { get; set; }
 
-        public string TeacherId { get; set; }
+        public Guid TeacherId { get; set; }
 
-        public string StudentId { get; set; }
+        public Guid StudentId { get; set; }
 
         public DateTime StartDateTime { get; set; }
 
@@ -21,5 +21,7 @@ namespace Hablame.Domain.Entities
         public int DurationMinutes { get; set; }
 
         public Language Language { get; set; }
+
+        public Guid LanguageId { get; set; }
     }
 }

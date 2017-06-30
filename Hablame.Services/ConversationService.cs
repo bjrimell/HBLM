@@ -23,10 +23,10 @@ namespace Hablame.Services
             this.mistakeRepository = mistakeRepository;
             this.conversationRepository = conversationRepository;
         }
-        public ConversationViewModel CreateConversationViewModel(string studentId)
+        public ConversationViewModel CreateConversationViewModel(Guid studentId)
         {
             // TODO: Make this current logged-in user
-            var currentUserId = "En01"; // Barry
+            var currentUserId = new Guid("a3250996-fa99-4299-b44a-8fb0be5386e5");
             var student = this.friendService.GetUserById(studentId);
             var teacher = this.friendService.GetUserById(currentUserId);
 
@@ -39,39 +39,49 @@ namespace Hablame.Services
                 Family = "Romance"
             };
 
+            var conversation = new Conversation
+            {
+                Id = Guid.NewGuid(),
+                TeacherId = currentUserId,
+                StudentId = studentId,
+                StartDateTime = DateTime.Now,
+                EndDateTime = DateTime.Now,
+                LanguageId = Guid.Parse("f4e4b27d-eb24-43de-b9d7-f67a73ae83f8") //English
+            };
+
+            var convoId = this.conversationRepository.CreateNewConversation(conversation);
+
             var viewModel = new ConversationViewModel
             {
-                ConversationId = Guid.NewGuid().ToString(),
+                ConversationId = Guid.Parse(convoId),
                 Teacher = teacher,
                 Student = student,
                 StartDateTime = DateTime.Now,
-                TopGlobalMistakesForLanguage = allMistakes,
-                MostCommonSessionMistakes = allMistakes,
-                LatestSessionMistakes = allMistakes,
+                EndDateTime = DateTime.Now,
+                TopGlobalMistakesForLanguage = this.mistakeRepository.GetTopMistakesForLanguage(conversation.LanguageId),
+                LatestSessionMistakes = this.mistakeRepository.GetLatestSessionMistakes(conversation.Id),
+                MostCommonSessionMistakes = this.mistakeRepository.GetTopMistakesForSession(conversation.Id),
                 Language = language
             };
 
             return viewModel;
         }
 
-        public ConversationViewModel RecreateConversationViewModel(string conversationId, string spokenValue, string correctValue, bool IsSuperfluousAuxVerb, bool IsMissingAuxVerb)
+        public ConversationViewModel RecreateConversationViewModel(Guid conversationId, string spokenValue, string correctValue, bool IsSuperfluousAuxVerb, bool IsMissingAuxVerb)
         {
             var savedConversation = this.conversationRepository.RetrieveConversation(conversationId);
             var teacher = this.friendService.GetUserById(savedConversation.TeacherId);
             var student = this.friendService.GetUserById(savedConversation.StudentId);
             var allMistakes = this.mistakeRepository.GetAllMistakes();
-            var topGlobalMistakesForLanguage = this.mistakeRepository.GetTopMistakesForLanguage(savedConversation.Language.Name);
-            var latestSessionMistakes = this.mistakeRepository.GetLatestSessionMistakes(conversationId);
-            var mostCommonSessionMistakes = this.mistakeRepository.GetTopMistakesForSession(conversationId);
 
             var viewModel = new ConversationViewModel
             {
-                ConversationId = savedConversation.ConversationId,
+                ConversationId = savedConversation.Id,
                 Teacher = teacher,
                 Student = student,
-                TopGlobalMistakesForLanguage = topGlobalMistakesForLanguage,
-                LatestSessionMistakes = latestSessionMistakes,
-                MostCommonSessionMistakes = mostCommonSessionMistakes,
+                TopGlobalMistakesForLanguage = this.mistakeRepository.GetTopMistakesForLanguage(savedConversation.LanguageId),
+                LatestSessionMistakes = this.mistakeRepository.GetLatestSessionMistakes(conversationId),
+                MostCommonSessionMistakes = this.mistakeRepository.GetTopMistakesForSession(conversationId),
                 StartDateTime = savedConversation.StartDateTime,
                 EndDateTime = savedConversation.EndDateTime,
                 Language = savedConversation.Language
@@ -80,13 +90,13 @@ namespace Hablame.Services
             return viewModel;
         }
 
-        public string GetConversationStudentId(string conversationId)
+        public Guid GetConversationStudentId(Guid conversationId)
         {
             var conversation = this.conversationRepository.RetrieveConversation(conversationId);
             return conversation.StudentId;
         }
 
-        public string GetConversationTeacherId(string conversationId)
+        public Guid GetConversationTeacherId(Guid conversationId)
         {
             var conversation = this.conversationRepository.RetrieveConversation(conversationId);
             return conversation.TeacherId;
