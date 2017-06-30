@@ -37,6 +37,7 @@
     <Property Name="CorrectValue" Type="nvarchar(max)" />
     <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
     <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -54,12 +55,14 @@ warning 6002: The table/view 'Hablame.dbo.vw_Mistakes' does not have a primary k
       <PropertyRef Name="SpokenValue" />
       <PropertyRef Name="IsSuperfluousAuxVerb" />
       <PropertyRef Name="IsMissingAuxVerb" />
+      <PropertyRef Name="DateTime" />
     </Key>
     <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CorrectValue" Type="nvarchar(max)" />
     <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
     <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
     <Property Name="Count" Type="int" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_MistakesByConversation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -69,6 +72,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByConversation' does not ha
       <PropertyRef Name="IsSuperfluousAuxVerb" />
       <PropertyRef Name="IsMissingAuxVerb" />
       <PropertyRef Name="ConversationId" />
+      <PropertyRef Name="DateTime" />
     </Key>
     <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CorrectValue" Type="nvarchar(max)" />
@@ -76,6 +80,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByConversation' does not ha
     <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
     <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Count" Type="int" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_MistakesByLanguage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -85,6 +90,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByLanguage' does not have a
       <PropertyRef Name="IsSuperfluousAuxVerb" />
       <PropertyRef Name="IsMissingAuxVerb" />
       <PropertyRef Name="LanguageId" />
+      <PropertyRef Name="DateTime" />
     </Key>
     <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CorrectValue" Type="nvarchar(max)" />
@@ -92,6 +98,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByLanguage' does not have a
     <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
     <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Count" Type="int" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -101,6 +108,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
       <PropertyRef Name="IsSuperfluousAuxVerb" />
       <PropertyRef Name="IsMissingAuxVerb" />
       <PropertyRef Name="StudentId" />
+      <PropertyRef Name="DateTime" />
     </Key>
     <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CorrectValue" Type="nvarchar(max)" />
@@ -108,6 +116,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
     <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Count" Type="int" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
   </EntityType>
   <Association Name="FK_Language_Family">
     <End Role="LanguageFamily" Type="Self.LanguageFamily" Multiplicity="1" />
@@ -151,7 +160,8 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     [vw_Mistakes].[CorrectValue] AS [CorrectValue], 
     [vw_Mistakes].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
     [vw_Mistakes].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
-    [vw_Mistakes].[Count] AS [Count]
+    [vw_Mistakes].[Count] AS [Count], 
+    [vw_Mistakes].[DateTime] AS [DateTime]
     FROM [dbo].[vw_Mistakes] AS [vw_Mistakes]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="vw_MistakesByConversation" EntityType="Self.vw_MistakesByConversation" store:Type="Views" store:Schema="dbo">
@@ -161,7 +171,8 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     [vw_MistakesByConversation].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
     [vw_MistakesByConversation].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
     [vw_MistakesByConversation].[ConversationId] AS [ConversationId], 
-    [vw_MistakesByConversation].[Count] AS [Count]
+    [vw_MistakesByConversation].[Count] AS [Count], 
+    [vw_MistakesByConversation].[DateTime] AS [DateTime]
     FROM [dbo].[vw_MistakesByConversation] AS [vw_MistakesByConversation]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="vw_MistakesByLanguage" EntityType="Self.vw_MistakesByLanguage" store:Type="Views" store:Schema="dbo">
@@ -171,7 +182,8 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     [vw_MistakesByLanguage].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
     [vw_MistakesByLanguage].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
     [vw_MistakesByLanguage].[LanguageId] AS [LanguageId], 
-    [vw_MistakesByLanguage].[Count] AS [Count]
+    [vw_MistakesByLanguage].[Count] AS [Count], 
+    [vw_MistakesByLanguage].[DateTime] AS [DateTime]
     FROM [dbo].[vw_MistakesByLanguage] AS [vw_MistakesByLanguage]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="vw_MistakesByStudent" EntityType="Self.vw_MistakesByStudent" store:Type="Views" store:Schema="dbo">
@@ -181,7 +193,8 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     [vw_MistakesByStudent].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
     [vw_MistakesByStudent].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
     [vw_MistakesByStudent].[StudentId] AS [StudentId], 
-    [vw_MistakesByStudent].[Count] AS [Count]
+    [vw_MistakesByStudent].[Count] AS [Count], 
+    [vw_MistakesByStudent].[DateTime] AS [DateTime]
     FROM [dbo].[vw_MistakesByStudent] AS [vw_MistakesByStudent]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Language_Family" Association="Self.FK_Language_Family">

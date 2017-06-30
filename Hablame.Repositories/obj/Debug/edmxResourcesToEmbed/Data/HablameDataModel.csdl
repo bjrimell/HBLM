@@ -41,6 +41,7 @@
     <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
     <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Conversation" Relationship="Self.FK_Mistake_Conversation" FromRole="Mistake" ToRole="Conversation" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -121,12 +122,14 @@
       <PropertyRef Name="SpokenValue" />
       <PropertyRef Name="IsSuperfluousAuxVerb" />
       <PropertyRef Name="IsMissingAuxVerb" />
+      <PropertyRef Name="DateTime" />
     </Key>
     <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
     <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
     <Property Name="Count" Type="Int32" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="vw_MistakesByConversation">
     <Key>
@@ -134,6 +137,7 @@
       <PropertyRef Name="IsSuperfluousAuxVerb" />
       <PropertyRef Name="IsMissingAuxVerb" />
       <PropertyRef Name="ConversationId" />
+      <PropertyRef Name="DateTime" />
     </Key>
     <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -141,6 +145,7 @@
     <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
     <Property Name="ConversationId" Type="Guid" Nullable="false" />
     <Property Name="Count" Type="Int32" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="vw_MistakesByLanguage">
     <Key>
@@ -148,6 +153,7 @@
       <PropertyRef Name="IsSuperfluousAuxVerb" />
       <PropertyRef Name="IsMissingAuxVerb" />
       <PropertyRef Name="LanguageId" />
+      <PropertyRef Name="DateTime" />
     </Key>
     <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -155,6 +161,7 @@
     <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
     <Property Name="LanguageId" Type="Guid" Nullable="false" />
     <Property Name="Count" Type="Int32" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="vw_MistakesByStudent">
     <Key>
@@ -162,6 +169,7 @@
       <PropertyRef Name="IsSuperfluousAuxVerb" />
       <PropertyRef Name="IsMissingAuxVerb" />
       <PropertyRef Name="StudentId" />
+      <PropertyRef Name="DateTime" />
     </Key>
     <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -169,5 +177,6 @@
     <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
     <Property Name="StudentId" Type="Guid" Nullable="false" />
     <Property Name="Count" Type="Int32" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
 </Schema>

@@ -54,28 +54,28 @@ namespace Hablame.Repositories
         public List<Domain.Entities.Mistake> GetTopMistakesForLanguage(Guid languageId)
         {
             var mistakes = new List<Domain.Entities.Mistake>();
-            var response = db.vw_MistakesByLanguage.Where(m => m.LanguageId == languageId).Take(10);
+            var response = db.vw_MistakesByLanguage.Where(m => m.LanguageId == languageId).OrderByDescending(m => m.Count).Take(10);
             return Mapper.Map(response, mistakes);
         }
 
         public List<Domain.Entities.Mistake> GetLatestSessionMistakes(Guid conversationId)
         {
             var mistakes = new List<Domain.Entities.Mistake>();
-            var response = db.vw_MistakesByConversation.Where(m => m.ConversationId == conversationId).Take(10);//.OrderBy(m => m.DateTime);
+            var response = db.vw_MistakesByConversation.Where(m => m.ConversationId == conversationId).OrderByDescending(m => m.DateTime).Take(10);
             return Mapper.Map(response, mistakes);
         }
 
         public List<Domain.Entities.Mistake> GetTopMistakesForSession(Guid conversationId)
         {
             var mistakes = new List<Domain.Entities.Mistake>();
-            var response = db.vw_MistakesByConversation.Where(m => m.ConversationId == conversationId).OrderBy(m => m.Count).Take(10);
+            var response = db.vw_MistakesByConversation.Where(m => m.ConversationId == conversationId).OrderByDescending(m => m.Count).Take(10);
             return Mapper.Map(response, mistakes);
         }
 
         public List<Domain.Entities.Mistake> GetTopMistakesForStudent(Guid studentId)
         {
             var mistakes = new List<Domain.Entities.Mistake>();
-            var response = db.vw_MistakesByStudent.Where(m => m.StudentId == studentId).OrderBy(m => m.Count).Take(10);
+            var response = db.vw_MistakesByStudent.Where(m => m.StudentId == studentId).OrderByDescending(m => m.Count).Take(10);
             return Mapper.Map(response, mistakes);
         }
 

@@ -31,6 +31,7 @@ namespace Hablame.Services
             var mistake = new Mistake
             {
                 Id = Guid.NewGuid(),
+                DateTime = DateTime.Now,
                 ConversationId = conversationId,
                 SpokenValue = spokenValue,
                 CorrectValue = correctValue,

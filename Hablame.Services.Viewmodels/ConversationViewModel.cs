@@ -10,6 +10,11 @@ namespace Hablame.Services.Viewmodels
 {
     public class ConversationViewModel
     {
+        public ConversationViewModel()
+        {
+            // added this here because the view was broken when conversation first starts. TODO: Might be best to think about how to change this...
+            this.NewMistake = new Mistake();
+        }
         public Conversation SavedConversation { get; set; }
 
         public Guid ConversationId { get; set; }
@@ -29,7 +34,17 @@ namespace Hablame.Services.Viewmodels
 
         public List<Mistake> LatestSessionMistakes { get; set; }
 
+        public List<Mistake> MostCommonMistakesForStudent { get; set; }
+
         public Language Language { get; set; }
+
+        public bool MistakeAdded { get; set; }
+
+        public bool MistakeDeleted { get; set; }
+
+        public bool MistakeRepeated { get; set; }
+
+        public Mistake NewMistake { get; set; }
 
     }
 }

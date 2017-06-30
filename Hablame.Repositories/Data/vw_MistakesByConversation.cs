@@ -20,5 +20,6 @@ namespace Hablame.Repositories.Data
         public bool IsMissingAuxVerb { get; set; }
         public System.Guid ConversationId { get; set; }
         public Nullable<int> Count { get; set; }
+        public System.DateTime DateTime { get; set; }
     }
 }

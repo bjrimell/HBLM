@@ -61,6 +61,7 @@ namespace Hablame.Services
                 TopGlobalMistakesForLanguage = this.mistakeRepository.GetTopMistakesForLanguage(conversation.LanguageId),
                 LatestSessionMistakes = this.mistakeRepository.GetLatestSessionMistakes(conversation.Id),
                 MostCommonSessionMistakes = this.mistakeRepository.GetTopMistakesForSession(conversation.Id),
+                MostCommonMistakesForStudent = this.mistakeRepository.GetTopMistakesForStudent(student.Id),
                 Language = language
             };
 
@@ -82,6 +83,7 @@ namespace Hablame.Services
                 TopGlobalMistakesForLanguage = this.mistakeRepository.GetTopMistakesForLanguage(savedConversation.LanguageId),
                 LatestSessionMistakes = this.mistakeRepository.GetLatestSessionMistakes(conversationId),
                 MostCommonSessionMistakes = this.mistakeRepository.GetTopMistakesForSession(conversationId),
+                MostCommonMistakesForStudent = this.mistakeRepository.GetTopMistakesForStudent(student.Id),
                 StartDateTime = savedConversation.StartDateTime,
                 EndDateTime = savedConversation.EndDateTime,
                 Language = savedConversation.Language

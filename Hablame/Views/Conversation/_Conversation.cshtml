@@ -81,11 +81,25 @@
             <div class="row content">
 
                 <div class="col-lg-12">
-                    <div class="well">
+                    
                         @{
-                            Html.RenderAction("EnteredMistake", "Mistake");
-                        }
-                    </div>
+                            if (Model.MistakeAdded)
+                            {
+                                <div class="well">
+                                    <div class="alert alert-success">
+                                        <h3><strong>Mistake added!</strong></h3> @Model.Student.Forename said <strong>@Model.NewMistake.SpokenValue</strong> but should have said <strong>@Model.NewMistake.CorrectValue</strong>.
+                                    </div>
+                                </div>
+                                    }
+                                    if (@Model.MistakeDeleted)
+                                    {
+                                    <h1>TODO</h1>
+                                    }
+                                    if (@Model.MistakeRepeated)
+                                    {
+                                    <h1>TODO</h1>
+                                    }
+                                    }
                 </div>
             </div>
 
@@ -167,7 +181,7 @@
                                 </thead>
                                 <tbody>
                                     @{
-                                        foreach (var mistake in Model.TopGlobalMistakesForLanguage)
+                                        foreach (var mistake in Model.MostCommonMistakesForStudent)
                                         {
                                             <tr>
                                                 <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>

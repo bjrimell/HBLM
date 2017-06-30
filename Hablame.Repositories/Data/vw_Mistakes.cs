@@ -19,5 +19,6 @@ namespace Hablame.Repositories.Data
         public bool IsSuperfluousAuxVerb { get; set; }
         public bool IsMissingAuxVerb { get; set; }
         public Nullable<int> Count { get; set; }
+        public System.DateTime DateTime { get; set; }
     }
 }

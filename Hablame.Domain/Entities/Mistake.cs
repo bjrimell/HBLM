@@ -16,6 +16,8 @@ namespace Hablame.Domain.Entities
 
         public Guid LanguageId { get; set; }
 
+        public DateTime DateTime { get; set; }
+
         public bool IsWordMistake { get; set; }
 
         public bool IsPhraseMistake { get; set; }

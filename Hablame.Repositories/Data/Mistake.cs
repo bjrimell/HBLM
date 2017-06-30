@@ -20,6 +20,7 @@ namespace Hablame.Repositories.Data
         public string CorrectValue { get; set; }
         public bool IsSuperfluousAuxVerb { get; set; }
         public bool IsMissingAuxVerb { get; set; }
+        public System.DateTime DateTime { get; set; }
     
         public virtual Conversation Conversation { get; set; }
     }
