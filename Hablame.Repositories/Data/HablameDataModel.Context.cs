@@ -36,6 +36,8 @@ namespace Hablame.Repositories.Data
         public virtual DbSet<vw_MistakesByConversation> vw_MistakesByConversation { get; set; }
         public virtual DbSet<vw_MistakesByLanguage> vw_MistakesByLanguage { get; set; }
         public virtual DbSet<vw_MistakesByStudent> vw_MistakesByStudent { get; set; }
+        public virtual DbSet<MistakeMadeMistakeType> MistakeMadeMistakeTypes { get; set; }
+        public virtual DbSet<MistakeType> MistakeTypes { get; set; }
     
         public virtual ObjectResult<getTopMistakesByLanguageId_Result> getTopMistakesByLanguageId(Nullable<System.Guid> languageId)
         {

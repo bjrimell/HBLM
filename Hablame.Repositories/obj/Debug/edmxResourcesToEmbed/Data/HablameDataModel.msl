@@ -34,6 +34,7 @@
     <EntitySetMapping Name="Mistakes">
       <EntityTypeMapping TypeName="HablameModel.Mistake">
         <MappingFragment StoreEntitySet="Mistake">
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
           <ScalarProperty Name="DateTime" ColumnName="DateTime" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
@@ -126,6 +127,26 @@
           <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
           <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
           <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MistakeMadeMistakeTypes">
+      <EntityTypeMapping TypeName="HablameModel.MistakeMadeMistakeType">
+        <MappingFragment StoreEntitySet="MistakeMadeMistakeType">
+          <ScalarProperty Name="MistakeTypeId" ColumnName="MistakeTypeId" />
+          <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MistakeTypes">
+      <EntityTypeMapping TypeName="HablameModel.MistakeType">
+        <MappingFragment StoreEntitySet="MistakeType">
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="MaximumRatingLevelVisibility" ColumnName="MaximumRatingLevelVisibility" />
+          <ScalarProperty Name="MinimumRatingLevelVisibility" ColumnName="MinimumRatingLevelVisibility" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

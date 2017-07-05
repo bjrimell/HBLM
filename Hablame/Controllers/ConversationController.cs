@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 using Hablame.Services;
 
+using Hablame.Domain.Entities;
+using Hablame.Services.Viewmodels;
+
 namespace Hablame.Controllers
 {
     public class ConversationController : Controller
@@ -38,21 +41,23 @@ namespace Hablame.Controllers
             string conversationId,
             string spokenValue,
             string correctValue,
+            IEnumerable<string> SelectedMistakeTypes,
+            int rating = 0,
             bool IsSuperfluousAuxVerb = false,
             bool IsMissingAuxVerb = false)
         {
             var conversationGuid = Guid.Parse(conversationId);
 
-            var newMistake = this.mistakeService.CreateMistake(
-                conversationGuid,
-                spokenValue,
-                correctValue,
-                IsSuperfluousAuxVerb,
-                IsMissingAuxVerb);
-
             var viewModel = this.conversationService.RecreateConversationViewModel(conversationGuid, spokenValue, correctValue, IsSuperfluousAuxVerb, IsMissingAuxVerb);
 
-            viewModel.TopGlobalMistakesForLanguage.Add(newMistake);
+            var newMistake = this.mistakeService.CreateMistake(
+                conversationGuid,
+                rating,
+                spokenValue,
+                correctValue,
+                SelectedMistakeTypes);
+
+            this.conversationService.SetMessaging(viewModel, newMistake);
 
             return this.PartialView("_Conversation", viewModel);
         }

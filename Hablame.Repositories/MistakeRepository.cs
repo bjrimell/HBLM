@@ -96,5 +96,12 @@ namespace Hablame.Repositories
                 return false;
             }
         }
+
+        public List<Domain.Entities.MistakeType> GetMistakeTypes(Guid languageId)
+        {
+            var mistakeTypes = new List<Domain.Entities.MistakeType>();
+            var response = db.MistakeTypes.Where(m => m.LanguageId == languageId);
+            return Mapper.Map(response, mistakeTypes);
+        }
     }
 }

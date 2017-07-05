@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Hablame.Services.Viewmodels;
+using Hablame.Domain.Entities;
 
 namespace Hablame.Services
 {
@@ -17,6 +18,8 @@ namespace Hablame.Services
         Guid GetConversationStudentId(Guid conversationId);
 
         Guid GetConversationTeacherId(Guid conversationId);
+
+        void SetMessaging(ConversationViewModel viewModel, Mistake newMistake);
 
     }
 }

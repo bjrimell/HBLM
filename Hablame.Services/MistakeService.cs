@@ -26,7 +26,7 @@ namespace Hablame.Services
             return viewModel;
         }
 
-        public Mistake CreateMistake(Guid conversationId, string spokenValue, string correctValue, bool IsSuperfluousAuxVerb, bool IsMissingAuxVerb)
+        public Mistake CreateMistake(Guid conversationId, int rating, string spokenValue, string correctValue, IEnumerable<string> selectedMistakeTypes)
         {
             var mistake = new Mistake
             {
@@ -36,7 +36,8 @@ namespace Hablame.Services
                 SpokenValue = spokenValue,
                 CorrectValue = correctValue,
                 StudentId = this.conversationService.GetConversationStudentId(conversationId),
-                TeacherId = this.conversationService.GetConversationTeacherId(conversationId)
+                TeacherId = this.conversationService.GetConversationTeacherId(conversationId),
+                Rating = rating
             };
 
             this.mistakeRepository.CreateNewMistake(mistake);

@@ -15,7 +15,7 @@ namespace Hablame.Services
 
         private readonly IFriendService friendService;
         private readonly IMistakeRepository mistakeRepository;
-        private IConversationRepository conversationRepository;
+        private readonly IConversationRepository conversationRepository;
 
         public ConversationService(IFriendService friendService, IMistakeRepository mistakeRepository, IConversationRepository conversationRepository)
         {
@@ -35,8 +35,9 @@ namespace Hablame.Services
             // TODO: Make this be the selected language when the convo was initiated
             var language = new Language
             {
-                Name = "Spanish",
-                Family = "Romance"
+                Id = Guid.Parse("f4e4b27d-eb24-43de-b9d7-f67a73ae83f8"),
+                Name = "English",
+                Family = "Germanic"
             };
 
             var conversation = new Conversation
@@ -62,7 +63,8 @@ namespace Hablame.Services
                 LatestSessionMistakes = this.mistakeRepository.GetLatestSessionMistakes(conversation.Id),
                 MostCommonSessionMistakes = this.mistakeRepository.GetTopMistakesForSession(conversation.Id),
                 MostCommonMistakesForStudent = this.mistakeRepository.GetTopMistakesForStudent(student.Id),
-                Language = language
+                Language = language,
+                MistakeTypeOptions = this.GetMistakeTypeOptions(conversation.LanguageId)
             };
 
             return viewModel;
@@ -86,7 +88,8 @@ namespace Hablame.Services
                 MostCommonMistakesForStudent = this.mistakeRepository.GetTopMistakesForStudent(student.Id),
                 StartDateTime = savedConversation.StartDateTime,
                 EndDateTime = savedConversation.EndDateTime,
-                Language = savedConversation.Language
+                Language = savedConversation.Language,
+                MistakeTypeOptions = this.GetMistakeTypeOptions(savedConversation.LanguageId)
             };
 
             return viewModel;
@@ -102,6 +105,31 @@ namespace Hablame.Services
         {
             var conversation = this.conversationRepository.RetrieveConversation(conversationId);
             return conversation.TeacherId;
+        }
+
+        public void SetMessaging(ConversationViewModel viewModel, Mistake newMistake)
+        {
+            viewModel.NewMistake = newMistake;
+            viewModel.MistakeAdded = newMistake.Rating < 5;
+            viewModel.PraiseAdded = newMistake.Rating == 5;
+        }
+
+        private List<MistakeTypeOptions> GetMistakeTypeOptions(Guid languageId)
+        {
+            var response = new List<MistakeTypeOptions>();
+            var allMistakes = this.mistakeRepository.GetMistakeTypes(languageId);
+
+            // Started with 1 rather than the traditional 0 as it will be used for the rating levels 1 -5
+            for (int i = 1; i <= 5; i++)
+            {
+                var mistakeTypeOptions = new MistakeTypeOptions
+                {
+                    RatingVisibleFor = i,
+                    MistakeTypeList = allMistakes.Where(m => m.MaximumRatingLevelVisibility >= i && m.MinimumRatingLevelVisibility <= i).ToList()
+                };
+                response.Add(mistakeTypeOptions);
+            }
+            return response;
         }
     }
 }

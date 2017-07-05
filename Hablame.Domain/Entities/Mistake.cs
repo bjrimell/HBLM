@@ -33,5 +33,9 @@ namespace Hablame.Domain.Entities
         public string Comment { get; set; }
 
         public int Count { get; set; }
+
+        public int Rating { get; set; }
+
+        public bool PronunciationError { get; set; }
     }
 }

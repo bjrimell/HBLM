@@ -12,17 +12,10 @@ namespace Hablame.Repositories.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Mistake
+    public partial class MistakeMadeMistakeType
     {
         public System.Guid Id { get; set; }
         public System.Guid ConversationId { get; set; }
-        public string SpokenValue { get; set; }
-        public string CorrectValue { get; set; }
-        public bool IsSuperfluousAuxVerb { get; set; }
-        public bool IsMissingAuxVerb { get; set; }
-        public System.DateTime DateTime { get; set; }
-        public int Rating { get; set; }
-    
-        public virtual Conversation Conversation { get; set; }
+        public System.Guid MistakeTypeId { get; set; }
     }
 }

@@ -1,6 +1,1 @@
-D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\Hablame.Common.dll
-D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\Hablame.Common.pdb
-D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\AutoMapper.dll
-D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\AutoMapper.xml
-D:\Code\priv\language\HBLM\Hablame.Common\obj\Debug\Hablame.Common.dll
-D:\Code\priv\language\HBLM\Hablame.Common\obj\Debug\Hablame.Common.pdb
+D:\Code\priv\language\HBLM\Hablame.Common\obj\Debug\Hablame.Common.csprojResolveAssemblyReference.cache

@@ -29,6 +29,10 @@ namespace Hablame.Repositories.Mapping
                 cfg.CreateMap<Data.vw_MistakesByStudent, Domain.Entities.Mistake>();
                 cfg.CreateMap<Data.vw_MistakesByLanguage, Domain.Entities.Mistake>();
 
+                // Mistake Type Mappings
+                cfg.CreateMap<Domain.Entities.MistakeType, Data.MistakeType>();
+                cfg.CreateMap<Data.MistakeType, Domain.Entities.MistakeType>();
+
                 // Conversation Mappings
                 cfg.CreateMap<Domain.Entities.Conversation, Data.Conversation>();
                 cfg.CreateMap<Data.Conversation, Domain.Entities.Conversation>();

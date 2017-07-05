@@ -2,6 +2,7 @@
 
 <div class="container-fluid">
     <div class="row content">
+        <!-- Left hand nav -->
         <div class="col-sm-3 sidenav">
             <h3>Conversation Details</h3>
             <div class="well">
@@ -28,212 +29,255 @@
 
         </div>
 
+        <!-- Main body content -->
         <div class="col-sm-9">
 
             <div class="row content">
                 <div class="col-lg-12">
-                    <h2>Enter new mistake</h2>
-                    <form method="post">
-                        <input type="hidden" name="conversationId" id="conversationId" value="@Model.ConversationId" />
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <!-- Text Input -->
-                                <div class="form-group">
-                                    <label for="inputlg">@Model.Student.Forename said:</label>
-                                    <input class="form-control input-lg" id="spokenValue" name="spokenValue" type="text">
+                    <div class="input-content">
+                        <form method="post">
+                            <div class="row">
+                                <!-- Spoken value Input -->
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <h3><label for="inputlg">@Model.Student.Forename said:</label></h3>
+                                        <input class="form-control input-lg" id="spokenValue" name="spokenValue" type="text">
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputlg">but should have said:</label>
-                                    <input class="form-control input-lg" id="correctValue" name="correctValue" type="text">
-                                </div>
-                                <button type="submit" class="btn btn-lg btn-primary">SUBMIT</button>
-                            </div>
-                            <div class="col-lg-6">
-                                <!-- Checkboxes -->
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-info btn-lg active">
-                                        <input type="checkbox" autocomplete="off"> <input id="IsSuperfluousAuxVerb" name="IsSuperfluousAuxVerb" type="checkbox" value=""><span data-toggle="tooltip" title="e.g. Wrong: I am very much like football. Corrected: I very much like football.">Unnecessary auxiliary verb</span>
-                                    </label>
-                                    <label class="btn btn-info btn-lg">
-                                        <input type="checkbox" autocomplete="off"> <input id="IsMissingAuxVerb" name="IsMissingAuxVerb" type="checkbox" value=""><span data-toggle="tooltip" title="e.g. ">Missing auxiliary verb</span>
-                                    </label>
-                                    <label class="btn btn-info btn-lg">
-                                        <input type="checkbox" autocomplete="off"> Wrong verb form
-                                    </label>
-                                    <label class="btn btn-info btn-lg">
-                                        <input type="checkbox" autocomplete="off"> Wrong verb pattern
-                                    </label>
-                                    <label class="btn btn-info btn-lg">
-                                        <input type="checkbox" autocomplete="off"> Wrong phrasal verb
-                                    </label>
-                                    <label class="btn btn-info btn-lg">
-                                        <input type="checkbox" autocomplete="off"> Wrong subject-verb agreement
-                                    </label>
+                                <!-- Rating Input -->
+                                <div class="col-lg-6">
+                                    <h3>Rating</h3>
+                                    <ul class="rate-area">
+                                        <input type="radio" id="5-star" name="rating" value="5" onclick="if(this.checked){showMistakeContent(false, 5)}" />
+                                        <label for="5-star" title="Amazing">5 stars</label>
+                                        <input type="radio" id="4-star" name="rating" value="4" onclick="if(this.checked){showMistakeContent(true, 4)}" />
+                                        <label for="4-star" title="Good">4 stars</label>
+                                        <input type="radio" id="3-star" name="rating" value="3" onclick="if(this.checked){showMistakeContent(true, 3)}" />
+                                        <label for="3-star" title="Average">3 stars</label>
+                                        <input type="radio" id="2-star" name="rating" value="2" onclick="if(this.checked){showMistakeContent(true, 2)}" />
+                                        <label for="2-star" title="Not Good">2 stars</label>
+                                        <input type="radio" id="1-star" name="rating" value="1" onclick="if(this.checked){showMistakeContent(true, 1)}" />
+                                        <label for="1-star" title="Bad">1 star</label>
+                                    </ul>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                            <div class="row">
+                                <!-- Mistake Content (hidden by default) -->
+                                <div class="col-lg-12" id="mistakeContent" hidden="hidden">
+                                    <div class="form-group">
+                                        <label for="inputlg">Improvement:</label>
+                                        <input class="form-control input-lg" id="correctValue" name="correctValue" type="text">
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Mistake Type Options -->
+                                <div id="mistakeTypeOptions" class="col-lg-12">
+                                    <!-- Mistake Category Section - note the dynamic div name-->
+                                    <!-- This section displays only the MistakeType Options for the particular rating that has been given to the student for their 'mistake' -->
+                                    <!-- 5 different divs are created, hidden by default, controlled by Jquery -->
+                                    @{
+                                        for (var i = 1; i <= 5; i++)
+                                        {
+                                            <div id="options-rating-@i" hidden="hidden">
+
+                                                @foreach (var ratingSet in @Model.MistakeTypeOptions.Where(m => m.RatingVisibleFor == i))
+                                                {
+                                                    foreach (var item in ratingSet.MistakeTypeList)
+                                                    {
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" data-toggle="toggle" name="SelectedMistakeTypes" value="@item.Title"> @item.Title
+                                                        </label>
+                                                    }
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Praise Content (hidden by default) -->
+                                <div id="praiseContent" class="col-lg-12" hidden="hidden">
+                                    <h5>Great - praising your student will encourage motivation and confidence!</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Form submission content -->
+                                <div id="submitForm" class="col-lg-12">
+                                    <input type="hidden" name="conversationId" id="conversationId" value="@Model.ConversationId" />
+                                    <button type="submit" name="submit-mistake" id="submit-mistake" class="btn btn-lg btn-primary" disabled="disabled">SUBMIT</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
             <br />
 
-            <div class="row content">
-
+            <!-- Messaging alerting the user that a new Mistake has been added-->
+            <div id="dataPostedMessage" class="row content">
                 <div class="col-lg-12">
-                    
-                        @{
-                            if (Model.MistakeAdded)
-                            {
-                                <div class="well">
-                                    <div class="alert alert-success">
-                                        <h3><strong>Mistake added!</strong></h3> @Model.Student.Forename said <strong>@Model.NewMistake.SpokenValue</strong> but should have said <strong>@Model.NewMistake.CorrectValue</strong>.
-                                    </div>
+                    @{
+                        if (Model.MistakeAdded)
+                        {
+                            <div class="well">
+                                <div class="alert alert-success">
+                                    <h3><strong>Mistake added!</strong></h3> @Model.Student.Forename said <strong>@Model.NewMistake.SpokenValue</strong> but should have said <strong>@Model.NewMistake.CorrectValue</strong>.
                                 </div>
-                                    }
-                                    if (@Model.MistakeDeleted)
-                                    {
-                                    <h1>TODO</h1>
-                                    }
-                                    if (@Model.MistakeRepeated)
-                                    {
-                                    <h1>TODO</h1>
-                                    }
-                                    }
+                            </div>
+                        }
+                        if (@Model.MistakeDeleted)
+                        {
+                            <h1>TODO</h1>
+                        }
+                        if (@Model.MistakeRepeated)
+                        {
+                            <h1>TODO</h1>
+                        }
+                        if (Model.PraiseAdded)
+                        {
+                            <div class="well">
+                                <div class="alert alert-success">
+                                    <h3><strong>Praise added!</strong></h3> You have applauded @Model.Student.Forename for saying <strong>@Model.NewMistake.SpokenValue</strong>.
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
-
-            <div class="row content">
-                <div class="col-lg-12">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#home">Latest (this conversation)</a></li>
-                        <li><a data-toggle="tab" href="#menu1">Top (this conversation)</a></li>
-                        <li><a data-toggle="tab" href="#menu2">@Model.Student.Forename's Top Mistakes</a></li>
-                        <li><a data-toggle="tab" href="#menu3">Top English mistakes</a></li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div id="home" class="tab-pane fade in active">
-                            <table class="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>Spoken</th>
-                                        <th>Correct</th>
-                                        <th>Occurences</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        foreach (var mistake in Model.LatestSessionMistakes)
-                                        {
-                                            <tr>
-                                                <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
-                                                <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
-                                                <td>@mistake.Count</td>
-                                                <td>
-                                                    <button type="submit" class="btn btn-sm btn-primary">+1</button>
-                                                    <button type="submit" class="btn btn-sm btn-primary">Similar</button>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="menu1" class="tab-pane fade">
-                            <table class="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>Spoken</th>
-                                        <th>Correct</th>
-                                        <th>Occurences</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        foreach (var mistake in Model.MostCommonSessionMistakes)
-                                        {
-                                            <tr>
-                                                <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
-                                                <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
-                                                <td>@mistake.Count</td>
-                                                <td>
-                                                    <button type="submit" class="btn btn-sm btn-primary">+1</button>
-                                                    <button type="submit" class="btn btn-sm btn-primary">Similar</button>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="menu2" class="tab-pane fade">
-                            <table class="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>Spoken</th>
-                                        <th>Correct</th>
-                                        <th>Occurences</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        foreach (var mistake in Model.MostCommonMistakesForStudent)
-                                        {
-                                            <tr>
-                                                <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
-                                                <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
-                                                <td>@mistake.Count</td>
-                                                <td>
-                                                    <button type="submit" class="btn btn-sm btn-primary">+1</button>
-                                                    <button type="submit" class="btn btn-sm btn-primary">Similar</button>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="menu3" class="tab-pane fade">
-                            <table class="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>Spoken</th>
-                                        <th>Correct</th>
-                                        <th>Occurences</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        foreach (var mistake in Model.TopGlobalMistakesForLanguage)
-                                        {
-                                            <tr>
-                                                <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
-                                                <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
-                                                <td>@mistake.Count</td>
-                                                <td>
-                                                    <button type="submit" class="btn btn-sm btn-primary">+1</button>
-                                                    <button type="submit" class="btn btn-sm btn-primary">Similar</button>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-</div>
+            
+    <br />
 
-<div class="container-fluid">
+    <!-- Historic mistakes section -->
+    <div class="row content">
+        <div class="col-lg-12">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Latest (this conversation)</a></li>
+                <li><a data-toggle="tab" href="#menu1">Top (this conversation)</a></li>
+                <li><a data-toggle="tab" href="#menu2">@Model.Student.Forename's Top Mistakes</a></li>
+                <li><a data-toggle="tab" href="#menu3">Top English mistakes</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Spoken</th>
+                                <th>Correct</th>
+                                <th>Occurences</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var mistake in Model.LatestSessionMistakes)
+                                {
+                                    <tr>
+                                        <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
+                                        <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
+                                        <td>@mistake.Count</td>
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-primary">+1</button>
+                                            <button type="submit" class="btn btn-sm btn-primary">Similar</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Spoken</th>
+                                <th>Correct</th>
+                                <th>Occurences</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var mistake in Model.MostCommonSessionMistakes)
+                                {
+                                    <tr>
+                                        <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
+                                        <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
+                                        <td>@mistake.Count</td>
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-primary">+1</button>
+                                            <button type="submit" class="btn btn-sm btn-primary">Similar</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Spoken</th>
+                                <th>Correct</th>
+                                <th>Occurences</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var mistake in Model.MostCommonMistakesForStudent)
+                                {
+                                    <tr>
+                                        <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
+                                        <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
+                                        <td>@mistake.Count</td>
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-primary">+1</button>
+                                            <button type="submit" class="btn btn-sm btn-primary">Similar</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div id="menu3" class="tab-pane fade">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Spoken</th>
+                                <th>Correct</th>
+                                <th>Occurences</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var mistake in Model.TopGlobalMistakesForLanguage)
+                                {
+                                    <tr>
+                                        <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
+                                        <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
+                                        <td>@mistake.Count</td>
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-primary">+1</button>
+                                            <button type="submit" class="btn btn-sm btn-primary">Similar</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -243,4 +287,20 @@ $(document).ready(function(){
 });
 </script>
 
+<script>
+    function showMistakeContent(show, rating) {
 
+        document.getElementById("mistakeContent").hidden = !show;
+        document.getElementById("praiseContent").hidden = show;
+        document.getElementById("submit-mistake").disabled = false;
+
+        // reset all rating options sections to hidden
+        document.getElementById("options-rating-1").hidden = true;
+        document.getElementById("options-rating-2").hidden = true;
+        document.getElementById("options-rating-3").hidden = true;
+        document.getElementById("options-rating-4").hidden = true;
+        document.getElementById("options-rating-5").hidden = true;
+        // set the selected rating's section to visible
+        document.getElementById("options-rating-" + rating).hidden = false;
+    }
+</script>

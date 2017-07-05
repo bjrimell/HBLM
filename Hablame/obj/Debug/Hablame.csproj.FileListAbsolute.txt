@@ -148,6 +148,7 @@ D:\Code\priv\language\HBLM\Hablame\bin\System.Web.WebPages.Deployment.dll
 D:\Code\priv\language\HBLM\Hablame\bin\System.Web.WebPages.dll
 D:\Code\priv\language\HBLM\Hablame\bin\System.Web.WebPages.Razor.dll
 D:\Code\priv\language\HBLM\Hablame\bin\WebGrease.dll
+D:\Code\priv\language\HBLM\Hablame\bin\AutoMapper.dll
 D:\Code\priv\language\HBLM\Hablame\bin\Hablame.Domain.pdb
 D:\Code\priv\language\HBLM\Hablame\bin\Hablame.Repositories.pdb
 D:\Code\priv\language\HBLM\Hablame\bin\Hablame.Services.Viewmodels.pdb
@@ -183,8 +184,7 @@ D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.Owin.Security.OAuth.xml
 D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.Owin.Security.Google.xml
 D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Code\priv\language\HBLM\Hablame\bin\AutoMapper.xml
 D:\Code\priv\language\HBLM\Hablame\obj\Debug\Hablame.csprojResolveAssemblyReference.cache
 D:\Code\priv\language\HBLM\Hablame\obj\Debug\Hablame.dll
 D:\Code\priv\language\HBLM\Hablame\obj\Debug\Hablame.pdb
-D:\Code\priv\language\HBLM\Hablame\bin\AutoMapper.dll
-D:\Code\priv\language\HBLM\Hablame\bin\AutoMapper.xml

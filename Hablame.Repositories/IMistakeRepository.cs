@@ -21,5 +21,7 @@ namespace Hablame.Repositories
         List<Mistake> GetTopMistakesForStudent(Guid studentId);
 
         bool CreateNewMistake(Mistake mistake);
+
+        List<MistakeType> GetMistakeTypes(Guid languageId);
     }
 }

@@ -44,7 +44,20 @@ namespace Hablame.Services.Viewmodels
 
         public bool MistakeRepeated { get; set; }
 
+        public bool PraiseAdded { get; set; }
+
         public Mistake NewMistake { get; set; }
 
+        public List<MistakeTypeOptions> MistakeTypeOptions {get; set;}
+
+        public IEnumerable<string> SelectedMistakeTypes { get; set; }
+
+    }
+
+    public class MistakeTypeOptions
+    {
+        public int RatingVisibleFor { get; set; }
+
+        public List<MistakeType> MistakeTypeList { get; set; }
     }
 }

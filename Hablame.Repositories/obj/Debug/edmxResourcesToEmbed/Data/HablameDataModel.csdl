@@ -42,6 +42,7 @@
     <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Conversation" Relationship="Self.FK_Mistake_Conversation" FromRole="Mistake" ToRole="Conversation" />
     <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -100,6 +101,8 @@
     <EntitySet Name="vw_MistakesByConversation" EntityType="HablameModel.vw_MistakesByConversation" />
     <EntitySet Name="vw_MistakesByLanguage" EntityType="HablameModel.vw_MistakesByLanguage" />
     <EntitySet Name="vw_MistakesByStudent" EntityType="HablameModel.vw_MistakesByStudent" />
+    <EntitySet Name="MistakeMadeMistakeTypes" EntityType="HablameModel.MistakeMadeMistakeType" />
+    <EntitySet Name="MistakeTypes" EntityType="HablameModel.MistakeType" />
   </EntityContainer>
   <ComplexType Name="getTopMistakesByLanguageId_Result">
     <Property Type="Guid" Name="ConversationId" Nullable="false" />
@@ -178,5 +181,23 @@
     <Property Name="StudentId" Type="Guid" Nullable="false" />
     <Property Name="Count" Type="Int32" />
     <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="MistakeMadeMistakeType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="ConversationId" Type="Guid" Nullable="false" />
+    <Property Name="MistakeTypeId" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MistakeType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MinimumRatingLevelVisibility" Type="Int32" Nullable="false" />
+    <Property Name="MaximumRatingLevelVisibility" Type="Int32" Nullable="false" />
+    <Property Name="LanguageId" Type="Guid" Nullable="false" />
   </EntityType>
 </Schema>
