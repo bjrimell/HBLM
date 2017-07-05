@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Entities\Conversation.cs" />
     <Compile Include="Entities\Language.cs" />
+    <Compile Include="Entities\MistakeMade.cs" />
     <Compile Include="Entities\Mistake.cs" />
     <Compile Include="Entities\MistakeType.cs" />
     <Compile Include="Entities\User.cs" />

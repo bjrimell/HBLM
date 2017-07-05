@@ -28,9 +28,6 @@ namespace Hablame.Services
             // TODO: Make this current logged-in user
             var currentUserId = new Guid("a3250996-fa99-4299-b44a-8fb0be5386e5");
             var student = this.friendService.GetUserById(studentId);
-            var teacher = this.friendService.GetUserById(currentUserId);
-
-            var allMistakes = this.mistakeRepository.GetAllMistakes();
 
             // TODO: Make this be the selected language when the convo was initiated
             var language = new Language
@@ -55,7 +52,7 @@ namespace Hablame.Services
             var viewModel = new ConversationViewModel
             {
                 ConversationId = Guid.Parse(convoId),
-                Teacher = teacher,
+                Teacher = this.friendService.GetUserById(currentUserId),
                 Student = student,
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now,
@@ -70,17 +67,15 @@ namespace Hablame.Services
             return viewModel;
         }
 
-        public ConversationViewModel RecreateConversationViewModel(Guid conversationId, string spokenValue, string correctValue, bool IsSuperfluousAuxVerb, bool IsMissingAuxVerb)
+        public ConversationViewModel RecreateConversationViewModel(Guid conversationId, string spokenValue, string correctValue)
         {
             var savedConversation = this.conversationRepository.RetrieveConversation(conversationId);
-            var teacher = this.friendService.GetUserById(savedConversation.TeacherId);
             var student = this.friendService.GetUserById(savedConversation.StudentId);
-            var allMistakes = this.mistakeRepository.GetAllMistakes();
 
             var viewModel = new ConversationViewModel
             {
                 ConversationId = savedConversation.Id,
-                Teacher = teacher,
+                Teacher = this.friendService.GetUserById(savedConversation.TeacherId),
                 Student = student,
                 TopGlobalMistakesForLanguage = this.mistakeRepository.GetTopMistakesForLanguage(savedConversation.LanguageId),
                 LatestSessionMistakes = this.mistakeRepository.GetLatestSessionMistakes(conversationId),
@@ -107,11 +102,14 @@ namespace Hablame.Services
             return conversation.TeacherId;
         }
 
-        public void SetMessaging(ConversationViewModel viewModel, Mistake newMistake)
+        public void SetMessaging(ConversationViewModel viewModel, MistakeMade newMistakeMade, string spokenValue, string correctValue, int rating)
         {
-            viewModel.NewMistake = newMistake;
-            viewModel.MistakeAdded = newMistake.Rating < 5;
-            viewModel.PraiseAdded = newMistake.Rating == 5;
+            newMistakeMade.SpokenValue = spokenValue;
+            newMistakeMade.CorrectValue = correctValue;
+            newMistakeMade.Rating = rating;
+            viewModel.NewMistakeMade = newMistakeMade;
+            viewModel.MistakeAdded = newMistakeMade.Rating < 5;
+            viewModel.PraiseAdded = newMistakeMade.Rating == 5;
         }
 
         private List<MistakeTypeOptions> GetMistakeTypeOptions(Guid languageId)

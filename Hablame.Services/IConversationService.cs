@@ -13,13 +13,13 @@ namespace Hablame.Services
     {
         ConversationViewModel CreateConversationViewModel(Guid studentId);
 
-        ConversationViewModel RecreateConversationViewModel(Guid conversationId, string spokenValue, string correctValue, bool IsSuperfluousAuxVerb, bool IsMissingAuxVerb);
+        ConversationViewModel RecreateConversationViewModel(Guid conversationId, string spokenValue, string correctValue);
 
         Guid GetConversationStudentId(Guid conversationId);
 
         Guid GetConversationTeacherId(Guid conversationId);
 
-        void SetMessaging(ConversationViewModel viewModel, Mistake newMistake);
+        void SetMessaging(ConversationViewModel viewModel, MistakeMade newMistakeMade, string spokenValue, string correctValue, int rating);
 
     }
 }

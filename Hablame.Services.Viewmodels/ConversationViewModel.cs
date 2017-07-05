@@ -13,7 +13,7 @@ namespace Hablame.Services.Viewmodels
         public ConversationViewModel()
         {
             // added this here because the view was broken when conversation first starts. TODO: Might be best to think about how to change this...
-            this.NewMistake = new Mistake();
+            this.NewMistakeMade = new MistakeMade();
         }
         public Conversation SavedConversation { get; set; }
 
@@ -46,7 +46,7 @@ namespace Hablame.Services.Viewmodels
 
         public bool PraiseAdded { get; set; }
 
-        public Mistake NewMistake { get; set; }
+        public MistakeMade NewMistakeMade { get; set; }
 
         public List<MistakeTypeOptions> MistakeTypeOptions {get; set;}
 

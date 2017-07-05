@@ -1,108 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="HablameModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Conversation">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Guid" Nullable="false" />
-    <Property Name="TeacherId" Type="Guid" Nullable="false" />
-    <Property Name="StudentId" Type="Guid" Nullable="false" />
-    <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="EndDateTime" Type="DateTime" Precision="3" />
-    <Property Name="DurationMinutes" Type="Int32" Nullable="false" />
-    <Property Name="LanguageId" Type="Guid" Nullable="false" />
-    <NavigationProperty Name="Mistakes" Relationship="Self.FK_Mistake_Conversation" FromRole="Conversation" ToRole="Mistake" />
-  </EntityType>
-  <EntityType Name="Language">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Guid" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="LanguageFamilyId" Type="Guid" Nullable="false" />
-    <NavigationProperty Name="LanguageFamily" Relationship="Self.FK_Language_Family" FromRole="Language" ToRole="LanguageFamily" />
-  </EntityType>
-  <EntityType Name="LanguageFamily">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Guid" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Languages" Relationship="Self.FK_Language_Family" FromRole="LanguageFamily" ToRole="Language" />
-  </EntityType>
-  <EntityType Name="Mistake">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Guid" Nullable="false" />
-    <Property Name="ConversationId" Type="Guid" Nullable="false" />
-    <Property Name="SpokenValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Conversation" Relationship="Self.FK_Mistake_Conversation" FromRole="Mistake" ToRole="Conversation" />
-    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Rating" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Person">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Guid" Nullable="false" />
-    <Property Name="Forename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Mistake_Conversation">
-    <End Role="Conversation" Type="Self.Conversation" Multiplicity="1" />
-    <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Conversation">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Mistake">
-        <PropertyRef Name="ConversationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Language_Family">
-    <End Role="LanguageFamily" Type="Self.LanguageFamily" Multiplicity="1" />
-    <End Role="Language" Type="Self.Language" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="LanguageFamily">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Language">
-        <PropertyRef Name="LanguageFamilyId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="HablameDatabaseEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Conversations" EntityType="Self.Conversation" />
-    <EntitySet Name="Languages" EntityType="Self.Language" />
-    <EntitySet Name="LanguageFamilies" EntityType="Self.LanguageFamily" />
-    <EntitySet Name="Mistakes" EntityType="Self.Mistake" />
-    <EntitySet Name="People" EntityType="Self.Person" />
-    <AssociationSet Name="FK_Mistake_Conversation" Association="Self.FK_Mistake_Conversation">
-      <End Role="Conversation" EntitySet="Conversations" />
-      <End Role="Mistake" EntitySet="Mistakes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Language_Family" Association="Self.FK_Language_Family">
-      <End Role="LanguageFamily" EntitySet="LanguageFamilies" />
-      <End Role="Language" EntitySet="Languages" />
-    </AssociationSet>
     <FunctionImport Name="getTopMistakesByLanguageId" ReturnType="Collection(HablameModel.getTopMistakesByLanguageId_Result)">
       <Parameter Name="languageId" Mode="In" Type="Guid" />
     </FunctionImport>
     <FunctionImport Name="getTopMistakesByConversationId" ReturnType="Collection(HablameModel.getTopMistakesByConversationId_Result)">
       <Parameter Name="conversationId" Mode="In" Type="Guid" />
     </FunctionImport>
+    <EntitySet Name="Conversations" EntityType="HablameModel.Conversation" />
+    <EntitySet Name="Languages" EntityType="HablameModel.Language" />
+    <EntitySet Name="LanguageFamilies" EntityType="HablameModel.LanguageFamily" />
+    <EntitySet Name="Mistakes" EntityType="HablameModel.Mistake" />
+    <EntitySet Name="MistakeMades" EntityType="HablameModel.MistakeMade" />
+    <EntitySet Name="MistakeTypes" EntityType="HablameModel.MistakeType" />
+    <EntitySet Name="People" EntityType="HablameModel.Person" />
     <EntitySet Name="vw_Mistakes" EntityType="HablameModel.vw_Mistakes" />
     <EntitySet Name="vw_MistakesByConversation" EntityType="HablameModel.vw_MistakesByConversation" />
     <EntitySet Name="vw_MistakesByLanguage" EntityType="HablameModel.vw_MistakesByLanguage" />
     <EntitySet Name="vw_MistakesByStudent" EntityType="HablameModel.vw_MistakesByStudent" />
-    <EntitySet Name="MistakeMadeMistakeTypes" EntityType="HablameModel.MistakeMadeMistakeType" />
-    <EntitySet Name="MistakeTypes" EntityType="HablameModel.MistakeType" />
+    <AssociationSet Name="FK_Mistake_Conversation" Association="HablameModel.FK_Mistake_Conversation">
+      <End Role="Conversation" EntitySet="Conversations" />
+      <End Role="Mistake" EntitySet="Mistakes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Language_Family" Association="HablameModel.FK_Language_Family">
+      <End Role="LanguageFamily" EntitySet="LanguageFamilies" />
+      <End Role="Language" EntitySet="Languages" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="getTopMistakesByLanguageId_Result">
     <Property Type="Guid" Name="ConversationId" Nullable="false" />
@@ -120,75 +43,59 @@
     <Property Type="Boolean" Name="IsMissingAuxVerb" Nullable="false" />
     <Property Type="Boolean" Name="IsSuperfluousAuxVerb" Nullable="false" />
   </ComplexType>
-  <EntityType Name="vw_Mistakes">
+  <EntityType Name="Conversation">
     <Key>
-      <PropertyRef Name="SpokenValue" />
-      <PropertyRef Name="IsSuperfluousAuxVerb" />
-      <PropertyRef Name="IsMissingAuxVerb" />
-      <PropertyRef Name="DateTime" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
-    <Property Name="Count" Type="Int32" />
-    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-  </EntityType>
-  <EntityType Name="vw_MistakesByConversation">
-    <Key>
-      <PropertyRef Name="SpokenValue" />
-      <PropertyRef Name="IsSuperfluousAuxVerb" />
-      <PropertyRef Name="IsMissingAuxVerb" />
-      <PropertyRef Name="ConversationId" />
-      <PropertyRef Name="DateTime" />
-    </Key>
-    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
-    <Property Name="ConversationId" Type="Guid" Nullable="false" />
-    <Property Name="Count" Type="Int32" />
-    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-  </EntityType>
-  <EntityType Name="vw_MistakesByLanguage">
-    <Key>
-      <PropertyRef Name="SpokenValue" />
-      <PropertyRef Name="IsSuperfluousAuxVerb" />
-      <PropertyRef Name="IsMissingAuxVerb" />
-      <PropertyRef Name="LanguageId" />
-      <PropertyRef Name="DateTime" />
-    </Key>
-    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
-    <Property Name="LanguageId" Type="Guid" Nullable="false" />
-    <Property Name="Count" Type="Int32" />
-    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-  </EntityType>
-  <EntityType Name="vw_MistakesByStudent">
-    <Key>
-      <PropertyRef Name="SpokenValue" />
-      <PropertyRef Name="IsSuperfluousAuxVerb" />
-      <PropertyRef Name="IsMissingAuxVerb" />
-      <PropertyRef Name="StudentId" />
-      <PropertyRef Name="DateTime" />
-    </Key>
-    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="TeacherId" Type="Guid" Nullable="false" />
     <Property Name="StudentId" Type="Guid" Nullable="false" />
-    <Property Name="Count" Type="Int32" />
-    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+    <Property Name="DurationMinutes" Type="Int32" Nullable="false" />
+    <Property Name="LanguageId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Mistakes" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Conversation" ToRole="Mistake" />
   </EntityType>
-  <EntityType Name="MistakeMadeMistakeType">
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LanguageFamilyId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="LanguageFamily" Relationship="HablameModel.FK_Language_Family" FromRole="Language" ToRole="LanguageFamily" />
+  </EntityType>
+  <EntityType Name="LanguageFamily">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Languages" Relationship="HablameModel.FK_Language_Family" FromRole="LanguageFamily" ToRole="Language" />
+  </EntityType>
+  <EntityType Name="Mistake">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Guid" Nullable="false" />
     <Property Name="ConversationId" Type="Guid" Nullable="false" />
-    <Property Name="MistakeTypeId" Type="Guid" Nullable="false" />
+    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Conversation" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Mistake" ToRole="Conversation" />
+  </EntityType>
+  <EntityType Name="MistakeMade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="ConversationId" Type="Guid" Nullable="false" />
+    <Property Name="MistakeId" Type="Guid" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="MistakeType">
     <Key>
@@ -199,5 +106,87 @@
     <Property Name="MinimumRatingLevelVisibility" Type="Int32" Nullable="false" />
     <Property Name="MaximumRatingLevelVisibility" Type="Int32" Nullable="false" />
     <Property Name="LanguageId" Type="Guid" Nullable="false" />
+    <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
+    <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
+    <Property Name="IsVocab" Type="Boolean" Nullable="false" />
   </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Forename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_Mistakes">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="Id" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_MistakesByConversation">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="ConversationId" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ConversationId" Type="Guid" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="Id" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_MistakesByLanguage">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="LanguageId" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LanguageId" Type="Guid" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="Id" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_MistakesByStudent">
+    <Key>
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StudentId" Type="Guid" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="Id" Type="Guid" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Mistake_Conversation">
+    <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="1" />
+    <End Type="HablameModel.Mistake" Role="Mistake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conversation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mistake">
+        <PropertyRef Name="ConversationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Language_Family">
+    <End Type="HablameModel.LanguageFamily" Role="LanguageFamily" Multiplicity="1" />
+    <End Type="HablameModel.Language" Role="Language" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LanguageFamily">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Language">
+        <PropertyRef Name="LanguageFamilyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

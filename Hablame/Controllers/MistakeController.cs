@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using Hablame.Services;
+using Hablame.Domain.Entities;
 
 namespace Hablame.Controllers
 {

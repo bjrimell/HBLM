@@ -16,9 +16,7 @@ namespace Hablame.Repositories.Data
     {
         public string SpokenValue { get; set; }
         public string CorrectValue { get; set; }
-        public bool IsSuperfluousAuxVerb { get; set; }
-        public bool IsMissingAuxVerb { get; set; }
         public Nullable<int> Count { get; set; }
-        public System.DateTime DateTime { get; set; }
+        public System.Guid Id { get; set; }
     }
 }

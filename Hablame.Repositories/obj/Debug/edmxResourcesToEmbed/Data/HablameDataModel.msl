@@ -1,60 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="HablameModelStoreContainer" CdmEntityContainer="HablameDatabaseEntities">
-    <EntitySetMapping Name="Conversations">
-      <EntityTypeMapping TypeName="HablameModel.Conversation">
-        <MappingFragment StoreEntitySet="Conversation">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
-          <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
-          <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
-          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Languages">
-      <EntityTypeMapping TypeName="HablameModel.Language">
-        <MappingFragment StoreEntitySet="Language">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="LanguageFamilyId" ColumnName="LanguageFamilyId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LanguageFamilies">
-      <EntityTypeMapping TypeName="HablameModel.LanguageFamily">
-        <MappingFragment StoreEntitySet="LanguageFamily">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Mistakes">
-      <EntityTypeMapping TypeName="HablameModel.Mistake">
-        <MappingFragment StoreEntitySet="Mistake">
-          <ScalarProperty Name="Rating" ColumnName="Rating" />
-          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
-          <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
-          <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
-          <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
-          <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="People">
-      <EntityTypeMapping TypeName="HablameModel.Person">
-        <MappingFragment StoreEntitySet="Person">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Forename" ColumnName="Forename" />
-          <ScalarProperty Name="Surname" ColumnName="Surname" />
-          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="getTopMistakesByLanguageId" FunctionName="HablameModel.Store.getTopMistakesByLanguageId">
       <ResultMapping>
         <ComplexTypeMapping TypeName="HablameModel.getTopMistakesByLanguageId_Result">
@@ -79,61 +25,56 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="vw_Mistakes">
-      <EntityTypeMapping TypeName="HablameModel.vw_Mistakes">
-        <MappingFragment StoreEntitySet="vw_Mistakes">
-          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-          <ScalarProperty Name="Count" ColumnName="Count" />
-          <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
-          <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
-          <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
-          <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="vw_MistakesByConversation">
-      <EntityTypeMapping TypeName="HablameModel.vw_MistakesByConversation">
-        <MappingFragment StoreEntitySet="vw_MistakesByConversation">
-          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-          <ScalarProperty Name="Count" ColumnName="Count" />
-          <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
-          <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
-          <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
-          <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
-          <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="vw_MistakesByLanguage">
-      <EntityTypeMapping TypeName="HablameModel.vw_MistakesByLanguage">
-        <MappingFragment StoreEntitySet="vw_MistakesByLanguage">
-          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-          <ScalarProperty Name="Count" ColumnName="Count" />
+    <EntitySetMapping Name="Conversations">
+      <EntityTypeMapping TypeName="HablameModel.Conversation">
+        <MappingFragment StoreEntitySet="Conversation">
           <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
-          <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
-          <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
-          <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
-          <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="vw_MistakesByStudent">
-      <EntityTypeMapping TypeName="HablameModel.vw_MistakesByStudent">
-        <MappingFragment StoreEntitySet="vw_MistakesByStudent">
-          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
+          <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
           <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="HablameModel.Language">
+        <MappingFragment StoreEntitySet="Language">
+          <ScalarProperty Name="LanguageFamilyId" ColumnName="LanguageFamilyId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LanguageFamilies">
+      <EntityTypeMapping TypeName="HablameModel.LanguageFamily">
+        <MappingFragment StoreEntitySet="LanguageFamily">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mistakes">
+      <EntityTypeMapping TypeName="HablameModel.Mistake">
+        <MappingFragment StoreEntitySet="Mistake">
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
           <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
           <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
           <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
           <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+          <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MistakeMadeMistakeTypes">
-      <EntityTypeMapping TypeName="HablameModel.MistakeMadeMistakeType">
-        <MappingFragment StoreEntitySet="MistakeMadeMistakeType">
-          <ScalarProperty Name="MistakeTypeId" ColumnName="MistakeTypeId" />
+    <EntitySetMapping Name="MistakeMades">
+      <EntityTypeMapping TypeName="HablameModel.MistakeMade">
+        <MappingFragment StoreEntitySet="MistakeMade">
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
           <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -142,11 +83,67 @@
     <EntitySetMapping Name="MistakeTypes">
       <EntityTypeMapping TypeName="HablameModel.MistakeType">
         <MappingFragment StoreEntitySet="MistakeType">
+          <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
+          <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
+          <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />
           <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
           <ScalarProperty Name="MaximumRatingLevelVisibility" ColumnName="MaximumRatingLevelVisibility" />
           <ScalarProperty Name="MinimumRatingLevelVisibility" ColumnName="MinimumRatingLevelVisibility" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="HablameModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Forename" ColumnName="Forename" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Mistakes">
+      <EntityTypeMapping TypeName="HablameModel.vw_Mistakes">
+        <MappingFragment StoreEntitySet="vw_Mistakes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+          <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_MistakesByConversation">
+      <EntityTypeMapping TypeName="HablameModel.vw_MistakesByConversation">
+        <MappingFragment StoreEntitySet="vw_MistakesByConversation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+          <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+          <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_MistakesByLanguage">
+      <EntityTypeMapping TypeName="HablameModel.vw_MistakesByLanguage">
+        <MappingFragment StoreEntitySet="vw_MistakesByLanguage">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+          <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_MistakesByStudent">
+      <EntityTypeMapping TypeName="HablameModel.vw_MistakesByStudent">
+        <MappingFragment StoreEntitySet="vw_MistakesByStudent">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+          <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

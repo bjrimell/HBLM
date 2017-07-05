@@ -23,5 +23,7 @@ namespace Hablame.Repositories
         bool CreateNewMistake(Mistake mistake);
 
         List<MistakeType> GetMistakeTypes(Guid languageId);
+
+        void CreateNewMistakeMade(MistakeMade mistakeMade);
     }
 }

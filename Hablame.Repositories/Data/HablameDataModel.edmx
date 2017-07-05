@@ -45,13 +45,15 @@
           <Property Name="DateTime" Type="datetime" Nullable="false" />
           <Property Name="Rating" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="MistakeMadeMistakeType">
+        <EntityType Name="MistakeMade">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="MistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MistakeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MistakeType">
           <Key>
@@ -62,6 +64,9 @@
           <Property Name="MinimumRatingLevelVisibility" Type="int" Nullable="false" />
           <Property Name="MaximumRatingLevelVisibility" Type="int" Nullable="false" />
           <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsGrammar" Type="bit" Nullable="false" />
+          <Property Name="IsPronunciation" Type="bit" Nullable="false" />
+          <Property Name="IsVocab" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -76,71 +81,55 @@
 warning 6002: The table/view 'Hablame.dbo.vw_Mistakes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_Mistakes">
           <Key>
+            <PropertyRef Name="Id" />
             <PropertyRef Name="SpokenValue" />
-            <PropertyRef Name="IsSuperfluousAuxVerb" />
-            <PropertyRef Name="IsMissingAuxVerb" />
-            <PropertyRef Name="DateTime" />
           </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CorrectValue" Type="nvarchar(max)" />
-          <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
           <Property Name="Count" Type="int" />
-          <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_MistakesByConversation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_MistakesByConversation">
           <Key>
+            <PropertyRef Name="Id" />
             <PropertyRef Name="SpokenValue" />
-            <PropertyRef Name="IsSuperfluousAuxVerb" />
-            <PropertyRef Name="IsMissingAuxVerb" />
             <PropertyRef Name="ConversationId" />
-            <PropertyRef Name="DateTime" />
           </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CorrectValue" Type="nvarchar(max)" />
-          <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
           <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Count" Type="int" />
-          <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_MistakesByLanguage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_MistakesByLanguage">
           <Key>
+            <PropertyRef Name="Id" />
             <PropertyRef Name="SpokenValue" />
-            <PropertyRef Name="IsSuperfluousAuxVerb" />
-            <PropertyRef Name="IsMissingAuxVerb" />
             <PropertyRef Name="LanguageId" />
-            <PropertyRef Name="DateTime" />
           </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CorrectValue" Type="nvarchar(max)" />
-          <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
           <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Count" Type="int" />
-          <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_MistakesByStudent">
           <Key>
+            <PropertyRef Name="Id" />
             <PropertyRef Name="SpokenValue" />
-            <PropertyRef Name="IsSuperfluousAuxVerb" />
-            <PropertyRef Name="IsMissingAuxVerb" />
             <PropertyRef Name="StudentId" />
-            <PropertyRef Name="DateTime" />
           </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CorrectValue" Type="nvarchar(max)" />
-          <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
           <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Count" Type="int" />
-          <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Language_Family">
           <End Role="LanguageFamily" Type="Self.LanguageFamily" Multiplicity="1" />
@@ -177,50 +166,42 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LanguageFamily" EntityType="Self.LanguageFamily" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MistakeMadeMistakeType" EntityType="Self.MistakeMadeMistakeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MistakeMade" EntityType="Self.MistakeMade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MistakeType" EntityType="Self.MistakeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vw_Mistakes" EntityType="Self.vw_Mistakes" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [vw_Mistakes].[Id] AS [Id], 
     [vw_Mistakes].[SpokenValue] AS [SpokenValue], 
     [vw_Mistakes].[CorrectValue] AS [CorrectValue], 
-    [vw_Mistakes].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
-    [vw_Mistakes].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
-    [vw_Mistakes].[Count] AS [Count], 
-    [vw_Mistakes].[DateTime] AS [DateTime]
+    [vw_Mistakes].[Count] AS [Count]
     FROM [dbo].[vw_Mistakes] AS [vw_Mistakes]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_MistakesByConversation" EntityType="Self.vw_MistakesByConversation" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [vw_MistakesByConversation].[Id] AS [Id], 
     [vw_MistakesByConversation].[SpokenValue] AS [SpokenValue], 
     [vw_MistakesByConversation].[CorrectValue] AS [CorrectValue], 
-    [vw_MistakesByConversation].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
-    [vw_MistakesByConversation].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
     [vw_MistakesByConversation].[ConversationId] AS [ConversationId], 
-    [vw_MistakesByConversation].[Count] AS [Count], 
-    [vw_MistakesByConversation].[DateTime] AS [DateTime]
+    [vw_MistakesByConversation].[Count] AS [Count]
     FROM [dbo].[vw_MistakesByConversation] AS [vw_MistakesByConversation]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_MistakesByLanguage" EntityType="Self.vw_MistakesByLanguage" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [vw_MistakesByLanguage].[Id] AS [Id], 
     [vw_MistakesByLanguage].[SpokenValue] AS [SpokenValue], 
     [vw_MistakesByLanguage].[CorrectValue] AS [CorrectValue], 
-    [vw_MistakesByLanguage].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
-    [vw_MistakesByLanguage].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
     [vw_MistakesByLanguage].[LanguageId] AS [LanguageId], 
-    [vw_MistakesByLanguage].[Count] AS [Count], 
-    [vw_MistakesByLanguage].[DateTime] AS [DateTime]
+    [vw_MistakesByLanguage].[Count] AS [Count]
     FROM [dbo].[vw_MistakesByLanguage] AS [vw_MistakesByLanguage]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_MistakesByStudent" EntityType="Self.vw_MistakesByStudent" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [vw_MistakesByStudent].[Id] AS [Id], 
     [vw_MistakesByStudent].[SpokenValue] AS [SpokenValue], 
     [vw_MistakesByStudent].[CorrectValue] AS [CorrectValue], 
-    [vw_MistakesByStudent].[IsSuperfluousAuxVerb] AS [IsSuperfluousAuxVerb], 
-    [vw_MistakesByStudent].[IsMissingAuxVerb] AS [IsMissingAuxVerb], 
     [vw_MistakesByStudent].[StudentId] AS [StudentId], 
-    [vw_MistakesByStudent].[Count] AS [Count], 
-    [vw_MistakesByStudent].[DateTime] AS [DateTime]
+    [vw_MistakesByStudent].[Count] AS [Count]
     FROM [dbo].[vw_MistakesByStudent] AS [vw_MistakesByStudent]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Language_Family" Association="Self.FK_Language_Family">
@@ -236,109 +217,32 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HablameModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Conversation">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="TeacherId" Type="Guid" Nullable="false" />
-          <Property Name="StudentId" Type="Guid" Nullable="false" />
-          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
-          <Property Name="DurationMinutes" Type="Int32" Nullable="false" />
-          <Property Name="LanguageId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Mistakes" Relationship="Self.FK_Mistake_Conversation" FromRole="Conversation" ToRole="Mistake" />
-        </EntityType>
-        <EntityType Name="Language">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LanguageFamilyId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="LanguageFamily" Relationship="Self.FK_Language_Family" FromRole="Language" ToRole="LanguageFamily" />
-        </EntityType>
-        <EntityType Name="LanguageFamily">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Languages" Relationship="Self.FK_Language_Family" FromRole="LanguageFamily" ToRole="Language" />
-        </EntityType>
-        <EntityType Name="Mistake">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="ConversationId" Type="Guid" Nullable="false" />
-          <Property Name="SpokenValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Conversation" Relationship="Self.FK_Mistake_Conversation" FromRole="Mistake" ToRole="Conversation" />
-          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Rating" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Person">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Forename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_Mistake_Conversation">
-          <End Role="Conversation" Type="Self.Conversation" Multiplicity="1" />
-          <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Conversation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Mistake">
-              <PropertyRef Name="ConversationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Language_Family">
-          <End Role="LanguageFamily" Type="Self.LanguageFamily" Multiplicity="1" />
-          <End Role="Language" Type="Self.Language" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LanguageFamily">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Language">
-              <PropertyRef Name="LanguageFamilyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="HablameDatabaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Conversations" EntityType="Self.Conversation" />
-          <EntitySet Name="Languages" EntityType="Self.Language" />
-          <EntitySet Name="LanguageFamilies" EntityType="Self.LanguageFamily" />
-          <EntitySet Name="Mistakes" EntityType="Self.Mistake" />
-          <EntitySet Name="People" EntityType="Self.Person" />
-          <AssociationSet Name="FK_Mistake_Conversation" Association="Self.FK_Mistake_Conversation">
-            <End Role="Conversation" EntitySet="Conversations" />
-            <End Role="Mistake" EntitySet="Mistakes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Language_Family" Association="Self.FK_Language_Family">
-            <End Role="LanguageFamily" EntitySet="LanguageFamilies" />
-            <End Role="Language" EntitySet="Languages" />
-          </AssociationSet>
           <FunctionImport Name="getTopMistakesByLanguageId" ReturnType="Collection(HablameModel.getTopMistakesByLanguageId_Result)">
           <Parameter Name="languageId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="getTopMistakesByConversationId" ReturnType="Collection(HablameModel.getTopMistakesByConversationId_Result)">
           <Parameter Name="conversationId" Mode="In" Type="Guid" />
           </FunctionImport>
+          <EntitySet Name="Conversations" EntityType="HablameModel.Conversation" />
+          <EntitySet Name="Languages" EntityType="HablameModel.Language" />
+          <EntitySet Name="LanguageFamilies" EntityType="HablameModel.LanguageFamily" />
+          <EntitySet Name="Mistakes" EntityType="HablameModel.Mistake" />
+          <EntitySet Name="MistakeMades" EntityType="HablameModel.MistakeMade" />
+          <EntitySet Name="MistakeTypes" EntityType="HablameModel.MistakeType" />
+          <EntitySet Name="People" EntityType="HablameModel.Person" />
           <EntitySet Name="vw_Mistakes" EntityType="HablameModel.vw_Mistakes" />
           <EntitySet Name="vw_MistakesByConversation" EntityType="HablameModel.vw_MistakesByConversation" />
           <EntitySet Name="vw_MistakesByLanguage" EntityType="HablameModel.vw_MistakesByLanguage" />
           <EntitySet Name="vw_MistakesByStudent" EntityType="HablameModel.vw_MistakesByStudent" />
-          <EntitySet Name="MistakeMadeMistakeTypes" EntityType="HablameModel.MistakeMadeMistakeType" />
-          <EntitySet Name="MistakeTypes" EntityType="HablameModel.MistakeType" />
+          <AssociationSet Name="FK_Mistake_Conversation" Association="HablameModel.FK_Mistake_Conversation">
+            <End Role="Conversation" EntitySet="Conversations" />
+            <End Role="Mistake" EntitySet="Mistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Language_Family" Association="HablameModel.FK_Language_Family">
+            <End Role="LanguageFamily" EntitySet="LanguageFamilies" />
+            <End Role="Language" EntitySet="Languages" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="getTopMistakesByLanguageId_Result">
           <Property Type="Guid" Name="ConversationId" Nullable="false" />
@@ -356,75 +260,59 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <Property Type="Boolean" Name="IsMissingAuxVerb" Nullable="false" />
           <Property Type="Boolean" Name="IsSuperfluousAuxVerb" Nullable="false" />
         </ComplexType>
-        <EntityType Name="vw_Mistakes">
+        <EntityType Name="Conversation">
           <Key>
-            <PropertyRef Name="SpokenValue" />
-            <PropertyRef Name="IsSuperfluousAuxVerb" />
-            <PropertyRef Name="IsMissingAuxVerb" />
-            <PropertyRef Name="DateTime" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="vw_MistakesByConversation">
-          <Key>
-            <PropertyRef Name="SpokenValue" />
-            <PropertyRef Name="IsSuperfluousAuxVerb" />
-            <PropertyRef Name="IsMissingAuxVerb" />
-            <PropertyRef Name="ConversationId" />
-            <PropertyRef Name="DateTime" />
-          </Key>
-          <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
-          <Property Name="ConversationId" Type="Guid" Nullable="false" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="vw_MistakesByLanguage">
-          <Key>
-            <PropertyRef Name="SpokenValue" />
-            <PropertyRef Name="IsSuperfluousAuxVerb" />
-            <PropertyRef Name="IsMissingAuxVerb" />
-            <PropertyRef Name="LanguageId" />
-            <PropertyRef Name="DateTime" />
-          </Key>
-          <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
-          <Property Name="LanguageId" Type="Guid" Nullable="false" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="vw_MistakesByStudent">
-          <Key>
-            <PropertyRef Name="SpokenValue" />
-            <PropertyRef Name="IsSuperfluousAuxVerb" />
-            <PropertyRef Name="IsMissingAuxVerb" />
-            <PropertyRef Name="StudentId" />
-            <PropertyRef Name="DateTime" />
-          </Key>
-          <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TeacherId" Type="Guid" Nullable="false" />
           <Property Name="StudentId" Type="Guid" Nullable="false" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+          <Property Name="DurationMinutes" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Mistakes" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Conversation" ToRole="Mistake" />
         </EntityType>
-        <EntityType Name="MistakeMadeMistakeType">
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageFamilyId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="LanguageFamily" Relationship="HablameModel.FK_Language_Family" FromRole="Language" ToRole="LanguageFamily" />
+        </EntityType>
+        <EntityType Name="LanguageFamily">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Languages" Relationship="HablameModel.FK_Language_Family" FromRole="LanguageFamily" ToRole="Language" />
+        </EntityType>
+        <EntityType Name="Mistake">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="ConversationId" Type="Guid" Nullable="false" />
-          <Property Name="MistakeTypeId" Type="Guid" Nullable="false" />
+          <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
+          <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Conversation" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Mistake" ToRole="Conversation" />
+        </EntityType>
+        <EntityType Name="MistakeMade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ConversationId" Type="Guid" Nullable="false" />
+          <Property Name="MistakeId" Type="Guid" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="MistakeType">
           <Key>
@@ -435,67 +323,95 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <Property Name="MinimumRatingLevelVisibility" Type="Int32" Nullable="false" />
           <Property Name="MaximumRatingLevelVisibility" Type="Int32" Nullable="false" />
           <Property Name="LanguageId" Type="Guid" Nullable="false" />
+          <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
+          <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
+          <Property Name="IsVocab" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Forename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw_Mistakes">
+          <Key>
+            <PropertyRef Name="SpokenValue" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_MistakesByConversation">
+          <Key>
+            <PropertyRef Name="SpokenValue" />
+            <PropertyRef Name="ConversationId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConversationId" Type="Guid" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_MistakesByLanguage">
+          <Key>
+            <PropertyRef Name="SpokenValue" />
+            <PropertyRef Name="LanguageId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageId" Type="Guid" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_MistakesByStudent">
+          <Key>
+            <PropertyRef Name="SpokenValue" />
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudentId" Type="Guid" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Mistake_Conversation">
+          <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="1" />
+          <End Type="HablameModel.Mistake" Role="Mistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mistake">
+              <PropertyRef Name="ConversationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Language_Family">
+          <End Type="HablameModel.LanguageFamily" Role="LanguageFamily" Multiplicity="1" />
+          <End Type="HablameModel.Language" Role="Language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LanguageFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Language">
+              <PropertyRef Name="LanguageFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HablameModelStoreContainer" CdmEntityContainer="HablameDatabaseEntities">
-          <EntitySetMapping Name="Conversations">
-            <EntityTypeMapping TypeName="HablameModel.Conversation">
-              <MappingFragment StoreEntitySet="Conversation">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
-                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
-                <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
-                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Languages">
-            <EntityTypeMapping TypeName="HablameModel.Language">
-              <MappingFragment StoreEntitySet="Language">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LanguageFamilyId" ColumnName="LanguageFamilyId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LanguageFamilies">
-            <EntityTypeMapping TypeName="HablameModel.LanguageFamily">
-              <MappingFragment StoreEntitySet="LanguageFamily">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Mistakes">
-            <EntityTypeMapping TypeName="HablameModel.Mistake">
-              <MappingFragment StoreEntitySet="Mistake">
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
-                <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
-                <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
-                <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
-                <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="People">
-            <EntityTypeMapping TypeName="HablameModel.Person">
-              <MappingFragment StoreEntitySet="Person">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Forename" ColumnName="Forename" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="getTopMistakesByLanguageId" FunctionName="HablameModel.Store.getTopMistakesByLanguageId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HablameModel.getTopMistakesByLanguageId_Result">
@@ -520,61 +436,56 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="vw_Mistakes">
-            <EntityTypeMapping TypeName="HablameModel.vw_Mistakes">
-              <MappingFragment StoreEntitySet="vw_Mistakes">
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
-                <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
-                <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
-                <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vw_MistakesByConversation">
-            <EntityTypeMapping TypeName="HablameModel.vw_MistakesByConversation">
-              <MappingFragment StoreEntitySet="vw_MistakesByConversation">
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
-                <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
-                <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
-                <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
-                <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vw_MistakesByLanguage">
-            <EntityTypeMapping TypeName="HablameModel.vw_MistakesByLanguage">
-              <MappingFragment StoreEntitySet="vw_MistakesByLanguage">
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
+          <EntitySetMapping Name="Conversations">
+            <EntityTypeMapping TypeName="HablameModel.Conversation">
+              <MappingFragment StoreEntitySet="Conversation">
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
-                <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
-                <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
-                <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
-                <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vw_MistakesByStudent">
-            <EntityTypeMapping TypeName="HablameModel.vw_MistakesByStudent">
-              <MappingFragment StoreEntitySet="vw_MistakesByStudent">
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="HablameModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="LanguageFamilyId" ColumnName="LanguageFamilyId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LanguageFamilies">
+            <EntityTypeMapping TypeName="HablameModel.LanguageFamily">
+              <MappingFragment StoreEntitySet="LanguageFamily">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mistakes">
+            <EntityTypeMapping TypeName="HablameModel.Mistake">
+              <MappingFragment StoreEntitySet="Mistake">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
                 <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
                 <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
                 <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+                <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MistakeMadeMistakeTypes">
-            <EntityTypeMapping TypeName="HablameModel.MistakeMadeMistakeType">
-              <MappingFragment StoreEntitySet="MistakeMadeMistakeType">
-                <ScalarProperty Name="MistakeTypeId" ColumnName="MistakeTypeId" />
+          <EntitySetMapping Name="MistakeMades">
+            <EntityTypeMapping TypeName="HablameModel.MistakeMade">
+              <MappingFragment StoreEntitySet="MistakeMade">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
                 <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -583,6 +494,9 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySetMapping Name="MistakeTypes">
             <EntityTypeMapping TypeName="HablameModel.MistakeType">
               <MappingFragment StoreEntitySet="MistakeType">
+                <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
+                <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
+                <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
                 <ScalarProperty Name="MaximumRatingLevelVisibility" ColumnName="MaximumRatingLevelVisibility" />
                 <ScalarProperty Name="MinimumRatingLevelVisibility" ColumnName="MinimumRatingLevelVisibility" />
@@ -591,7 +505,60 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="HablameModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Forename" ColumnName="Forename" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Mistakes">
+            <EntityTypeMapping TypeName="HablameModel.vw_Mistakes">
+              <MappingFragment StoreEntitySet="vw_Mistakes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+                <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_MistakesByConversation">
+            <EntityTypeMapping TypeName="HablameModel.vw_MistakesByConversation">
+              <MappingFragment StoreEntitySet="vw_MistakesByConversation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+                <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+                <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_MistakesByLanguage">
+            <EntityTypeMapping TypeName="HablameModel.vw_MistakesByLanguage">
+              <MappingFragment StoreEntitySet="vw_MistakesByLanguage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+                <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_MistakesByStudent">
+            <EntityTypeMapping TypeName="HablameModel.vw_MistakesByStudent">
+              <MappingFragment StoreEntitySet="vw_MistakesByStudent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+                <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -19,5 +19,8 @@ namespace Hablame.Repositories.Data
         public int MinimumRatingLevelVisibility { get; set; }
         public int MaximumRatingLevelVisibility { get; set; }
         public System.Guid LanguageId { get; set; }
+        public bool IsGrammar { get; set; }
+        public bool IsPronunciation { get; set; }
+        public bool IsVocab { get; set; }
     }
 }

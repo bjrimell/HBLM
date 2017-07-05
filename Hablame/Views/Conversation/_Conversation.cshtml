@@ -65,7 +65,7 @@
                                 <!-- Mistake Content (hidden by default) -->
                                 <div class="col-lg-12" id="mistakeContent" hidden="hidden">
                                     <div class="form-group">
-                                        <label for="inputlg">Improvement:</label>
+                                        <label for="inputlg">Suggested improvement:</label>
                                         <input class="form-control input-lg" id="correctValue" name="correctValue" type="text">
                                         <br />
                                     </div>
@@ -87,7 +87,7 @@
                                                     foreach (var item in ratingSet.MistakeTypeList)
                                                     {
                                                         <label class="checkbox-inline">
-                                                            <input type="checkbox" data-toggle="toggle" name="SelectedMistakeTypes" value="@item.Title"> @item.Title
+                                                            <input type="checkbox" data-toggle="toggle" name="SelectedMistakeTypes" value="@item.Id"> @item.Title
                                                         </label>
                                                     }
                                                 }
@@ -102,6 +102,7 @@
                                     <h5>Great - praising your student will encourage motivation and confidence!</h5>
                                 </div>
                             </div>
+                            <br /> 
                             <div class="row">
                                 <!-- Form submission content -->
                                 <div id="submitForm" class="col-lg-12">
@@ -124,7 +125,12 @@
                         {
                             <div class="well">
                                 <div class="alert alert-success">
-                                    <h3><strong>Mistake added!</strong></h3> @Model.Student.Forename said <strong>@Model.NewMistake.SpokenValue</strong> but should have said <strong>@Model.NewMistake.CorrectValue</strong>.
+                                    <h3><strong>Mistake added!</strong></h3> @Model.Student.Forename said <strong>@Model.NewMistakeMade.SpokenValue</strong> but should have said <strong>@Model.NewMistakeMade.CorrectValue</strong>.
+                                    <form method="post">
+                                        <input type="hidden" name="conversationId" id="conversationId-repeat-mistakeAdded" value="@Model.ConversationId" />
+                                        <input type="hidden" name="mistakeId" id="mistakeId-repeat-mistakeAdded" value="@Model.NewMistakeMade.Id" />
+                                        <button type="submit" name="submit-mistake-repeat" id="submit-repeat-mistakeAdded" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </form>
                                 </div>
                             </div>
                         }
@@ -140,7 +146,12 @@
                         {
                             <div class="well">
                                 <div class="alert alert-success">
-                                    <h3><strong>Praise added!</strong></h3> You have applauded @Model.Student.Forename for saying <strong>@Model.NewMistake.SpokenValue</strong>.
+                                    <h3><strong>Praise added!</strong></h3> You have applauded @Model.Student.Forename for saying <strong>@Model.NewMistakeMade.SpokenValue</strong>.
+                                    <form method="post">
+                                        <input type="hidden" name="conversationId" id="conversationId-repeat-praiseAdded" value="@Model.ConversationId" />
+                                        <input type="hidden" name="mistakeId" id="mistakeId-repeat-praiseAdded" value="@Model.NewMistakeMade.Id" />
+                                        <button type="submit" name="submit-mistake-repeat" id="submit-repeat-praiseAdded" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </form>
                                 </div>
                             </div>
                         }
@@ -178,8 +189,11 @@
                                                 <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
                                                 <td>@mistake.Count</td>
                                                 <td>
-                                                    <button type="submit" class="btn btn-sm btn-primary">+1</button>
-                                                    <button type="submit" class="btn btn-sm btn-primary">Similar</button>
+                                                    <form method="post">
+                                                        <input type="hidden" name="conversationId" id="conversationId-repeat-latestSessionMistakes" value="@Model.ConversationId" />
+                                                        <input type="hidden" name="mistakeId" id="mistakeId-repeat-latestSessionMistakes" value="@mistake.Id" />
+                                                        <button type="submit" name="submit-repeat-repeat-latestSessionMistakes" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         }
@@ -206,8 +220,11 @@
                                                 <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
                                                 <td>@mistake.Count</td>
                                                 <td>
-                                                    <button type="submit" class="btn btn-sm btn-primary">+1</button>
-                                                    <button type="submit" class="btn btn-sm btn-primary">Similar</button>
+                                                    <form method="post">
+                                                        <input type="hidden" name="conversationId" id="conversationId-repeat-mostCommonSessionMistakes" value="@Model.ConversationId" />
+                                                        <input type="hidden" name="mistakeId" id="mistakeId-repeat-mostCommonSessionMistakes" value="@mistake.Id" />
+                                                        <button type="submit" name="submit-repeat-repeat-mostCommonSessionMistakes" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         }
@@ -221,7 +238,7 @@
                                     <tr>
                                         <th>Spoken</th>
                                         <th>Correct</th>
-                                        <th>Occurences</th>
+                                        <th>Occurences (all-time)</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -234,8 +251,11 @@
                                                 <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
                                                 <td>@mistake.Count</td>
                                                 <td>
-                                                    <button type="submit" class="btn btn-sm btn-primary">+1</button>
-                                                    <button type="submit" class="btn btn-sm btn-primary">Similar</button>
+                                                    <form method="post">
+                                                        <input type="hidden" name="conversationId" id="conversationId-repeat-mostCommonMistakesForStudent" value="@Model.ConversationId" />
+                                                        <input type="hidden" name="mistakeId" id="mistakeId-repeat-mostCommonMistakesForStudent" value="@mistake.Id" />
+                                                        <button type="submit" name="submit-repeat-repeat-mostCommonMistakesForStudent" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         }
@@ -249,7 +269,7 @@
                                     <tr>
                                         <th>Spoken</th>
                                         <th>Correct</th>
-                                        <th>Occurences</th>
+                                        <th>Occurences (all-time)</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -262,8 +282,11 @@
                                                 <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
                                                 <td>@mistake.Count</td>
                                                 <td>
-                                                    <button type="submit" class="btn btn-sm btn-primary">+1</button>
-                                                    <button type="submit" class="btn btn-sm btn-primary">Similar</button>
+                                                    <form method="post">
+                                                        <input type="hidden" name="conversationId" id="conversationId-repeat-topGlobalMistakesForLanguage" value="@Model.ConversationId" />
+                                                        <input type="hidden" name="mistakeId" id="mistakeId-repeat-topGlobalMistakesForLanguage" value="@mistake.Id" />
+                                                        <button type="submit" name="submit-repeat-repeat-topGlobalMistakesForLanguage" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         }

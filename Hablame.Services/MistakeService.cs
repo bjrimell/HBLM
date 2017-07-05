@@ -26,23 +26,56 @@ namespace Hablame.Services
             return viewModel;
         }
 
-        public Mistake CreateMistake(Guid conversationId, int rating, string spokenValue, string correctValue, IEnumerable<string> selectedMistakeTypes)
+        public MistakeMade CreateMistakeMade(Guid conversationId, int rating, string spokenValue, string correctValue, IEnumerable<string> selectedMistakeTypes, string repeatedMistakeId)
         {
-            var mistake = new Mistake
+            var mistakeMade = new MistakeMade
             {
                 Id = Guid.NewGuid(),
-                DateTime = DateTime.Now,
+                MistakeId = this.SetMistakeId(repeatedMistakeId, correctValue, spokenValue, rating, conversationId),
                 ConversationId = conversationId,
-                SpokenValue = spokenValue,
-                CorrectValue = correctValue,
-                StudentId = this.conversationService.GetConversationStudentId(conversationId),
-                TeacherId = this.conversationService.GetConversationTeacherId(conversationId),
-                Rating = rating
+                DateTime = DateTime.Now
             };
 
-            this.mistakeRepository.CreateNewMistake(mistake);
+            this.mistakeRepository.CreateNewMistakeMade(mistakeMade);
 
-            return mistake;
+            return mistakeMade;
+        }
+
+        private Guid SetMistakeId(string repeatedMistakeId, string correctValue, string spokenValue, int rating, Guid conversationId)
+        {
+            // If we are repeating an existing mistake, just use that ID
+            // If not, see if a matching Mistake already exists in the DB
+            // If it does not, create a new one
+
+            if (repeatedMistakeId != null)
+            {
+                return Guid.Parse(repeatedMistakeId);
+                // early out if we know we are reusing an existing Mistake
+            }
+
+            var matchingMistake = this.mistakeRepository.GetAllMistakes().Where(m => m.CorrectValue == correctValue && m.SpokenValue == spokenValue && m.Rating == rating).FirstOrDefault();
+            if (matchingMistake != null)
+            {
+                return matchingMistake.Id;
+            }
+            else
+            {
+                // Create brand new mistake
+                var mistake = new Mistake
+                {
+                    Id = Guid.NewGuid(),
+                    DateTime = DateTime.Now,
+                    ConversationId = conversationId,
+                    SpokenValue = spokenValue,
+                    CorrectValue = correctValue,
+                    StudentId = this.conversationService.GetConversationStudentId(conversationId),
+                    TeacherId = this.conversationService.GetConversationTeacherId(conversationId),
+                    Rating = rating
+                };
+
+                this.mistakeRepository.CreateNewMistake(mistake);
+                return mistake.Id;
+            }
         }
     }
 }

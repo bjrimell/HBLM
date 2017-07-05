@@ -5,19 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2af36801ac164725a285e0843117af2b" Name="Diagram1">
-        <EntityTypeShape EntityType="HablameModel.Conversation" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="HablameModel.Language" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HablameModel.LanguageFamily" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HablameModel.Mistake" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="HablameModel.Person" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="HablameModel.FK_Mistake_Conversation" ManuallyRouted="false" />
-        <AssociationConnector Association="HablameModel.FK_Language_Family" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="HablameModel.vw_Mistakes" Width="1.5" PointX="8.375" PointY="0.75" />
-        <EntityTypeShape EntityType="HablameModel.vw_MistakesByConversation" Width="1.5" PointX="8.375" PointY="3.75" />
-        <EntityTypeShape EntityType="HablameModel.vw_MistakesByLanguage" Width="1.5" PointX="8.375" PointY="6.75" />
-        <EntityTypeShape EntityType="HablameModel.vw_MistakesByStudent" Width="1.5" PointX="5.375" PointY="3.75" />
-        <EntityTypeShape EntityType="HablameModel.MistakeMadeMistakeType" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="HablameModel.MistakeType" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="HablameModel.Conversation" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="HablameModel.Language" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="HablameModel.LanguageFamily" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="HablameModel.Mistake" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="HablameModel.MistakeMade" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HablameModel.MistakeType" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HablameModel.Person" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HablameModel.vw_Mistakes" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="HablameModel.vw_MistakesByConversation" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="HablameModel.vw_MistakesByLanguage" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HablameModel.vw_MistakesByStudent" Width="1.5" PointX="4.75" PointY="7.75" />
+        <AssociationConnector Association="HablameModel.FK_Mistake_Conversation" />
+        <AssociationConnector Association="HablameModel.FK_Language_Family" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

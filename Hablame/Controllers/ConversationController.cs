@@ -43,21 +43,21 @@ namespace Hablame.Controllers
             string correctValue,
             IEnumerable<string> SelectedMistakeTypes,
             int rating = 0,
-            bool IsSuperfluousAuxVerb = false,
-            bool IsMissingAuxVerb = false)
+            string mistakeId = null)
         {
             var conversationGuid = Guid.Parse(conversationId);
 
-            var viewModel = this.conversationService.RecreateConversationViewModel(conversationGuid, spokenValue, correctValue, IsSuperfluousAuxVerb, IsMissingAuxVerb);
-
-            var newMistake = this.mistakeService.CreateMistake(
+            var newMistakeMade = this.mistakeService.CreateMistakeMade(
                 conversationGuid,
                 rating,
                 spokenValue,
                 correctValue,
-                SelectedMistakeTypes);
+                SelectedMistakeTypes,
+                mistakeId);
 
-            this.conversationService.SetMessaging(viewModel, newMistake);
+            var viewModel = this.conversationService.RecreateConversationViewModel(conversationGuid, spokenValue, correctValue);
+
+            this.conversationService.SetMessaging(viewModel, newMistakeMade, correctValue, spokenValue, rating);
 
             return this.PartialView("_Conversation", viewModel);
         }

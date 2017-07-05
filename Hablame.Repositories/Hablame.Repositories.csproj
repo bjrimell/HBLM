@@ -97,7 +97,7 @@
     <Compile Include="Data\Mistake.cs">
       <DependentUpon>HablameDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\MistakeMadeMistakeType.cs">
+    <Compile Include="Data\MistakeMade.cs">
       <DependentUpon>HablameDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\MistakeType.cs">

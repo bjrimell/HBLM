@@ -31,13 +31,13 @@ namespace Hablame.Repositories.Data
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<LanguageFamily> LanguageFamilies { get; set; }
         public virtual DbSet<Mistake> Mistakes { get; set; }
+        public virtual DbSet<MistakeMade> MistakeMades { get; set; }
+        public virtual DbSet<MistakeType> MistakeTypes { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<vw_Mistakes> vw_Mistakes { get; set; }
         public virtual DbSet<vw_MistakesByConversation> vw_MistakesByConversation { get; set; }
         public virtual DbSet<vw_MistakesByLanguage> vw_MistakesByLanguage { get; set; }
         public virtual DbSet<vw_MistakesByStudent> vw_MistakesByStudent { get; set; }
-        public virtual DbSet<MistakeMadeMistakeType> MistakeMadeMistakeTypes { get; set; }
-        public virtual DbSet<MistakeType> MistakeTypes { get; set; }
     
         public virtual ObjectResult<getTopMistakesByLanguageId_Result> getTopMistakesByLanguageId(Nullable<System.Guid> languageId)
         {
