@@ -102,12 +102,17 @@ namespace Hablame.Services
             return conversation.TeacherId;
         }
 
-        public void SetMessaging(ConversationViewModel viewModel, MistakeMade newMistakeMade, string spokenValue, string correctValue, int rating)
+        public void SetMessaging(ConversationViewModel viewModel, MistakeMade newMistakeMade, string mistakeId)
         {
-            newMistakeMade.SpokenValue = spokenValue;
-            newMistakeMade.CorrectValue = correctValue;
-            newMistakeMade.Rating = rating;
-            viewModel.NewMistakeMade = newMistakeMade;
+            if (mistakeId != null)
+            {
+                viewModel.NewMistakeMade = this.mistakeRepository.GetMistakeMadeSummaryById(Guid.Parse(mistakeId));
+            }
+            else
+            {
+                viewModel.NewMistakeMade = newMistakeMade;
+            }
+            
             viewModel.MistakeAdded = newMistakeMade.Rating < 5;
             viewModel.PraiseAdded = newMistakeMade.Rating == 5;
         }

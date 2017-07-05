@@ -14,7 +14,7 @@ namespace Hablame.Repositories
 
         List<Mistake> GetTopMistakesForLanguage(Guid languageId);
 
-        List<Mistake> GetLatestSessionMistakes(Guid conversationId);
+        List<MistakeMade> GetLatestSessionMistakes(Guid conversationId);
 
         List<Mistake> GetTopMistakesForSession(Guid conversationId);
 
@@ -25,5 +25,7 @@ namespace Hablame.Repositories
         List<MistakeType> GetMistakeTypes(Guid languageId);
 
         void CreateNewMistakeMade(MistakeMade mistakeMade);
+
+        MistakeMade GetMistakeMadeSummaryById(Guid mistakeId);
     }
 }

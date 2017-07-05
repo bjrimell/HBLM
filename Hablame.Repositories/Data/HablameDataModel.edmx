@@ -78,6 +78,21 @@
           <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_MistakeMadeSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_MistakeMadeSummary">
+          <Key>
+            <PropertyRef Name="MistakeId" />
+            <PropertyRef Name="ConversationId" />
+            <PropertyRef Name="SpokenValue" />
+            <PropertyRef Name="DateTime" />
+          </Key>
+          <Property Name="MistakeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CorrectValue" Type="nvarchar(max)" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_Mistakes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_Mistakes">
           <Key>
@@ -169,6 +184,15 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySet Name="MistakeMade" EntityType="Self.MistakeMade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MistakeType" EntityType="Self.MistakeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_MistakeMadeSummary" EntityType="Self.vw_MistakeMadeSummary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_MistakeMadeSummary].[MistakeId] AS [MistakeId], 
+    [vw_MistakeMadeSummary].[ConversationId] AS [ConversationId], 
+    [vw_MistakeMadeSummary].[SpokenValue] AS [SpokenValue], 
+    [vw_MistakeMadeSummary].[CorrectValue] AS [CorrectValue], 
+    [vw_MistakeMadeSummary].[DateTime] AS [DateTime]
+    FROM [dbo].[vw_MistakeMadeSummary] AS [vw_MistakeMadeSummary]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_Mistakes" EntityType="Self.vw_Mistakes" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_Mistakes].[Id] AS [Id], 
@@ -243,6 +267,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
             <End Role="LanguageFamily" EntitySet="LanguageFamilies" />
             <End Role="Language" EntitySet="Languages" />
           </AssociationSet>
+          <EntitySet Name="vw_MistakeMadeSummary" EntityType="HablameModel.vw_MistakeMadeSummary" />
         </EntityContainer>
         <ComplexType Name="getTopMistakesByLanguageId_Result">
           <Property Type="Guid" Name="ConversationId" Nullable="false" />
@@ -406,6 +431,19 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vw_MistakeMadeSummary">
+          <Key>
+            <PropertyRef Name="MistakeId" />
+            <PropertyRef Name="SpokenValue" />
+            <PropertyRef Name="DateTime" />
+            <PropertyRef Name="ConversationId" />
+          </Key>
+          <Property Name="MistakeId" Type="Guid" Nullable="false" />
+          <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConversationId" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -555,6 +593,17 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
                 <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_MistakeMadeSummary">
+            <EntityTypeMapping TypeName="HablameModel.vw_MistakeMadeSummary">
+              <MappingFragment StoreEntitySet="vw_MistakeMadeSummary">
+                <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+                <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+                <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

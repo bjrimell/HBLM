@@ -147,5 +147,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="vw_MistakeMadeSummary">
+      <EntityTypeMapping TypeName="HablameModel.vw_MistakeMadeSummary">
+        <MappingFragment StoreEntitySet="vw_MistakeMadeSummary">
+          <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
+          <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
+          <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -57,7 +57,7 @@ namespace Hablame.Controllers
 
             var viewModel = this.conversationService.RecreateConversationViewModel(conversationGuid, spokenValue, correctValue);
 
-            this.conversationService.SetMessaging(viewModel, newMistakeMade, correctValue, spokenValue, rating);
+            this.conversationService.SetMessaging(viewModel, newMistakeMade, mistakeId);
 
             return this.PartialView("_Conversation", viewModel);
         }

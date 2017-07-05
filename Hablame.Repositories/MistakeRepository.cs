@@ -58,10 +58,10 @@ namespace Hablame.Repositories
             return Mapper.Map(response, mistakes);
         }
 
-        public List<Domain.Entities.Mistake> GetLatestSessionMistakes(Guid conversationId)
+        public List<Domain.Entities.MistakeMade> GetLatestSessionMistakes(Guid conversationId)
         {
-            var mistakes = new List<Domain.Entities.Mistake>();
-            var response = db.vw_MistakesByConversation.Where(m => m.ConversationId == conversationId).Take(10);
+            var mistakes = new List<Domain.Entities.MistakeMade>();
+            var response = db.vw_MistakeMadeSummary.Where(m => m.ConversationId == conversationId).OrderByDescending(m => m.DateTime).Take(10);
             return Mapper.Map(response, mistakes);
         }
 
@@ -117,6 +117,13 @@ namespace Hablame.Repositories
             catch (Exception ex)
             {
             }
+        }
+
+        public Domain.Entities.MistakeMade GetMistakeMadeSummaryById(Guid mistakeId)
+        {
+            var mistakeMade = new Domain.Entities.MistakeMade();
+            var response = db.vw_MistakeMadeSummary.Where(m => m.MistakeId == mistakeId).FirstOrDefault();
+            return Mapper.Map(response, mistakeMade);
         }
     }
 }

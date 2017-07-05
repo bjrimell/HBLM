@@ -19,7 +19,7 @@ namespace Hablame.Services
 
         Guid GetConversationTeacherId(Guid conversationId);
 
-        void SetMessaging(ConversationViewModel viewModel, MistakeMade newMistakeMade, string spokenValue, string correctValue, int rating);
+        void SetMessaging(ConversationViewModel viewModel, MistakeMade newMistakeMade, string mistakeId);
 
     }
 }

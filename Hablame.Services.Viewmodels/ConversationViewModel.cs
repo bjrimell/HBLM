@@ -32,7 +32,7 @@ namespace Hablame.Services.Viewmodels
 
         public List<Mistake> MostCommonSessionMistakes { get; set; }
 
-        public List<Mistake> LatestSessionMistakes { get; set; }
+        public List<MistakeMade> LatestSessionMistakes { get; set; }
 
         public List<Mistake> MostCommonMistakesForStudent { get; set; }
 

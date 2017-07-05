@@ -106,6 +106,9 @@
     <Compile Include="Data\Person.cs">
       <DependentUpon>HablameDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\vw_MistakeMadeSummary.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\vw_Mistakes.cs">
       <DependentUpon>HablameDataModel.tt</DependentUpon>
     </Compile>

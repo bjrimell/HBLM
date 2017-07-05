@@ -32,6 +32,7 @@ namespace Hablame.Repositories.Mapping
                 // Mistake Type Mappings
                 cfg.CreateMap<Domain.Entities.MistakeType, Data.MistakeType>();
                 cfg.CreateMap<Data.MistakeType, Domain.Entities.MistakeType>();
+                cfg.CreateMap<Data.vw_MistakeMadeSummary, Domain.Entities.MistakeMade>();
 
                 // Mistake Made Mappings
                 cfg.CreateMap<Domain.Entities.MistakeMade, Data.MistakeMade>();

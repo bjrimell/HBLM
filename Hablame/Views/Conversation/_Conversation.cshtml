@@ -176,7 +176,7 @@
                                     <tr>
                                         <th>Spoken</th>
                                         <th>Correct</th>
-                                        <th>Occurences</th>
+                                        <th>When</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -187,7 +187,7 @@
                                             <tr>
                                                 <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
                                                 <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
-                                                <td>@mistake.Count</td>
+                                                <td>@mistake.DateTime</td>
                                                 <td>
                                                     <form method="post">
                                                         <input type="hidden" name="conversationId" id="conversationId-repeat-latestSessionMistakes" value="@Model.ConversationId" />
