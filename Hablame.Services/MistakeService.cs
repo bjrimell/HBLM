@@ -60,8 +60,10 @@ namespace Hablame.Services
             }
             else
             {
-                // Create brand new mistake
+                // get all the user selected mistake types that can be applied to this mistake
+                var validMistakeTypesSelected = this.GenerateValidMistakeTypes(selectedMistakeTypes, rating);
 
+                // Create brand new mistake
                 var mistake = new Mistake
                 {
                     Id = Guid.NewGuid(),
@@ -71,10 +73,13 @@ namespace Hablame.Services
                     CorrectValue = correctValue,
                     StudentId = this.conversationService.GetConversationStudentId(conversationId),
                     TeacherId = this.conversationService.GetConversationTeacherId(conversationId),
-                    Rating = rating
+                    Rating = rating,
+                    IsGrammar = validMistakeTypesSelected.Any(m => m.IsGrammar),
+                    IsPronunciation = validMistakeTypesSelected.Any(m => m.IsPronunciation),
+                    IsVocab = validMistakeTypesSelected.Any(m => m.IsVocab)
                 };
 
-                this.mistakeRepository.CreateNewMistake(mistake, this.GenerateValidMistakeTypes(selectedMistakeTypes, rating));
+                this.mistakeRepository.CreateNewMistake(mistake, validMistakeTypesSelected);
                 return mistake.Id;
             }
         }

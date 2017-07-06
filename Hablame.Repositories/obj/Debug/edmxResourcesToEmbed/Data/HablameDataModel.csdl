@@ -83,11 +83,12 @@
     <Property Name="ConversationId" Type="Guid" Nullable="false" />
     <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-    <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
     <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Rating" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Conversation" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Mistake" ToRole="Conversation" />
+    <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
+    <Property Name="IsVocab" Type="Boolean" Nullable="false" />
+    <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="MistakeMade">
     <Key>
@@ -197,12 +198,18 @@
       <PropertyRef Name="SpokenValue" />
       <PropertyRef Name="DateTime" />
       <PropertyRef Name="ConversationId" />
+      <PropertyRef Name="IsGrammar" />
+      <PropertyRef Name="IsVocab" />
+      <PropertyRef Name="IsPronunciation" />
     </Key>
     <Property Name="MistakeId" Type="Guid" Nullable="false" />
     <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ConversationId" Type="Guid" Nullable="false" />
+    <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
+    <Property Name="IsVocab" Type="Boolean" Nullable="false" />
+    <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="MistakeAssignedMistakeType">
     <Key>

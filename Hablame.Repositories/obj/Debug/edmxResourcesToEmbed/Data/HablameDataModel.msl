@@ -58,10 +58,11 @@
     <EntitySetMapping Name="Mistakes">
       <EntityTypeMapping TypeName="HablameModel.Mistake">
         <MappingFragment StoreEntitySet="Mistake">
+          <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
+          <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
+          <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />
           <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-          <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
-          <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
           <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
           <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
           <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
@@ -150,6 +151,9 @@
     <EntitySetMapping Name="vw_MistakeMadeSummary">
       <EntityTypeMapping TypeName="HablameModel.vw_MistakeMadeSummary">
         <MappingFragment StoreEntitySet="vw_MistakeMadeSummary">
+          <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
+          <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
+          <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />
           <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
           <ScalarProperty Name="DateTime" ColumnName="DateTime" />
           <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />

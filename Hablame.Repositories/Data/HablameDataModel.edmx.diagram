@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="HablameModel.LanguageFamily" Width="1.5" PointX="0.75" PointY="5" />
         <EntityTypeShape EntityType="HablameModel.Mistake" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="HablameModel.MistakeMade" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="HablameModel.MistakeType" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HablameModel.MistakeType" Width="1.5" PointX="5.75" PointY="4" />
         <EntityTypeShape EntityType="HablameModel.Person" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="HablameModel.vw_Mistakes" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="HablameModel.vw_MistakesByConversation" Width="1.5" PointX="2.75" PointY="7.75" />

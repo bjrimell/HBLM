@@ -40,10 +40,11 @@
           <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CorrectValue" Type="nvarchar(max)" />
-          <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
+          <Property Name="IsGrammar" Type="bit" Nullable="false" />
+          <Property Name="IsVocab" Type="bit" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
           <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="IsPronunciation" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="MistakeAssignedMistakeType">
           <Key>
@@ -93,12 +94,18 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakeMadeSummary' does not have a
             <PropertyRef Name="ConversationId" />
             <PropertyRef Name="SpokenValue" />
             <PropertyRef Name="DateTime" />
+            <PropertyRef Name="IsGrammar" />
+            <PropertyRef Name="IsVocab" />
+            <PropertyRef Name="IsPronunciation" />
           </Key>
           <Property Name="MistakeId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CorrectValue" Type="nvarchar(max)" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsGrammar" Type="bit" Nullable="false" />
+          <Property Name="IsVocab" Type="bit" Nullable="false" />
+          <Property Name="IsPronunciation" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_Mistakes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -199,7 +206,10 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     [vw_MistakeMadeSummary].[ConversationId] AS [ConversationId], 
     [vw_MistakeMadeSummary].[SpokenValue] AS [SpokenValue], 
     [vw_MistakeMadeSummary].[CorrectValue] AS [CorrectValue], 
-    [vw_MistakeMadeSummary].[DateTime] AS [DateTime]
+    [vw_MistakeMadeSummary].[DateTime] AS [DateTime], 
+    [vw_MistakeMadeSummary].[IsGrammar] AS [IsGrammar], 
+    [vw_MistakeMadeSummary].[IsVocab] AS [IsVocab], 
+    [vw_MistakeMadeSummary].[IsPronunciation] AS [IsPronunciation]
     FROM [dbo].[vw_MistakeMadeSummary] AS [vw_MistakeMadeSummary]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_Mistakes" EntityType="Self.vw_Mistakes" store:Type="Views" store:Schema="dbo">
@@ -333,11 +343,12 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <Property Name="ConversationId" Type="Guid" Nullable="false" />
           <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsSuperfluousAuxVerb" Type="Boolean" Nullable="false" />
-          <Property Name="IsMissingAuxVerb" Type="Boolean" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Rating" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Conversation" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Mistake" ToRole="Conversation" />
+          <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
+          <Property Name="IsVocab" Type="Boolean" Nullable="false" />
+          <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="MistakeMade">
           <Key>
@@ -447,12 +458,18 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
             <PropertyRef Name="SpokenValue" />
             <PropertyRef Name="DateTime" />
             <PropertyRef Name="ConversationId" />
+            <PropertyRef Name="IsGrammar" />
+            <PropertyRef Name="IsVocab" />
+            <PropertyRef Name="IsPronunciation" />
           </Key>
           <Property Name="MistakeId" Type="Guid" Nullable="false" />
           <Property Name="SpokenValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ConversationId" Type="Guid" Nullable="false" />
+          <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
+          <Property Name="IsVocab" Type="Boolean" Nullable="false" />
+          <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="MistakeAssignedMistakeType">
           <Key>
@@ -525,10 +542,11 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySetMapping Name="Mistakes">
             <EntityTypeMapping TypeName="HablameModel.Mistake">
               <MappingFragment StoreEntitySet="Mistake">
+                <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
+                <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
+                <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="IsMissingAuxVerb" ColumnName="IsMissingAuxVerb" />
-                <ScalarProperty Name="IsSuperfluousAuxVerb" ColumnName="IsSuperfluousAuxVerb" />
                 <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
                 <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
                 <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
@@ -617,6 +635,9 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySetMapping Name="vw_MistakeMadeSummary">
             <EntityTypeMapping TypeName="HablameModel.vw_MistakeMadeSummary">
               <MappingFragment StoreEntitySet="vw_MistakeMadeSummary">
+                <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
+                <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
+                <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />
                 <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />

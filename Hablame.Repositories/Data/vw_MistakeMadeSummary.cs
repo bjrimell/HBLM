@@ -19,5 +19,8 @@ namespace Hablame.Repositories.Data
         public string CorrectValue { get; set; }
         public System.DateTime DateTime { get; set; }
         public System.Guid ConversationId { get; set; }
+        public bool IsGrammar { get; set; }
+        public bool IsVocab { get; set; }
+        public bool IsPronunciation { get; set; }
     }
 }

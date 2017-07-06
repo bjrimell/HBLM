@@ -35,10 +35,11 @@
     <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CorrectValue" Type="nvarchar(max)" />
-    <Property Name="IsSuperfluousAuxVerb" Type="bit" Nullable="false" />
-    <Property Name="IsMissingAuxVerb" Type="bit" Nullable="false" />
+    <Property Name="IsGrammar" Type="bit" Nullable="false" />
+    <Property Name="IsVocab" Type="bit" Nullable="false" />
     <Property Name="DateTime" Type="datetime" Nullable="false" />
     <Property Name="Rating" Type="int" Nullable="false" />
+    <Property Name="IsPronunciation" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="MistakeAssignedMistakeType">
     <Key>
@@ -88,12 +89,18 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakeMadeSummary' does not have a
       <PropertyRef Name="ConversationId" />
       <PropertyRef Name="SpokenValue" />
       <PropertyRef Name="DateTime" />
+      <PropertyRef Name="IsGrammar" />
+      <PropertyRef Name="IsVocab" />
+      <PropertyRef Name="IsPronunciation" />
     </Key>
     <Property Name="MistakeId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CorrectValue" Type="nvarchar(max)" />
     <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="IsGrammar" Type="bit" Nullable="false" />
+    <Property Name="IsVocab" Type="bit" Nullable="false" />
+    <Property Name="IsPronunciation" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_Mistakes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -194,7 +201,10 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     [vw_MistakeMadeSummary].[ConversationId] AS [ConversationId], 
     [vw_MistakeMadeSummary].[SpokenValue] AS [SpokenValue], 
     [vw_MistakeMadeSummary].[CorrectValue] AS [CorrectValue], 
-    [vw_MistakeMadeSummary].[DateTime] AS [DateTime]
+    [vw_MistakeMadeSummary].[DateTime] AS [DateTime], 
+    [vw_MistakeMadeSummary].[IsGrammar] AS [IsGrammar], 
+    [vw_MistakeMadeSummary].[IsVocab] AS [IsVocab], 
+    [vw_MistakeMadeSummary].[IsPronunciation] AS [IsPronunciation]
     FROM [dbo].[vw_MistakeMadeSummary] AS [vw_MistakeMadeSummary]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="vw_Mistakes" EntityType="Self.vw_Mistakes" store:Type="Views" store:Schema="dbo">

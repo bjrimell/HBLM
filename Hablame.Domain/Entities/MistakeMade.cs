@@ -28,13 +28,11 @@ namespace Hablame.Domain.Entities
             }
         }
 
-        public bool IsWordMistake { get; set; }
+        public bool IsVocab { get; set; }
 
-        public bool IsPhraseMistake { get; set; }
+        public bool IsGrammar { get; set; }
 
-        public bool IsGrammarMistake { get; set; }
-
-        public bool IsPronunciationMistake { get; set; }
+        public bool IsPronunciation { get; set; }
 
         public string SpokenValue { get; set; }
 
@@ -46,6 +44,5 @@ namespace Hablame.Domain.Entities
 
         public int Rating { get; set; }
 
-        public bool PronunciationError { get; set; }
     }
 }

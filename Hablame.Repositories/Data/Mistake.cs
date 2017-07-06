@@ -18,10 +18,11 @@ namespace Hablame.Repositories.Data
         public System.Guid ConversationId { get; set; }
         public string SpokenValue { get; set; }
         public string CorrectValue { get; set; }
-        public bool IsSuperfluousAuxVerb { get; set; }
-        public bool IsMissingAuxVerb { get; set; }
         public System.DateTime DateTime { get; set; }
         public int Rating { get; set; }
+        public bool IsGrammar { get; set; }
+        public bool IsVocab { get; set; }
+        public bool IsPronunciation { get; set; }
     
         public virtual Conversation Conversation { get; set; }
     }

@@ -135,6 +135,9 @@
                                     <tr>
                                         <th>Spoken</th>
                                         <th>Correct</th>
+                                        <th>Grammar</th>
+                                        <th>Vocab</th>
+                                        <th>Pronunciation</th>
                                         <th>When</th>
                                         <th>Action</th>
                                     </tr>
@@ -146,6 +149,18 @@
                                             <tr>
                                                 <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistakeMade.SpokenValue</td>
                                                 <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistakeMade.CorrectValue</td>
+                                                <td> @if (mistakeMade.IsGrammar)
+                                                {<span class="glyphicon glyphicon-ok"></span>}
+                                                else
+                                                { <span class="glyphicon glyphicon-remove"></span>}</td>
+                                                <td>@if (mistakeMade.IsVocab)
+                                                {<span class="glyphicon glyphicon-ok"></span>}
+                                                else
+                                                {<span class="glyphicon glyphicon-remove"></span>}</td>
+                                                <td>@if (mistakeMade.IsPronunciation)
+                                                {<span class="glyphicon glyphicon-ok"></span>}
+                                                else
+                                                {<span class="glyphicon glyphicon-remove"></span>}</td>
                                                 <td>@mistakeMade.MinutesAgo minutes ago.</td>
                                                 <td>
                                                     <form method="post">
@@ -166,6 +181,9 @@
                                     <tr>
                                         <th>Spoken</th>
                                         <th>Correct</th>
+                                        <th>Grammar</th>
+                                        <th>Vocab</th>
+                                        <th>Pronunciation</th>
                                         <th>Occurences</th>
                                         <th>Action</th>
                                     </tr>
@@ -177,6 +195,9 @@
                                             <tr>
                                                 <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
                                                 <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
+                                                <td> @if (mistake.IsGrammar) {<span class="glyphicon glyphicon-ok"></span>}else{ <span class="glyphicon glyphicon-remove"></span>}</td>
+                                                <td>@if (mistake.IsVocab){<span class="glyphicon glyphicon-ok"></span>}else {<span class="glyphicon glyphicon-remove"></span>}</td>
+                                                <td>@if (mistake.IsPronunciation){<span class="glyphicon glyphicon-ok"></span>}else{<span class="glyphicon glyphicon-remove"></span>}</td>
                                                 <td>@mistake.Count</td>
                                                 <td>
                                                     <form method="post">
