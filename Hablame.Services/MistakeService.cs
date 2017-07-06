@@ -33,7 +33,7 @@ namespace Hablame.Services
                 Id = Guid.NewGuid(),
                 MistakeId = this.SetMistakeId(repeatedMistakeId, correctValue, spokenValue, rating, conversationId),
                 ConversationId = conversationId,
-                DateTime = DateTime.Now
+                DateTime = DateTime.Now,
             };
 
             this.mistakeRepository.CreateNewMistakeMade(mistakeMade);

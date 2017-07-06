@@ -20,6 +20,14 @@ namespace Hablame.Domain.Entities
 
         public DateTime DateTime { get; set; }
 
+        public int MinutesAgo
+        {
+            get
+            {
+                return DateTime.Now.Subtract(DateTime).Minutes;
+            }
+        }
+
         public bool IsWordMistake { get; set; }
 
         public bool IsPhraseMistake { get; set; }
