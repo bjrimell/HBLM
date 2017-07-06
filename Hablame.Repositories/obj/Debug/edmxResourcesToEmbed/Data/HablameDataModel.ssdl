@@ -40,6 +40,14 @@
     <Property Name="DateTime" Type="datetime" Nullable="false" />
     <Property Name="Rating" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="MistakeAssignedMistakeType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MistakeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
   <EntityType Name="MistakeMade">
     <Key>
       <PropertyRef Name="Id" />
@@ -176,6 +184,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LanguageFamily" EntityType="Self.LanguageFamily" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MistakeAssignedMistakeType" EntityType="Self.MistakeAssignedMistakeType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MistakeMade" EntityType="Self.MistakeMade" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MistakeType" EntityType="Self.MistakeType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />

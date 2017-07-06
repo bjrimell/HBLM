@@ -45,6 +45,14 @@
           <Property Name="DateTime" Type="datetime" Nullable="false" />
           <Property Name="Rating" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="MistakeAssignedMistakeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MistakeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="MistakeMade">
           <Key>
             <PropertyRef Name="Id" />
@@ -181,6 +189,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LanguageFamily" EntityType="Self.LanguageFamily" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MistakeAssignedMistakeType" EntityType="Self.MistakeAssignedMistakeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MistakeMade" EntityType="Self.MistakeMade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MistakeType" EntityType="Self.MistakeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
@@ -268,6 +277,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
             <End Role="Language" EntitySet="Languages" />
           </AssociationSet>
           <EntitySet Name="vw_MistakeMadeSummary" EntityType="HablameModel.vw_MistakeMadeSummary" />
+          <EntitySet Name="MistakeAssignedMistakeTypes" EntityType="HablameModel.MistakeAssignedMistakeType" />
         </EntityContainer>
         <ComplexType Name="getTopMistakesByLanguageId_Result">
           <Property Type="Guid" Name="ConversationId" Nullable="false" />
@@ -444,6 +454,14 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ConversationId" Type="Guid" Nullable="false" />
         </EntityType>
+        <EntityType Name="MistakeAssignedMistakeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MistakeId" Type="Guid" Nullable="false" />
+          <Property Name="MistakeTypeId" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -604,6 +622,15 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
                 <ScalarProperty Name="CorrectValue" ColumnName="CorrectValue" />
                 <ScalarProperty Name="SpokenValue" ColumnName="SpokenValue" />
                 <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MistakeAssignedMistakeTypes">
+            <EntityTypeMapping TypeName="HablameModel.MistakeAssignedMistakeType">
+              <MappingFragment StoreEntitySet="MistakeAssignedMistakeType">
+                <ScalarProperty Name="MistakeTypeId" ColumnName="MistakeTypeId" />
+                <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

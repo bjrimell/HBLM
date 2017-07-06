@@ -27,6 +27,7 @@
       <End Role="Language" EntitySet="Languages" />
     </AssociationSet>
     <EntitySet Name="vw_MistakeMadeSummary" EntityType="HablameModel.vw_MistakeMadeSummary" />
+    <EntitySet Name="MistakeAssignedMistakeTypes" EntityType="HablameModel.MistakeAssignedMistakeType" />
   </EntityContainer>
   <ComplexType Name="getTopMistakesByLanguageId_Result">
     <Property Type="Guid" Name="ConversationId" Nullable="false" />
@@ -202,5 +203,13 @@
     <Property Name="CorrectValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ConversationId" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MistakeAssignedMistakeType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="MistakeId" Type="Guid" Nullable="false" />
+    <Property Name="MistakeTypeId" Type="Guid" Nullable="false" />
   </EntityType>
 </Schema>

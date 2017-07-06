@@ -24,8 +24,8 @@
 	Toggle.DEFAULTS = {
 	    on: '<span class="glyphicon glyphicon-ok"></span>',
 	    off: '<span class="glyphicon glyphicon-remove"</span>',
-		onstyle: 'primary',
-		offstyle: 'default',
+		onstyle: 'success',
+		offstyle: 'danger',
 		size: 'normal',
 		style: '',
 		width: null,

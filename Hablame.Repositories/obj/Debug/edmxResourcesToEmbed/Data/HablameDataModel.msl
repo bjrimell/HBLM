@@ -158,5 +158,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MistakeAssignedMistakeTypes">
+      <EntityTypeMapping TypeName="HablameModel.MistakeAssignedMistakeType">
+        <MappingFragment StoreEntitySet="MistakeAssignedMistakeType">
+          <ScalarProperty Name="MistakeTypeId" ColumnName="MistakeTypeId" />
+          <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

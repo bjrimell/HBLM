@@ -12,6 +12,7 @@
                 <h5><strong>Language:</strong></h5>
                 <h5><strong>Start Time:</strong>@Model.StartDateTime.ToShortTimeString()</h5>
                 <h5><strong>Current duration:</strong> @Model.DurationMinutes minutes</h5>
+                <h5><strong>Conversation ID:</strong> @Model.ConversationId</h5>
                 <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-pause"></span></button>
                 <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-play"></span></button>
                 <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-stop"></span></button>
@@ -87,7 +88,7 @@
                                                     foreach (var item in ratingSet.MistakeTypeList)
                                                     {
                                                         <label class="checkbox-inline">
-                                                            <input type="checkbox" data-toggle="toggle" name="SelectedMistakeTypes" value="@item.Id"> @item.Title
+                                                            <input type="checkbox" data-toggle="toggle" name="SelectedMistakeTypes" value="@item.Id"> <strong>@item.Title</strong>
                                                         </label>
                                                     }
                                                 }
@@ -117,48 +118,6 @@
 
             <br />
 
-            <!-- Messaging alerting the user that a new Mistake has been added-->
-            <div id="dataPostedMessage" class="row content">
-                <div class="col-lg-12">
-                    @{
-                        if (Model.MistakeAdded)
-                        {
-                            <div class="well">
-                                <div class="alert alert-success">
-                                    <h3><strong>Mistake added!</strong></h3> @Model.Student.Forename said <strong>@Model.NewMistakeMade.SpokenValue</strong> but should have said <strong>@Model.NewMistakeMade.CorrectValue</strong>.
-                                    <form method="post">
-                                        <input type="hidden" name="conversationId" id="conversationId-repeat-mistakeAdded" value="@Model.ConversationId" />
-                                        <input type="hidden" name="mistakeId" id="mistakeId-repeat-mistakeAdded" value="@Model.NewMistakeMade.Id" />
-                                        <button type="submit" name="submit-mistake-repeat" id="submit-repeat-mistakeAdded" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-                                    </form>
-                                </div>
-                            </div>
-                        }
-                        if (@Model.MistakeDeleted)
-                        {
-                            <h1>TODO</h1>
-                        }
-                        if (@Model.MistakeRepeated)
-                        {
-                            <h1>TODO</h1>
-                        }
-                        if (Model.PraiseAdded)
-                        {
-                            <div class="well">
-                                <div class="alert alert-success">
-                                    <h3><strong>Praise added!</strong></h3> You have applauded @Model.Student.Forename for saying <strong>@Model.NewMistakeMade.SpokenValue</strong>.
-                                    <form method="post">
-                                        <input type="hidden" name="conversationId" id="conversationId-repeat-praiseAdded" value="@Model.ConversationId" />
-                                        <input type="hidden" name="mistakeId" id="mistakeId-repeat-praiseAdded" value="@Model.NewMistakeMade.Id" />
-                                        <button type="submit" name="submit-mistake-repeat" id="submit-repeat-praiseAdded" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-                                    </form>
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
-            </div>
-
             <!-- Historic mistakes section -->
             <div id="historicMistakesSection" class="row content">
                 <div class="col-lg-12">
@@ -182,16 +141,16 @@
                                 </thead>
                                 <tbody>
                                     @{
-                                        foreach (var mistake in Model.LatestSessionMistakes)
+                                        foreach (var mistakeMade in Model.LatestSessionMistakes)
                                         {
                                             <tr>
-                                                <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
-                                                <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
-                                                <td>@mistake.DateTime</td>
+                                                <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistakeMade.SpokenValue</td>
+                                                <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistakeMade.CorrectValue</td>
+                                                <td>@mistakeMade.MinutesAgo minutes ago.</td>
                                                 <td>
                                                     <form method="post">
                                                         <input type="hidden" name="conversationId" id="conversationId-repeat-latestSessionMistakes" value="@Model.ConversationId" />
-                                                        <input type="hidden" name="mistakeId" id="mistakeId-repeat-latestSessionMistakes" value="@mistake.Id" />
+                                                        <input type="hidden" name="mistakeId" id="mistakeId-repeat-latestSessionMistakes" value="@mistakeMade.MistakeId" />
                                                         <button type="submit" name="submit-repeat-repeat-latestSessionMistakes" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
                                                     </form>
                                                 </td>
@@ -300,6 +259,41 @@
 
         </div>
     </div>
+    <!-- Messaging alerting the user that a new Mistake has been added-->
+    <div id="dataPostedMessage" class="row content">
+        <div class="col-lg-12">
+            @{
+                if (Model.MistakeAdded)
+                {
+                    <div id="mistakeAdded" class="well">
+                        <div class="alert alert-success">
+                            <form class="form-inline" method="post">
+                                <div class="form-group">
+                                    <h3><strong>Mistake added!</strong></h3> @Model.Student.Forename said <strong>@Model.NewMistakeMade.SpokenValue</strong> but should have said <strong>@Model.NewMistakeMade.CorrectValue</strong>.
+                                    <input type="hidden" name="conversationId" id="conversationId-repeat-mistakeAdded" value="@Model.ConversationId" />
+                                    <input type="hidden" name="mistakeId" id="mistakeId-repeat-mistakeAdded" value="@Model.NewMistakeMade.MistakeId" />
+                                    <button type="submit" name="submit-mistake-repeat" id="submit-repeat-mistakeAdded" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                }
+                if (Model.PraiseAdded)
+                {
+                    <div class="well">
+                        <div class="alert alert-success">
+                            <h3><strong>Praise added!</strong></h3> You have applauded @Model.Student.Forename for saying <strong>@Model.NewMistakeMade.SpokenValue</strong>.
+                            <form method="post">
+                                <input type="hidden" name="conversationId" id="conversationId-repeat-praiseAdded" value="@Model.ConversationId" />
+                                <input type="hidden" name="mistakeId" id="mistakeId-repeat-praiseAdded" value="@Model.NewMistakeMade.Id" />
+                                <button type="submit" name="submit-mistake-repeat" id="submit-repeat-praiseAdded" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
 </div>
 
 <script>
@@ -324,4 +318,10 @@ $(document).ready(function(){
         // set the selected rating's section to visible
         document.getElementById("options-rating-" + rating).hidden = false;
     }
+</script>
+
+<script>
+    setTimeout(function () {
+        $('#mistakeAdded').fadeOut('slow');
+    }, 5000); // <-- time in milliseconds
 </script>

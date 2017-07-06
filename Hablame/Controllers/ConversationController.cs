@@ -55,6 +55,8 @@ namespace Hablame.Controllers
                 SelectedMistakeTypes,
                 mistakeId);
 
+            //var validMistakeTypes = this.mistakeService.GenerateValidMistakeTypes(SelectedMistakeTypes, rating);
+
             var viewModel = this.conversationService.RecreateConversationViewModel(conversationGuid, spokenValue, correctValue);
 
             this.conversationService.SetMessaging(viewModel, newMistakeMade, mistakeId);

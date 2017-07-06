@@ -31,7 +31,7 @@ namespace Hablame.Services
             var mistakeMade = new MistakeMade
             {
                 Id = Guid.NewGuid(),
-                MistakeId = this.SetMistakeId(repeatedMistakeId, correctValue, spokenValue, rating, conversationId),
+                MistakeId = this.SetMistakeId(repeatedMistakeId, correctValue, spokenValue, rating, conversationId, selectedMistakeTypes),
                 ConversationId = conversationId,
                 DateTime = DateTime.Now,
             };
@@ -41,7 +41,7 @@ namespace Hablame.Services
             return mistakeMade;
         }
 
-        private Guid SetMistakeId(string repeatedMistakeId, string correctValue, string spokenValue, int rating, Guid conversationId)
+        private Guid SetMistakeId(string repeatedMistakeId, string correctValue, string spokenValue, int rating, Guid conversationId, IEnumerable<string> selectedMistakeTypes)
         {
             // If we are repeating an existing mistake, just use that ID
             // If not, see if a matching Mistake already exists in the DB
@@ -61,6 +61,7 @@ namespace Hablame.Services
             else
             {
                 // Create brand new mistake
+
                 var mistake = new Mistake
                 {
                     Id = Guid.NewGuid(),
@@ -73,9 +74,20 @@ namespace Hablame.Services
                     Rating = rating
                 };
 
-                this.mistakeRepository.CreateNewMistake(mistake);
+                this.mistakeRepository.CreateNewMistake(mistake, this.GenerateValidMistakeTypes(selectedMistakeTypes, rating));
                 return mistake.Id;
             }
+        }
+
+        private List<MistakeType> GenerateValidMistakeTypes(IEnumerable<string> selectedMistakeTypeIds, int rating)
+        {
+            var validSelectedMistakeTypes = new List<MistakeType>();
+
+            var selectedMistakeTypes = this.mistakeRepository.GetSelectedMistakeTypes(selectedMistakeTypeIds, rating);
+
+            validSelectedMistakeTypes = selectedMistakeTypes.Where(m => m.MinimumRatingLevelVisibility <= rating && m.MaximumRatingLevelVisibility >= rating).ToList();
+
+            return validSelectedMistakeTypes;
         }
     }
 }

@@ -79,7 +79,7 @@ namespace Hablame.Repositories
             return Mapper.Map(response, mistakes);
         }
 
-        public bool CreateNewMistake(Domain.Entities.Mistake mistake)
+        public bool CreateNewMistake(Domain.Entities.Mistake mistake, IEnumerable<Domain.Entities.MistakeType> selectedMistakeTypes)
         {
             var dbMistake = new Data.Mistake();
             var dbMistake2 = Mapper.Map(mistake, dbMistake);
@@ -88,6 +88,18 @@ namespace Hablame.Repositories
             {
                 db.Mistakes.Add(dbMistake2);
                 db.SaveChanges();
+                
+                foreach (var item in selectedMistakeTypes)
+                {
+                    var mistakeAssignedMistakeType = new Data.MistakeAssignedMistakeType
+                    {
+                        Id = Guid.NewGuid(),
+                        MistakeId = dbMistake2.Id,
+                        MistakeTypeId = item.Id
+                    };
+
+                    db.MistakeAssignedMistakeTypes.Add(mistakeAssignedMistakeType);
+                }
                 return true;
             }
             catch (Exception ex)
@@ -124,6 +136,15 @@ namespace Hablame.Repositories
             var mistakeMade = new Domain.Entities.MistakeMade();
             var response = db.vw_MistakeMadeSummary.Where(m => m.MistakeId == mistakeId).FirstOrDefault();
             return Mapper.Map(response, mistakeMade);
+        }
+
+        public List<Domain.Entities.MistakeType> GetSelectedMistakeTypes(IEnumerable<string> selectedMistakeTypes, int rating)
+        {
+            var mistakeTypes = new List<Domain.Entities.MistakeType>();
+
+            var guidList = selectedMistakeTypes.Select(Guid.Parse).ToList();
+            var response = db.MistakeTypes.Where(m => guidList.Contains(m.Id)).ToList();
+            return Mapper.Map(response, mistakeTypes);
         }
     }
 }

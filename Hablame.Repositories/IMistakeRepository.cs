@@ -20,12 +20,14 @@ namespace Hablame.Repositories
 
         List<Mistake> GetTopMistakesForStudent(Guid studentId);
 
-        bool CreateNewMistake(Mistake mistake);
+        bool CreateNewMistake(Mistake mistake, IEnumerable<MistakeType> selectedMistakeTypes);
 
         List<MistakeType> GetMistakeTypes(Guid languageId);
 
         void CreateNewMistakeMade(MistakeMade mistakeMade);
 
         MistakeMade GetMistakeMadeSummaryById(Guid mistakeId);
+
+        List<MistakeType> GetSelectedMistakeTypes(IEnumerable<string> selectedMistakeTypes, int rating);
     }
 }
