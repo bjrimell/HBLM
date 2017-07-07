@@ -16,6 +16,7 @@
           <Property Name="EndDateTime" Type="datetime" />
           <Property Name="DurationMinutes" Type="int" Nullable="false" />
           <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MistakeTypeOptionsConfigId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -76,6 +77,17 @@
           <Property Name="IsGrammar" Type="bit" Nullable="false" />
           <Property Name="IsPronunciation" Type="bit" Nullable="false" />
           <Property Name="IsVocab" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MistakeTypeConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstMistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SecondMistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ThirdMistakeTypeId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -199,6 +211,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySet Name="MistakeAssignedMistakeType" EntityType="Self.MistakeAssignedMistakeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MistakeMade" EntityType="Self.MistakeMade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MistakeType" EntityType="Self.MistakeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MistakeTypeConfiguration" EntityType="Self.MistakeTypeConfiguration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vw_MistakeMadeSummary" EntityType="Self.vw_MistakeMadeSummary" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -288,6 +301,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           </AssociationSet>
           <EntitySet Name="vw_MistakeMadeSummary" EntityType="HablameModel.vw_MistakeMadeSummary" />
           <EntitySet Name="MistakeAssignedMistakeTypes" EntityType="HablameModel.MistakeAssignedMistakeType" />
+          <EntitySet Name="MistakeTypeConfigurations" EntityType="HablameModel.MistakeTypeConfiguration" />
         </EntityContainer>
         <ComplexType Name="getTopMistakesByLanguageId_Result">
           <Property Type="Guid" Name="ConversationId" Nullable="false" />
@@ -317,6 +331,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <Property Name="DurationMinutes" Type="Int32" Nullable="false" />
           <Property Name="LanguageId" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Mistakes" Relationship="HablameModel.FK_Mistake_Conversation" FromRole="Conversation" ToRole="Mistake" />
+          <Property Name="MistakeTypeOptionsConfigId" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -479,6 +494,17 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <Property Name="MistakeId" Type="Guid" Nullable="false" />
           <Property Name="MistakeTypeId" Type="Guid" Nullable="false" />
         </EntityType>
+        <EntityType Name="MistakeTypeConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="OwnerId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstMistakeTypeId" Type="Guid" Nullable="false" />
+          <Property Name="SecondMistakeTypeId" Type="Guid" Nullable="false" />
+          <Property Name="ThirdMistakeTypeId" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -512,6 +538,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySetMapping Name="Conversations">
             <EntityTypeMapping TypeName="HablameModel.Conversation">
               <MappingFragment StoreEntitySet="Conversation">
+                <ScalarProperty Name="MistakeTypeOptionsConfigId" ColumnName="MistakeTypeOptionsConfigId" />
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
                 <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
                 <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
@@ -651,6 +678,18 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
               <MappingFragment StoreEntitySet="MistakeAssignedMistakeType">
                 <ScalarProperty Name="MistakeTypeId" ColumnName="MistakeTypeId" />
                 <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MistakeTypeConfigurations">
+            <EntityTypeMapping TypeName="HablameModel.MistakeTypeConfiguration">
+              <MappingFragment StoreEntitySet="MistakeTypeConfiguration">
+                <ScalarProperty Name="ThirdMistakeTypeId" ColumnName="ThirdMistakeTypeId" />
+                <ScalarProperty Name="SecondMistakeTypeId" ColumnName="SecondMistakeTypeId" />
+                <ScalarProperty Name="FirstMistakeTypeId" ColumnName="FirstMistakeTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

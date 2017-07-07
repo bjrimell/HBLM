@@ -49,11 +49,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Conversation.cs" />
+    <Compile Include="Entities\ConversationConfiguration.cs" />
     <Compile Include="Entities\Language.cs" />
     <Compile Include="Entities\MistakeAssignedMistakeType.cs" />
     <Compile Include="Entities\MistakeMade.cs" />
     <Compile Include="Entities\Mistake.cs" />
     <Compile Include="Entities\MistakeType.cs" />
+    <Compile Include="Entities\MistakeTypeConfiguration.cs" />
+    <Compile Include="Entities\MistakeTypeOptionsConfiguration.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

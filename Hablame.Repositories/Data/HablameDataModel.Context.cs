@@ -40,6 +40,7 @@ namespace Hablame.Repositories.Data
         public virtual DbSet<vw_MistakesByStudent> vw_MistakesByStudent { get; set; }
         public virtual DbSet<vw_MistakeMadeSummary> vw_MistakeMadeSummary { get; set; }
         public virtual DbSet<MistakeAssignedMistakeType> MistakeAssignedMistakeTypes { get; set; }
+        public virtual DbSet<MistakeTypeConfiguration> MistakeTypeConfigurations { get; set; }
     
         public virtual ObjectResult<getTopMistakesByLanguageId_Result> getTopMistakesByLanguageId(Nullable<System.Guid> languageId)
         {

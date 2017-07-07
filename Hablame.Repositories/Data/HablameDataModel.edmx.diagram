@@ -20,6 +20,7 @@
         <AssociationConnector Association="HablameModel.FK_Language_Family" />
         <EntityTypeShape EntityType="HablameModel.vw_MistakeMadeSummary" Width="1.5" PointX="7.375" PointY="7.75" />
         <EntityTypeShape EntityType="HablameModel.MistakeAssignedMistakeType" Width="1.5" PointX="9.375" PointY="6.75" />
+        <EntityTypeShape EntityType="HablameModel.MistakeTypeConfiguration" Width="1.5" PointX="9.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

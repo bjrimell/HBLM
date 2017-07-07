@@ -13,5 +13,9 @@ namespace Hablame.Repositories
         string CreateNewConversation(Conversation conversation);
 
         Conversation RetrieveConversation(Guid sessionId);
+
+        List<MistakeTypeConfiguration> GetAvailableMistakeTypeSettings(Guid teacherId);
+
+        void CreateNewMistakeTypeConfig(MistakeTypeConfiguration mistakeTypeOptionsConfiguration);
     }
 }

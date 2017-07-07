@@ -27,6 +27,7 @@ namespace Hablame.Repositories.Data
         public Nullable<System.DateTime> EndDateTime { get; set; }
         public int DurationMinutes { get; set; }
         public System.Guid LanguageId { get; set; }
+        public System.Guid MistakeTypeOptionsConfigId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mistake> Mistakes { get; set; }

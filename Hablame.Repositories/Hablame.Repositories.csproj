@@ -106,6 +106,9 @@
     <Compile Include="Data\MistakeType.cs">
       <DependentUpon>HablameDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\MistakeTypeConfiguration.cs">
+      <DependentUpon>HablameDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Person.cs">
       <DependentUpon>HablameDataModel.tt</DependentUpon>
     </Compile>

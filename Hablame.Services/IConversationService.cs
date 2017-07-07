@@ -21,5 +21,7 @@ namespace Hablame.Services
 
         void SetMessaging(ConversationViewModel viewModel, MistakeMade newMistakeMade, string mistakeId);
 
+        ConversationSettingsViewModel SetupConvoSettingsViewModel(string conversationId, string teacherId, string mistakeTypeOptionsConfigId);
+
     }
 }

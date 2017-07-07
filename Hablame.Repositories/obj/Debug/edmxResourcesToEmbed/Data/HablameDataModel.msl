@@ -28,6 +28,7 @@
     <EntitySetMapping Name="Conversations">
       <EntityTypeMapping TypeName="HablameModel.Conversation">
         <MappingFragment StoreEntitySet="Conversation">
+          <ScalarProperty Name="MistakeTypeOptionsConfigId" ColumnName="MistakeTypeOptionsConfigId" />
           <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
           <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
           <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
@@ -167,6 +168,18 @@
         <MappingFragment StoreEntitySet="MistakeAssignedMistakeType">
           <ScalarProperty Name="MistakeTypeId" ColumnName="MistakeTypeId" />
           <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MistakeTypeConfigurations">
+      <EntityTypeMapping TypeName="HablameModel.MistakeTypeConfiguration">
+        <MappingFragment StoreEntitySet="MistakeTypeConfiguration">
+          <ScalarProperty Name="ThirdMistakeTypeId" ColumnName="ThirdMistakeTypeId" />
+          <ScalarProperty Name="SecondMistakeTypeId" ColumnName="SecondMistakeTypeId" />
+          <ScalarProperty Name="FirstMistakeTypeId" ColumnName="FirstMistakeTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

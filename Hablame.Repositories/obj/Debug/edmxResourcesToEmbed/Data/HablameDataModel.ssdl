@@ -11,6 +11,7 @@
     <Property Name="EndDateTime" Type="datetime" />
     <Property Name="DurationMinutes" Type="int" Nullable="false" />
     <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MistakeTypeOptionsConfigId" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="Language">
     <Key>
@@ -71,6 +72,17 @@
     <Property Name="IsGrammar" Type="bit" Nullable="false" />
     <Property Name="IsPronunciation" Type="bit" Nullable="false" />
     <Property Name="IsVocab" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MistakeTypeConfiguration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstMistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SecondMistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ThirdMistakeTypeId" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -194,6 +206,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     <EntitySet Name="MistakeAssignedMistakeType" EntityType="Self.MistakeAssignedMistakeType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MistakeMade" EntityType="Self.MistakeMade" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MistakeType" EntityType="Self.MistakeType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MistakeTypeConfiguration" EntityType="Self.MistakeTypeConfiguration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="vw_MistakeMadeSummary" EntityType="Self.vw_MistakeMadeSummary" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

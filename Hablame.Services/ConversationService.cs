@@ -37,6 +37,8 @@ namespace Hablame.Services
                 Family = "Germanic"
             };
 
+            var mistakeTypeOptionConfigurationId = this.CreateMistakeTypeOptionsConfig(currentUserId);
+
             var conversation = new Conversation
             {
                 Id = Guid.NewGuid(),
@@ -44,7 +46,8 @@ namespace Hablame.Services
                 StudentId = studentId,
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now,
-                LanguageId = Guid.Parse("f4e4b27d-eb24-43de-b9d7-f67a73ae83f8") //English
+                LanguageId = Guid.Parse("f4e4b27d-eb24-43de-b9d7-f67a73ae83f8"), //English
+                MistakeTypeOptionsConfigId = mistakeTypeOptionConfigurationId
             };
 
             var convoId = this.conversationRepository.CreateNewConversation(conversation);
@@ -61,7 +64,8 @@ namespace Hablame.Services
                 MostCommonSessionMistakes = this.mistakeRepository.GetTopMistakesForSession(conversation.Id),
                 MostCommonMistakesForStudent = this.mistakeRepository.GetTopMistakesForStudent(student.Id),
                 Language = language,
-                MistakeTypeOptions = this.GetMistakeTypeOptions(conversation.LanguageId)
+                MistakeTypeOptions = this.GetMistakeTypeOptions(conversation.LanguageId),
+                MistakeTypeOptionsConfigId = conversation.MistakeTypeOptionsConfigId
             };
 
             return viewModel;
@@ -117,6 +121,56 @@ namespace Hablame.Services
             viewModel.PraiseAdded = newMistakeMade.Rating == 5;
         }
 
+        public ConversationSettingsViewModel SetupConvoSettingsViewModel(string conversationId, string teacherId, string mistakeTypeOptionsConfigId)
+        {
+            var teacherGuid = Guid.Parse(teacherId);
+            var conversationGuid = Guid.Parse(conversationId);
+            var mistakeTypeOptions = new List<MistakeTypeOptionsConfiguration>();
+            //mistakeTypeOptions = conversationRepository.GetMistakeTypeOptionsConfig(conversationId);
+
+            var availableMistakeTypeConfigs = conversationRepository.GetAvailableMistakeTypeSettings(teacherGuid);
+            var conversationConfig = this.CreateConversationConfig(conversationId, teacherId, mistakeTypeOptionsConfigId);
+
+            var viewModel = new ConversationSettingsViewModel
+            {
+                ConversationId = conversationGuid,
+                ConversationConfiguration = conversationConfig,
+                AvailableMistakeTypeConfigs = availableMistakeTypeConfigs
+            };
+
+            return viewModel;
+        }
+
+        private ConversationConfiguration CreateConversationConfig(string conversationId, string teacherId, string mistakeTypeOptionsConfigId)
+        {
+            var teacherGuid = Guid.Parse(teacherId);
+            var conversationGuid = Guid.Parse(conversationId);
+            var mistakeTypeOptionsConfigGuid = Guid.Parse(mistakeTypeOptionsConfigId);
+
+            var availableMistakeTypeConfigs = conversationRepository.GetAvailableMistakeTypeSettings(teacherGuid);
+
+            var mistakeTypeOptions = new List<MistakeTypeOptionsConfiguration>();
+
+            foreach (var item in availableMistakeTypeConfigs)
+            {
+                // add all the config sets available to the teacher to the list, but only mark the one matching this convo as Active
+                var mtoc = new MistakeTypeOptionsConfiguration
+                {
+                    MistakeTypeOptionsConfig = item,
+                    Enabled = item.Id == mistakeTypeOptionsConfigGuid
+                };
+
+                mistakeTypeOptions.Add(mtoc);
+            }
+
+            var config = new ConversationConfiguration
+            {
+                MistakeTypeOptions = mistakeTypeOptions
+            };
+
+            return config;
+        }
+
         private List<MistakeTypeOptions> GetMistakeTypeOptions(Guid languageId)
         {
             var response = new List<MistakeTypeOptions>();
@@ -133,6 +187,23 @@ namespace Hablame.Services
                 response.Add(mistakeTypeOptions);
             }
             return response;
+        }
+
+        private Guid CreateMistakeTypeOptionsConfig(Guid teacherId)
+        {
+            var mistakeTypeConfiguration = new MistakeTypeConfiguration
+            {
+                Id = Guid.NewGuid(),
+                Name = "Default",
+                OwnerId = teacherId,
+                FirstMistakeTypeId = Guid.Parse("fafb46df-e97d-4fac-a016-9c9151e26280"),
+                SecondMistakeTypeId = Guid.Parse("3eb190de-2d05-4d76-b261-dc980c9fbd2e"),
+                ThirdMistakeTypeId = Guid.Parse("fca1ff37-4b73-4a84-866c-41ce322448ab")
+            };
+
+            this.conversationRepository.CreateNewMistakeTypeConfig(mistakeTypeConfiguration);
+
+            return mistakeTypeConfiguration.Id;
         }
     }
 }

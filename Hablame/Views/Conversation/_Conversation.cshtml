@@ -13,6 +13,7 @@
                 <h5><strong>Start Time:</strong>@Model.StartDateTime.ToShortTimeString()</h5>
                 <h5><strong>Current duration:</strong> @Model.DurationMinutes minutes</h5>
                 <h5><strong>Conversation ID:</strong> @Model.ConversationId</h5>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-cog"></span> Conversation Settings</button>
                 <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-pause"></span></button>
                 <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-play"></span></button>
                 <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-stop"></span></button>
@@ -315,6 +316,17 @@
             }
         </div>
     </div>
+
+    @{
+        Html.RenderAction("ConversationConfiguration", "Conversation", new
+        {
+            conversationId = Model.ConversationId,
+            teacherId = Model.Teacher.Id,
+            MistakeTypeOptionsConfigId = Model.MistakeTypeOptionsConfigId
+        }
+        );
+    }
+
 </div>
 
 <script>
@@ -336,6 +348,7 @@ $(document).ready(function(){
         document.getElementById("options-rating-3").hidden = true;
         document.getElementById("options-rating-4").hidden = true;
         document.getElementById("options-rating-5").hidden = true;
+
         // set the selected rating's section to visible
         document.getElementById("options-rating-" + rating).hidden = false;
     }

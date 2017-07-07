@@ -63,5 +63,12 @@ namespace Hablame.Controllers
 
             return this.PartialView("_Conversation", viewModel);
         }
+
+        public ActionResult ConversationConfiguration(string conversationId, string teacherId, string mistakeTypeOptionsConfigId)
+        {
+            var viewModel = this.conversationService.SetupConvoSettingsViewModel(conversationId, teacherId, mistakeTypeOptionsConfigId);
+
+            return this.PartialView("_ConversationSettings", viewModel);
+        }
     }
 }

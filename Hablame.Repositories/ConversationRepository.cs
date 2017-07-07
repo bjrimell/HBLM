@@ -50,5 +50,31 @@ namespace Hablame.Repositories
                 return null;
             }
         }
+
+        public List<Domain.Entities.MistakeTypeConfiguration> GetAvailableMistakeTypeSettings(Guid teacherId)
+        {
+            var dbResponse = db.MistakeTypeConfigurations.Where(m => m.OwnerId == teacherId).ToList();
+
+            var configurations = new List<Domain.Entities.MistakeTypeConfiguration>();
+
+            return Mapper.Map(dbResponse, configurations);
+        }
+
+        public void CreateNewMistakeTypeConfig(Domain.Entities.MistakeTypeConfiguration mistakeTypeConfiguration)
+        {
+            var dbmistakeTypeConfig = new Data.MistakeTypeConfiguration();
+
+            var dbmistakeTypeConfig2 = Mapper.Map(mistakeTypeConfiguration, dbmistakeTypeConfig);
+
+            try
+            {
+                db.MistakeTypeConfigurations.Add(dbmistakeTypeConfig2);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
     }
 }
