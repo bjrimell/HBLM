@@ -27,25 +27,20 @@
                                             <li>Grammar</li>
                                             <li>Pronunciation</li>
                                         </ul>
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Configuration</th>
-                                                    <th>Enabled</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @{
-                                                    foreach (var mistakeTypeConfig in Model.ConversationConfiguration.MistakeTypeOptions)
-                                                    {
-                                                        <tr>
-                                                            <th>@mistakeTypeConfig.MistakeTypeOptionsConfig.Name</th>
-                                                            <th>First mistake Type ID @mistakeTypeConfig.Enabled</th>
-                                                        </tr>
-                                                    }
-                                                }
-                                            </tbody>
-                                        </table>
+
+                                        <p>Select the Mistake Type Configuration that you would like to use for this conversation:</p>
+
+                                        @{
+                                            foreach (var mistakeTypeConfig in Model.ConversationConfiguration.MistakeTypeOptions)
+                                            { 
+                                                var checkedValue = mistakeTypeConfig.Enabled ? new { @checked = "checked" } : null;
+                                                
+                                                <div class="radio">
+                                                    <label>
+                                                    <input type="radio" name="optradio" checked=@checkedValue value="@mistakeTypeConfig.MistakeTypeOptionsConfig.Id">@mistakeTypeConfig.MistakeTypeOptionsConfig.Name</label>
+                                                </div>
+                                            }
+                                        }
                                     </div>
                                 </div>
                             </div>

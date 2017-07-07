@@ -18,6 +18,8 @@ namespace Hablame.Services.Viewmodels
         public Conversation SavedConversation { get; set; }
 
         public Guid ConversationId { get; set; }
+
+        public Guid MistakeTypeOptionsConfigId { get; set; }
         public User Teacher { get; set; }
 
         public User Student { get; set; }

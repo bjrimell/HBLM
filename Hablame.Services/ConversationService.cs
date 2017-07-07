@@ -88,7 +88,8 @@ namespace Hablame.Services
                 StartDateTime = savedConversation.StartDateTime,
                 EndDateTime = savedConversation.EndDateTime,
                 Language = savedConversation.Language,
-                MistakeTypeOptions = this.GetMistakeTypeOptions(savedConversation.LanguageId)
+                MistakeTypeOptions = this.GetMistakeTypeOptions(savedConversation.LanguageId),
+                MistakeTypeOptionsConfigId = savedConversation.MistakeTypeOptionsConfigId
             };
 
             return viewModel;
