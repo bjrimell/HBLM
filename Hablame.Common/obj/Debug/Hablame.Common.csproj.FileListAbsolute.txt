@@ -1,1 +1,13 @@
+D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\Hablame.Common.dll
+D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\Hablame.Common.pdb
+D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\AutoMapper.dll
+D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\Hablame.Domain.dll
+D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\Hablame.Repositories.dll
+D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\EntityFramework.dll
+D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\Hablame.Domain.pdb
+D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\Hablame.Repositories.pdb
+D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\AutoMapper.xml
+D:\Code\priv\language\HBLM\Hablame.Common\bin\Debug\EntityFramework.xml
 D:\Code\priv\language\HBLM\Hablame.Common\obj\Debug\Hablame.Common.csprojResolveAssemblyReference.cache
+D:\Code\priv\language\HBLM\Hablame.Common\obj\Debug\Hablame.Common.dll
+D:\Code\priv\language\HBLM\Hablame.Common\obj\Debug\Hablame.Common.pdb

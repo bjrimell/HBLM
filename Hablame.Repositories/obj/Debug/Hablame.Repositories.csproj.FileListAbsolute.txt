@@ -27,3 +27,16 @@ D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\EntityFramework.SqlSer
 D:\Code\priv\language\HBLM\Hablame.Repositories\obj\Debug\Hablame.Repositories.csprojResolveAssemblyReference.cache
 D:\Code\priv\language\HBLM\Hablame.Repositories\obj\Debug\Hablame.Repositories.dll
 D:\Code\priv\language\HBLM\Hablame.Repositories\obj\Debug\Hablame.Repositories.pdb
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.Helpers.dll
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.Mvc.dll
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.Razor.dll
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.WebPages.dll
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.Helpers.xml
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.Mvc.xml
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.Razor.xml
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.WebPages.xml
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\Code\priv\language\HBLM\Hablame.Repositories\bin\Debug\System.Web.WebPages.Razor.xml

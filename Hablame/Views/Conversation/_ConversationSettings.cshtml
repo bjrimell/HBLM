@@ -21,14 +21,14 @@
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                        <p>You can display a maximum of nine feedback types for each feedback rating. All categories belong to one or more of the following three types:</p>
+                                        <h4>You can display a maximum of nine feedback types for each feedback rating. All categories belong to one or more of the following three types:</h4>
                                         <ul>
                                             <li>Vocabulary</li>
                                             <li>Grammar</li>
                                             <li>Pronunciation</li>
                                         </ul>
 
-                                        <p>Select the Mistake Type Configuration that you would like to use for this conversation:</p>
+                                        <h4>Select the Mistake Type Configuration that you would like to use for this conversation:</h4>
 
                                         @{
                                             foreach (var mistakeTypeConfig in Model.ConversationConfiguration.MistakeTypeOptions)
@@ -37,10 +37,13 @@
                                                 
                                                 <div class="radio">
                                                     <label>
-                                                    <input type="radio" name="optradio" checked=@checkedValue value="@mistakeTypeConfig.MistakeTypeOptionsConfig.Id">@mistakeTypeConfig.MistakeTypeOptionsConfig.Name</label>
+                                                    <input type="radio" name="optradio" checked=@checkedValue value="@mistakeTypeConfig.MistakeTypeOptionsConfig.Id" />@mistakeTypeConfig.MistakeTypeOptionsConfig.Name</label>
                                                 </div>
                                             }
                                         }
+                                    </div>
+                                    <div class="panel-footer">
+                                        <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
                             </div>

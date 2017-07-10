@@ -8,6 +8,8 @@ using Hablame.Services.Viewmodels;
 using Hablame.Domain.Entities;
 using Hablame.Repositories;
 
+using System.Web.Mvc;
+
 namespace Hablame.Services
 {
     public class FriendService : IFriendService
@@ -29,10 +31,32 @@ namespace Hablame.Services
             return viewModel;
         }
 
+        public List<User> GetFriendList(Guid teacherId)
+        {
+            // Todo: restrict to where student has friendship with techer, don't just bring them all back
+            return this.userRepository.GetAllMockUsers();
+        }
+
         public User GetUserById(Guid userId)
         {
             var allUsers = this.userRepository.GetAllMockUsers();
             return allUsers.SingleOrDefault(m => m.Id == userId);
+        }
+
+        public List<SelectListItem> GetFriendSelectList(Guid teacherId)
+        {
+            var allUsers = this.userRepository.GetAllMockUsers();
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            foreach (var item in allUsers)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = item.Forename + " " +item.Surname,
+                    Value = item.Id.ToString()
+                });
+            }
+            return items;
         }
     }
 }

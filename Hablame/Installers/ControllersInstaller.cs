@@ -23,6 +23,8 @@ namespace Hablame.Installers
 
             container.Register(Component.For<IMistakeService>().ImplementedBy<MistakeService>().LifestylePerWebRequest());
 
+            container.Register(Component.For<ILanguageService>().ImplementedBy<LanguageService>().LifestylePerWebRequest());
+
             // Repos
             container.Register(Component.For<IUserRepository>().ImplementedBy<UserRepository>().LifestylePerWebRequest());
 
