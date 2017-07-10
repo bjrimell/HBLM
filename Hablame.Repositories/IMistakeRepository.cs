@@ -29,5 +29,9 @@ namespace Hablame.Repositories
         MistakeMade GetMistakeMadeSummaryById(Guid mistakeId);
 
         List<MistakeType> GetSelectedMistakeTypes(IEnumerable<string> selectedMistakeTypes, int rating);
+
+        List<Mistake> GetAllMistakesByConvoId(string conversationId);
+
+        List<Mistake> GetAllPraiseByConvoId(string conversationId);
     }
 }

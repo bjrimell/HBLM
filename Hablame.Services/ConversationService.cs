@@ -184,7 +184,9 @@ namespace Hablame.Services
         {
             var viewModel = new ConversationReportViewModel
             {
-                Conversation = this.conversationRepository.GetConversationReport(conversationId)
+                Conversation = this.conversationRepository.GetConversationReport(conversationId),
+                MistakeList = this.mistakeRepository.GetAllMistakesByConvoId(conversationId),
+                PraiseList = this.mistakeRepository.GetAllPraiseByConvoId(conversationId)
             };
 
             return viewModel;

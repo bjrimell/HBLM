@@ -146,5 +146,21 @@ namespace Hablame.Repositories
             var response = db.MistakeTypes.Where(m => guidList.Contains(m.Id)).ToList();
             return Mapper.Map(response, mistakeTypes);
         }
+
+        public List<Domain.Entities.Mistake> GetAllMistakesByConvoId(string conversationId)
+        {
+            var conversationGuid = Guid.Parse(conversationId);
+            var mistakes = new List<Domain.Entities.Mistake>();
+            var response = db.vw_MistakeMadeSummary.Where(m => m.ConversationId == conversationGuid);
+            return Mapper.Map(response, mistakes);
+        }
+
+        public List<Domain.Entities.Mistake> GetAllPraiseByConvoId(string conversationId)
+        {
+            var conversationGuid = Guid.Parse(conversationId);
+            var mistakes = new List<Domain.Entities.Mistake>();
+            var response = db.vw_MistakeMadeSummary.Where(m => m.ConversationId == conversationGuid);
+            return Mapper.Map(response, mistakes);
+        }
     }
 }

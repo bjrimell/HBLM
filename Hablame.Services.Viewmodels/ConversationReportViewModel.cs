@@ -10,5 +10,9 @@ namespace Hablame.Services.Viewmodels
     public class ConversationReportViewModel
     {
         public ConversationSummary Conversation { get; set; }
+
+        public List<Mistake> MistakeList { get; set; }
+
+        public List<Mistake> PraiseList { get; set; }
     }
 }
