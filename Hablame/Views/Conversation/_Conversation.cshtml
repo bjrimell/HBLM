@@ -9,7 +9,7 @@
                 <h1><span class="glyphicon glyphicon-user"></span></h1>
                 <h4><strong>@Model.Student.Forename @Model.Student.Surname</strong></h4>
                 <h5><strong>Teacher:</strong> @Model.Teacher.Forename @Model.Teacher.Surname</h5>
-                <h5><strong>Language:</strong></h5>
+                <h5><strong>Language:</strong> @Model.Language.Name</h5>
                 <h5><strong>Start Time:</strong>@Model.StartDateTime.ToShortTimeString()</h5>
                 <h5><strong>Current duration:</strong> @Model.DurationMinutes minutes</h5>
                 <h5><strong>Conversation ID:</strong> @Model.ConversationId</h5>

@@ -12,5 +12,7 @@ namespace Hablame.Services
     {
         List<Language> GetAllLanguages();
         List<SelectListItem> GetLanguageSelectList();
+
+        Language GetLanguageById(Guid languageGuid);
     }
 }

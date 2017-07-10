@@ -11,7 +11,8 @@ namespace Hablame.Services
 {
     public interface IConversationService
     {
-        ConversationViewModel CreateConversationViewModel(Guid studentIdstring, string mistakeTypeConfigurationId);
+        string SetupNewConversation(string teacherId, string studentId, string languageId, string mistakeTypeConfigurationId);
+        ConversationViewModel CreateConversationViewModel(string conversationId);
 
         ConversationViewModel RecreateConversationViewModel(Guid conversationId, string spokenValue, string correctValue);
 

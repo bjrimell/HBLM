@@ -30,9 +30,9 @@ namespace Hablame.Controllers
         }
 
         [HttpGet]
-        public ActionResult StartConversation(Guid studentId, string mistakeTypeConfigurationId)
+        public ActionResult StartConversation(string conversationId)
         {
-            var viewModel = conversationService.CreateConversationViewModel(studentId, mistakeTypeConfigurationId);
+            var viewModel = conversationService.CreateConversationViewModel(conversationId);
             return this.PartialView("_Conversation", viewModel);
         }
 
@@ -81,10 +81,10 @@ namespace Hablame.Controllers
         [HttpPost]
         public ActionResult SetupConversation(string teacherId, string studentId, string languageId, string mistakeTypeConfigId)
         {
-            var hey = true;
+            var newConversationId = this.conversationService.SetupNewConversation(teacherId, studentId, languageId, mistakeTypeConfigId);
 
+            Response.Redirect("/conversation?conversationId=" + newConversationId);
             return null;
-
         }
     }
 }

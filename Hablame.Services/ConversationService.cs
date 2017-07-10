@@ -27,39 +27,38 @@ namespace Hablame.Services
             this.mistakeRepository = mistakeRepository;
             this.conversationRepository = conversationRepository;
         }
-        public ConversationViewModel CreateConversationViewModel(Guid studentId, string mistakeTypeConfigurationId)
+
+        public string SetupNewConversation(string teacherId, string studentId, string languageId, string mistakeTypeConfigurationId)
         {
             // TODO: Make this current logged-in user
-            var currentUserId = new Guid("a3250996-fa99-4299-b44a-8fb0be5386e5");
-            var student = this.friendService.GetUserById(studentId);
+            var student = this.friendService.GetUserById(Guid.Parse(studentId));
 
-            // TODO: Make this be the selected language when the convo was initiated
-            var language = new Language
-            {
-                Id = Guid.Parse("f4e4b27d-eb24-43de-b9d7-f67a73ae83f8"),
-                Name = "English",
-                Family = "Germanic"
-            };
-
-            //var mistakeTypeOptionConfigurationId = this.CreateMistakeTypeOptionsConfig(currentUserId);
+            var language = this.languageService.GetLanguageById(Guid.Parse(languageId));
 
             var conversation = new Conversation
             {
                 Id = Guid.NewGuid(),
-                TeacherId = currentUserId,
-                StudentId = studentId,
+                TeacherId = Guid.Parse(teacherId),
+                StudentId = Guid.Parse(studentId),
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now,
-                LanguageId = Guid.Parse("f4e4b27d-eb24-43de-b9d7-f67a73ae83f8"), //English
+                LanguageId = Guid.Parse(languageId),
                 MistakeTypeOptionsConfigId = Guid.Parse(mistakeTypeConfigurationId)
             };
 
-            var convoId = this.conversationRepository.CreateNewConversation(conversation);
+            return this.conversationRepository.CreateNewConversation(conversation); // returns the new ConversationID
+        }
+
+        public ConversationViewModel CreateConversationViewModel(string conversationId)
+        {
+            var conversation = this.conversationRepository.RetrieveConversation(Guid.Parse(conversationId));
+            var student = this.friendService.GetUserById(conversation.StudentId);
+            var language = this.languageService.GetLanguageById(conversation.LanguageId);
 
             var viewModel = new ConversationViewModel
             {
-                ConversationId = Guid.Parse(convoId),
-                Teacher = this.friendService.GetUserById(currentUserId),
+                ConversationId = Guid.Parse(conversationId),
+                Teacher = this.friendService.GetUserById(conversation.TeacherId),
                 Student = student,
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now,

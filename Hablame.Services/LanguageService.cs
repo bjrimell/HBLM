@@ -49,5 +49,11 @@ namespace Hablame.Services
             }
             return items;
         }
+
+        public Language GetLanguageById(Guid languageGuid)
+        {
+            var thisLanguage = this.GetAllLanguages().Where(m => m.Id == languageGuid).FirstOrDefault();
+            return thisLanguage;
+        }
     }
 }
