@@ -1,0 +1,35 @@
+﻿@model Hablame.Services.Viewmodels.SetupConversationViewModel
+
+Setup Convo partial for teacher with ID @Model.TeacherId
+
+<br />
+
+Friends list:
+
+<form method="post">
+    <div class="form-group">
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="email">Select Student:</label>
+                @Html.DropDownList("studentId", Model.FriendsSelectList, new { @class = "btn btn-default dropdown-toggle" })
+            </div>
+
+            <div class="form-group">
+                <label for="email">Select Language:</label>
+                @Html.DropDownList("languageId", Model.LanguageSelectList, new { @class = "btn btn-default dropdown-toggle" })
+            </div>
+
+            <div class="form-group">
+                <label for="email">Select Configuration:</label>
+                @Html.DropDownList("mistakeTypeConfigId", Model.MistaketypeConfigSelectList, new { @class = "btn btn-default dropdown-toggle" })
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+
+
+
+
+&mistakeTypeConfigurationId=76195390-374A-4F0A-B075-526FFAF82B2D

@@ -8,22 +8,26 @@ using Hablame.Services.Viewmodels;
 using Hablame.Repositories;
 using Hablame.Domain.Entities;
 
+using System.Web.Mvc;
+
 namespace Hablame.Services
 {
     public class ConversationService : IConversationService
     {
 
         private readonly IFriendService friendService;
+        private readonly ILanguageService languageService;
         private readonly IMistakeRepository mistakeRepository;
         private readonly IConversationRepository conversationRepository;
 
-        public ConversationService(IFriendService friendService, IMistakeRepository mistakeRepository, IConversationRepository conversationRepository)
+        public ConversationService(IFriendService friendService, ILanguageService languageService, IMistakeRepository mistakeRepository, IConversationRepository conversationRepository)
         {
             this.friendService = friendService;
+            this.languageService = languageService;
             this.mistakeRepository = mistakeRepository;
             this.conversationRepository = conversationRepository;
         }
-        public ConversationViewModel CreateConversationViewModel(Guid studentId)
+        public ConversationViewModel CreateConversationViewModel(Guid studentId, string mistakeTypeConfigurationId)
         {
             // TODO: Make this current logged-in user
             var currentUserId = new Guid("a3250996-fa99-4299-b44a-8fb0be5386e5");
@@ -37,7 +41,7 @@ namespace Hablame.Services
                 Family = "Germanic"
             };
 
-            var mistakeTypeOptionConfigurationId = this.CreateMistakeTypeOptionsConfig(currentUserId);
+            //var mistakeTypeOptionConfigurationId = this.CreateMistakeTypeOptionsConfig(currentUserId);
 
             var conversation = new Conversation
             {
@@ -47,7 +51,7 @@ namespace Hablame.Services
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now,
                 LanguageId = Guid.Parse("f4e4b27d-eb24-43de-b9d7-f67a73ae83f8"), //English
-                MistakeTypeOptionsConfigId = mistakeTypeOptionConfigurationId
+                MistakeTypeOptionsConfigId = Guid.Parse(mistakeTypeConfigurationId)
             };
 
             var convoId = this.conversationRepository.CreateNewConversation(conversation);
@@ -142,6 +146,26 @@ namespace Hablame.Services
             return viewModel;
         }
 
+        public SetupConversationViewModel SetupConversationViewModel(string teacherId)
+        {
+            var teacherGuid = Guid.Parse(teacherId);
+
+            var languageList = this.languageService.GetAllLanguages();
+
+
+            var viewModel = new SetupConversationViewModel()
+            {
+                FriendsList = this.friendService.GetFriendList(teacherGuid),
+                FriendsSelectList = this.friendService.GetFriendSelectList(teacherGuid),
+                MistakeTypeConfigurationList = this.conversationRepository.GetAvailableMistakeTypeSettings(teacherGuid),
+                LanguageSelectList = this.languageService.GetLanguageSelectList(),
+                MistaketypeConfigSelectList = this.GetAvailableMistakeTypeSelectList(teacherGuid),
+                LanguageList = languageList
+            };
+
+            return viewModel;
+        }
+
         private ConversationConfiguration CreateConversationConfig(string conversationId, string teacherId, string mistakeTypeOptionsConfigId)
         {
             var teacherGuid = Guid.Parse(teacherId);
@@ -205,6 +229,23 @@ namespace Hablame.Services
             this.conversationRepository.CreateNewMistakeTypeConfig(mistakeTypeConfiguration);
 
             return mistakeTypeConfiguration.Id;
+        }
+
+        private List<SelectListItem> GetAvailableMistakeTypeSelectList(Guid teacherGuid)
+        {
+            var allMistakeTypes = this.conversationRepository.GetAvailableMistakeTypeSettings(teacherGuid);
+
+            var items = new List<SelectListItem>();
+
+            foreach (var item in allMistakeTypes)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.Id.ToString()
+                });
+            }
+            return items;
         }
     }
 }

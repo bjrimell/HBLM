@@ -92,6 +92,7 @@ D:\Code\priv\language\Hablame\Hablame\bin\Hablame.Domain.dll
 D:\Code\priv\language\Hablame\Hablame\bin\Hablame.Domain.pdb
 D:\Code\priv\language\Hablame\Hablame\bin\Hablame.Repositories.dll
 D:\Code\priv\language\Hablame\Hablame\bin\Hablame.Repositories.pdb
+D:\Code\priv\language\HBLM\Hablame\obj\Debug\Hablame.csprojResolveAssemblyReference.cache
 D:\Code\priv\language\HBLM\Hablame\bin\ApplicationInsights.config
 D:\Code\priv\language\HBLM\Hablame\bin\roslyn\csc.exe
 D:\Code\priv\language\HBLM\Hablame\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -161,8 +162,8 @@ D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.AI.Web.xml
 D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.AI.WindowsServer.xml
 D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.ApplicationInsights.xml
 D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Code\priv\language\HBLM\Hablame\bin\System.Web.Helpers.xml
 D:\Code\priv\language\HBLM\Hablame\bin\System.Web.Mvc.xml
+D:\Code\priv\language\HBLM\Hablame\bin\System.Web.Helpers.xml
 D:\Code\priv\language\HBLM\Hablame\bin\System.Web.Optimization.xml
 D:\Code\priv\language\HBLM\Hablame\bin\System.Web.Razor.xml
 D:\Code\priv\language\HBLM\Hablame\bin\System.Web.WebPages.xml
@@ -185,6 +186,5 @@ D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.Owin.Security.Google.xml
 D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Code\priv\language\HBLM\Hablame\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Code\priv\language\HBLM\Hablame\bin\AutoMapper.xml
-D:\Code\priv\language\HBLM\Hablame\obj\Debug\Hablame.csprojResolveAssemblyReference.cache
 D:\Code\priv\language\HBLM\Hablame\obj\Debug\Hablame.dll
 D:\Code\priv\language\HBLM\Hablame\obj\Debug\Hablame.pdb
