@@ -92,6 +92,37 @@
     <Property Name="Forename" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PremiumAccount" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_ConversationSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_ConversationSummary">
+    <Key>
+      <PropertyRef Name="StartDateTime" />
+      <PropertyRef Name="StudentForename" />
+      <PropertyRef Name="StudentSurname" />
+      <PropertyRef Name="TeacherForename" />
+      <PropertyRef Name="TeacherSurname" />
+      <PropertyRef Name="DurationMinutes" />
+      <PropertyRef Name="ConversationId" />
+      <PropertyRef Name="LanguageId" />
+      <PropertyRef Name="MistakeTypeOptionsConfigId" />
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+    <Property Name="StudentForename" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="StudentSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TeacherForename" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TeacherSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" />
+    <Property Name="ConfigurationName" Type="varchar" MaxLength="50" />
+    <Property Name="DurationMinutes" Type="int" Nullable="false" />
+    <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MistakeTypeOptionsConfigId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TeacherId" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_MistakeMadeSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -208,6 +239,23 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     <EntitySet Name="MistakeType" EntityType="Self.MistakeType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MistakeTypeConfiguration" EntityType="Self.MistakeTypeConfiguration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_ConversationSummary" EntityType="Self.vw_ConversationSummary" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_ConversationSummary].[StartDateTime] AS [StartDateTime], 
+    [vw_ConversationSummary].[StudentForename] AS [StudentForename], 
+    [vw_ConversationSummary].[StudentSurname] AS [StudentSurname], 
+    [vw_ConversationSummary].[TeacherForename] AS [TeacherForename], 
+    [vw_ConversationSummary].[TeacherSurname] AS [TeacherSurname], 
+    [vw_ConversationSummary].[Language] AS [Language], 
+    [vw_ConversationSummary].[ConfigurationName] AS [ConfigurationName], 
+    [vw_ConversationSummary].[DurationMinutes] AS [DurationMinutes], 
+    [vw_ConversationSummary].[ConversationId] AS [ConversationId], 
+    [vw_ConversationSummary].[LanguageId] AS [LanguageId], 
+    [vw_ConversationSummary].[MistakeTypeOptionsConfigId] AS [MistakeTypeOptionsConfigId], 
+    [vw_ConversationSummary].[StudentId] AS [StudentId], 
+    [vw_ConversationSummary].[TeacherId] AS [TeacherId]
+    FROM [dbo].[vw_ConversationSummary] AS [vw_ConversationSummary]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="vw_MistakeMadeSummary" EntityType="Self.vw_MistakeMadeSummary" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [vw_MistakeMadeSummary].[MistakeId] AS [MistakeId], 

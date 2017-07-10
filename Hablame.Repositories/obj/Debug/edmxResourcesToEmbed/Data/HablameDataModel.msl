@@ -99,6 +99,7 @@
     <EntitySetMapping Name="People">
       <EntityTypeMapping TypeName="HablameModel.Person">
         <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="PremiumAccount" ColumnName="PremiumAccount" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
           <ScalarProperty Name="Surname" ColumnName="Surname" />
           <ScalarProperty Name="Forename" ColumnName="Forename" />
@@ -181,6 +182,25 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_ConversationSummary">
+      <EntityTypeMapping TypeName="HablameModel.vw_ConversationSummary">
+        <MappingFragment StoreEntitySet="vw_ConversationSummary">
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="TeacherSurname" ColumnName="TeacherSurname" />
+          <ScalarProperty Name="TeacherForename" ColumnName="TeacherForename" />
+          <ScalarProperty Name="StudentSurname" ColumnName="StudentSurname" />
+          <ScalarProperty Name="StudentForename" ColumnName="StudentForename" />
+          <ScalarProperty Name="MistakeTypeOptionsConfigId" ColumnName="MistakeTypeOptionsConfigId" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
+          <ScalarProperty Name="ConfigurationName" ColumnName="ConfigurationName" />
+          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -29,6 +29,7 @@
     <EntitySet Name="vw_MistakeMadeSummary" EntityType="HablameModel.vw_MistakeMadeSummary" />
     <EntitySet Name="MistakeAssignedMistakeTypes" EntityType="HablameModel.MistakeAssignedMistakeType" />
     <EntitySet Name="MistakeTypeConfigurations" EntityType="HablameModel.MistakeTypeConfiguration" />
+    <EntitySet Name="vw_ConversationSummary" EntityType="HablameModel.vw_ConversationSummary" />
   </EntityContainer>
   <ComplexType Name="getTopMistakesByLanguageId_Result">
     <Property Type="Guid" Name="ConversationId" Nullable="false" />
@@ -123,6 +124,7 @@
     <Property Name="Forename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PremiumAccount" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="vw_Mistakes">
     <Key>
@@ -231,5 +233,33 @@
     <Property Name="FirstMistakeTypeId" Type="Guid" Nullable="false" />
     <Property Name="SecondMistakeTypeId" Type="Guid" Nullable="false" />
     <Property Name="ThirdMistakeTypeId" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_ConversationSummary">
+    <Key>
+      <PropertyRef Name="StartDateTime" />
+      <PropertyRef Name="DurationMinutes" />
+      <PropertyRef Name="LanguageId" />
+      <PropertyRef Name="MistakeTypeOptionsConfigId" />
+      <PropertyRef Name="StudentForename" />
+      <PropertyRef Name="StudentSurname" />
+      <PropertyRef Name="TeacherForename" />
+      <PropertyRef Name="TeacherSurname" />
+      <PropertyRef Name="ConversationId" />
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ConfigurationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DurationMinutes" Type="Int32" Nullable="false" />
+    <Property Name="LanguageId" Type="Guid" Nullable="false" />
+    <Property Name="MistakeTypeOptionsConfigId" Type="Guid" Nullable="false" />
+    <Property Name="StudentForename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StudentSurname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TeacherForename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TeacherSurname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ConversationId" Type="Guid" Nullable="false" />
+    <Property Name="StudentId" Type="Guid" Nullable="false" />
+    <Property Name="TeacherId" Type="Guid" Nullable="false" />
   </EntityType>
 </Schema>

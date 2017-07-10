@@ -2,9 +2,9 @@
 
 <ul>
     @{ 
-        foreach (var item in Model.Conversations)
+        foreach (var item in Model.ConversationSummaries)
         {
-            <li>Conversation in LANGUAGE with @item.StudentId on @item.StartDateTime <a href="">View Report</a></li>
+            <li>Conversation in @item.Language with @item.StudentForename @item.StudentSurname on @item.StartDateTime <a href="Report?conversationId=@item.ConversationId">View Report</a></li>
         }
     }
 </ul>

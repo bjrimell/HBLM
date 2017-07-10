@@ -97,6 +97,37 @@
           <Property Name="Forename" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PremiumAccount" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_ConversationSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_ConversationSummary">
+          <Key>
+            <PropertyRef Name="StartDateTime" />
+            <PropertyRef Name="StudentForename" />
+            <PropertyRef Name="StudentSurname" />
+            <PropertyRef Name="TeacherForename" />
+            <PropertyRef Name="TeacherSurname" />
+            <PropertyRef Name="DurationMinutes" />
+            <PropertyRef Name="ConversationId" />
+            <PropertyRef Name="LanguageId" />
+            <PropertyRef Name="MistakeTypeOptionsConfigId" />
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="StudentForename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudentSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TeacherForename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TeacherSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" />
+          <Property Name="ConfigurationName" Type="varchar" MaxLength="50" />
+          <Property Name="DurationMinutes" Type="int" Nullable="false" />
+          <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MistakeTypeOptionsConfigId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeacherId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_MistakeMadeSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -213,6 +244,23 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySet Name="MistakeType" EntityType="Self.MistakeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MistakeTypeConfiguration" EntityType="Self.MistakeTypeConfiguration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_ConversationSummary" EntityType="Self.vw_ConversationSummary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_ConversationSummary].[StartDateTime] AS [StartDateTime], 
+    [vw_ConversationSummary].[StudentForename] AS [StudentForename], 
+    [vw_ConversationSummary].[StudentSurname] AS [StudentSurname], 
+    [vw_ConversationSummary].[TeacherForename] AS [TeacherForename], 
+    [vw_ConversationSummary].[TeacherSurname] AS [TeacherSurname], 
+    [vw_ConversationSummary].[Language] AS [Language], 
+    [vw_ConversationSummary].[ConfigurationName] AS [ConfigurationName], 
+    [vw_ConversationSummary].[DurationMinutes] AS [DurationMinutes], 
+    [vw_ConversationSummary].[ConversationId] AS [ConversationId], 
+    [vw_ConversationSummary].[LanguageId] AS [LanguageId], 
+    [vw_ConversationSummary].[MistakeTypeOptionsConfigId] AS [MistakeTypeOptionsConfigId], 
+    [vw_ConversationSummary].[StudentId] AS [StudentId], 
+    [vw_ConversationSummary].[TeacherId] AS [TeacherId]
+    FROM [dbo].[vw_ConversationSummary] AS [vw_ConversationSummary]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_MistakeMadeSummary" EntityType="Self.vw_MistakeMadeSummary" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_MistakeMadeSummary].[MistakeId] AS [MistakeId], 
@@ -302,6 +350,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySet Name="vw_MistakeMadeSummary" EntityType="HablameModel.vw_MistakeMadeSummary" />
           <EntitySet Name="MistakeAssignedMistakeTypes" EntityType="HablameModel.MistakeAssignedMistakeType" />
           <EntitySet Name="MistakeTypeConfigurations" EntityType="HablameModel.MistakeTypeConfiguration" />
+          <EntitySet Name="vw_ConversationSummary" EntityType="HablameModel.vw_ConversationSummary" />
         </EntityContainer>
         <ComplexType Name="getTopMistakesByLanguageId_Result">
           <Property Type="Guid" Name="ConversationId" Nullable="false" />
@@ -396,6 +445,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <Property Name="Forename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PremiumAccount" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="vw_Mistakes">
           <Key>
@@ -505,6 +555,34 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <Property Name="SecondMistakeTypeId" Type="Guid" Nullable="false" />
           <Property Name="ThirdMistakeTypeId" Type="Guid" Nullable="false" />
         </EntityType>
+        <EntityType Name="vw_ConversationSummary">
+          <Key>
+            <PropertyRef Name="StartDateTime" />
+            <PropertyRef Name="DurationMinutes" />
+            <PropertyRef Name="LanguageId" />
+            <PropertyRef Name="MistakeTypeOptionsConfigId" />
+            <PropertyRef Name="StudentForename" />
+            <PropertyRef Name="StudentSurname" />
+            <PropertyRef Name="TeacherForename" />
+            <PropertyRef Name="TeacherSurname" />
+            <PropertyRef Name="ConversationId" />
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConfigurationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DurationMinutes" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Guid" Nullable="false" />
+          <Property Name="MistakeTypeOptionsConfigId" Type="Guid" Nullable="false" />
+          <Property Name="StudentForename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudentSurname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TeacherForename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TeacherSurname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConversationId" Type="Guid" Nullable="false" />
+          <Property Name="StudentId" Type="Guid" Nullable="false" />
+          <Property Name="TeacherId" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -609,6 +687,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySetMapping Name="People">
             <EntityTypeMapping TypeName="HablameModel.Person">
               <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PremiumAccount" ColumnName="PremiumAccount" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Forename" ColumnName="Forename" />
@@ -691,6 +770,25 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_ConversationSummary">
+            <EntityTypeMapping TypeName="HablameModel.vw_ConversationSummary">
+              <MappingFragment StoreEntitySet="vw_ConversationSummary">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="TeacherSurname" ColumnName="TeacherSurname" />
+                <ScalarProperty Name="TeacherForename" ColumnName="TeacherForename" />
+                <ScalarProperty Name="StudentSurname" ColumnName="StudentSurname" />
+                <ScalarProperty Name="StudentForename" ColumnName="StudentForename" />
+                <ScalarProperty Name="MistakeTypeOptionsConfigId" ColumnName="MistakeTypeOptionsConfigId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
+                <ScalarProperty Name="ConfigurationName" ColumnName="ConfigurationName" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

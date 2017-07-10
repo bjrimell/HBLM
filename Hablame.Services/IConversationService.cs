@@ -27,5 +27,7 @@ namespace Hablame.Services
         SetupConversationViewModel SetupConversationViewModel(string teacherId);
 
         RecentConversationsViewModel SetupRecentConversationsViewModel(string teacherId);
+
+        ConversationReportViewModel SetupConversationReportViewModel(string conversationId);
     }
 }

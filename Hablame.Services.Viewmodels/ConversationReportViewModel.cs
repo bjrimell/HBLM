@@ -7,8 +7,8 @@ using Hablame.Domain.Entities;
 
 namespace Hablame.Services.Viewmodels
 {
-    public class RecentConversationsViewModel
+    public class ConversationReportViewModel
     {
-        public List<ConversationSummary> ConversationSummaries { get; set; }
+        public ConversationSummary Conversation { get; set; }
     }
 }

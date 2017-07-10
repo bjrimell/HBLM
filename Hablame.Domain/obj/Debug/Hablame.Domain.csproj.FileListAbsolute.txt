@@ -15,3 +15,4 @@ D:\Code\priv\language\HBLM\Hablame.Domain\bin\Debug\Castle.Core.xml
 D:\Code\priv\language\HBLM\Hablame.Domain\bin\Debug\Castle.Windsor.xml
 D:\Code\priv\language\HBLM\Hablame.Domain\obj\Debug\Hablame.Domain.dll
 D:\Code\priv\language\HBLM\Hablame.Domain\obj\Debug\Hablame.Domain.pdb
+D:\Code\priv\language\HBLM\Hablame.Domain\obj\Debug\Hablame.Domain.csprojResolveAssemblyReference.cache

@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConversationReportViewModel.cs" />
     <Compile Include="ConversationSettingsViewModel.cs" />
     <Compile Include="ConversationViewModel.cs" />
     <Compile Include="FriendListViewModel.cs" />

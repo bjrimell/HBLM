@@ -19,6 +19,9 @@ namespace Hablame.Repositories.Mapping
             Mapper.Initialize(
             cfg =>
             {
+                // Conversation Reports Mappings
+                cfg.CreateMap<Data.vw_ConversationSummary, Domain.Entities.ConversationSummary>();
+
                 // Conversation Mappings
                 cfg.CreateMap<Domain.Entities.Conversation, Data.Conversation>();
                 cfg.CreateMap<Data.Conversation, Domain.Entities.Conversation>();

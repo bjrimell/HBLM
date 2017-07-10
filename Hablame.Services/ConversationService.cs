@@ -174,7 +174,17 @@ namespace Hablame.Services
         {
             var viewModel = new RecentConversationsViewModel
             {
-                Conversations = this.conversationRepository.GetRecentConversationsForTeacher(teacherId)
+                ConversationSummaries = this.conversationRepository.GetRecentConversationSummaryForTeacher(teacherId)
+            };
+
+            return viewModel;
+        }
+
+        public ConversationReportViewModel SetupConversationReportViewModel(string conversationId)
+        {
+            var viewModel = new ConversationReportViewModel
+            {
+                Conversation = this.conversationRepository.GetConversationReport(conversationId)
             };
 
             return viewModel;

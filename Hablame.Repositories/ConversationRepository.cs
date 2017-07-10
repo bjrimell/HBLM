@@ -86,13 +86,22 @@ namespace Hablame.Repositories
             }
         }
 
-        public List<Domain.Entities.Conversation> GetRecentConversationsForTeacher(string teacherId)
+        public List<ConversationSummary> GetRecentConversationSummaryForTeacher(string teacherId)
         {
             var teacherGuid = Guid.Parse(teacherId);
-            var dbResponse = db.Conversations.Where(m => m.TeacherId == teacherGuid).ToList();
-            var convos = new List<Domain.Entities.Conversation>();
+            var dbResponse = db.vw_ConversationSummary.Where(m => m.TeacherId == teacherGuid).ToList().OrderByDescending(m => m.StartDateTime).Take(10);
+            var convos = new List<ConversationSummary>();
 
             return Mapper.Map(dbResponse, convos);
+        }
+
+        public ConversationSummary GetConversationReport(string conversationId)
+        {
+            var conversationGuid = Guid.Parse(conversationId);
+            var dbResponse = db.vw_ConversationSummary.Where(m => m.ConversationId == conversationGuid).FirstOrDefault();
+            var conversationReport = new ConversationSummary();
+
+            return Mapper.Map(dbResponse, conversationReport);
         }
     }
 }
