@@ -62,6 +62,14 @@ namespace Hablame.Repositories
             return Mapper.Map(dbResponse, configurations);
         }
 
+        public Domain.Entities.MistakeTypeConfiguration GetConversationMistakeTypeSettings(Guid configId)
+        {
+            var dbResponse = db.MistakeTypeConfigurations.Where(m => m.Id == configId).FirstOrDefault();
+            var config = new Domain.Entities.MistakeTypeConfiguration();
+
+            return Mapper.Map(dbResponse, config);
+        }
+
         public void CreateNewMistakeTypeConfig(Domain.Entities.MistakeTypeConfiguration mistakeTypeConfiguration)
         {
             var dbmistakeTypeConfig = new Data.MistakeTypeConfiguration();

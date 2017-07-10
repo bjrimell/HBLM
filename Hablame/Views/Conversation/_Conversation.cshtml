@@ -12,12 +12,11 @@
                 <h5><strong>Language:</strong> @Model.Language.Name</h5>
                 <h5><strong>Start Time:</strong>@Model.StartDateTime.ToShortTimeString()</h5>
                 <h5><strong>Current duration:</strong> @Model.DurationMinutes minutes</h5>
-                <h5><strong>Conversation ID:</strong> @Model.ConversationId</h5>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-cog"></span> Conversation Settings</button>
+                <h5><strong>Configuration:</strong> @Model.MistakeTypeConfig.Name </h5>
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"><h6><span class="glyphicon glyphicon-cog"></span></h6></button>
                 <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-pause"></span></button>
                 <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-play"></span></button>
                 <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-stop"></span></button>
-                RUNNING
             </div>
 
             <div class="panel panel-primary">

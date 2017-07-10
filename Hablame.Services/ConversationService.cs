@@ -51,13 +51,15 @@ namespace Hablame.Services
 
         public ConversationViewModel CreateConversationViewModel(string conversationId)
         {
-            var conversation = this.conversationRepository.RetrieveConversation(Guid.Parse(conversationId));
+            var conversationGuid = Guid.Parse(conversationId);
+            var conversation = this.conversationRepository.RetrieveConversation(conversationGuid);
             var student = this.friendService.GetUserById(conversation.StudentId);
             var language = this.languageService.GetLanguageById(conversation.LanguageId);
+            var mistakeTypeConfig = this.conversationRepository.GetConversationMistakeTypeSettings(conversation.MistakeTypeOptionsConfigId);
 
             var viewModel = new ConversationViewModel
             {
-                ConversationId = Guid.Parse(conversationId),
+                ConversationId = conversationGuid,
                 Teacher = this.friendService.GetUserById(conversation.TeacherId),
                 Student = student,
                 StartDateTime = DateTime.Now,
@@ -68,7 +70,8 @@ namespace Hablame.Services
                 MostCommonMistakesForStudent = this.mistakeRepository.GetTopMistakesForStudent(student.Id),
                 Language = language,
                 MistakeTypeOptions = this.GetMistakeTypeOptions(conversation.LanguageId),
-                MistakeTypeOptionsConfigId = conversation.MistakeTypeOptionsConfigId
+                MistakeTypeOptionsConfigId = conversation.MistakeTypeOptionsConfigId,
+                MistakeTypeConfig = mistakeTypeConfig
             };
 
             return viewModel;
@@ -78,6 +81,7 @@ namespace Hablame.Services
         {
             var savedConversation = this.conversationRepository.RetrieveConversation(conversationId);
             var student = this.friendService.GetUserById(savedConversation.StudentId);
+            var mistakeTypeConfig = this.conversationRepository.GetConversationMistakeTypeSettings(savedConversation.MistakeTypeOptionsConfigId);
 
             var viewModel = new ConversationViewModel
             {
@@ -92,7 +96,8 @@ namespace Hablame.Services
                 EndDateTime = savedConversation.EndDateTime,
                 Language = savedConversation.Language,
                 MistakeTypeOptions = this.GetMistakeTypeOptions(savedConversation.LanguageId),
-                MistakeTypeOptionsConfigId = savedConversation.MistakeTypeOptionsConfigId
+                MistakeTypeOptionsConfigId = savedConversation.MistakeTypeOptionsConfigId,
+                MistakeTypeConfig = mistakeTypeConfig
             };
 
             return viewModel;

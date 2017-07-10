@@ -20,6 +20,7 @@ namespace Hablame.Services.Viewmodels
         public Guid ConversationId { get; set; }
 
         public Guid MistakeTypeOptionsConfigId { get; set; }
+
         public User Teacher { get; set; }
 
         public User Student { get; set; }
@@ -49,6 +50,8 @@ namespace Hablame.Services.Viewmodels
         public bool PraiseAdded { get; set; }
 
         public MistakeMade NewMistakeMade { get; set; }
+
+        public MistakeTypeConfiguration MistakeTypeConfig { get; set; }
 
         public List<MistakeTypeOptions> MistakeTypeOptions {get; set;}
 
