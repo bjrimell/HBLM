@@ -86,5 +86,13 @@ namespace Hablame.Controllers
             Response.Redirect("/conversation?conversationId=" + newConversationId);
             return null;
         }
+
+        public ActionResult RecentConversations(string teacherId)
+        {
+            var viewModel = this.conversationService.SetupRecentConversationsViewModel(teacherId);
+
+            return this.PartialView("_RecentConversations", viewModel);
+        }
+
     }
 }

@@ -170,6 +170,16 @@ namespace Hablame.Services
             return viewModel;
         }
 
+        public RecentConversationsViewModel SetupRecentConversationsViewModel(string teacherId)
+        {
+            var viewModel = new RecentConversationsViewModel
+            {
+                Conversations = this.conversationRepository.GetRecentConversationsForTeacher(teacherId)
+            };
+
+            return viewModel;
+        }
+
         private ConversationConfiguration CreateConversationConfig(string conversationId, string teacherId, string mistakeTypeOptionsConfigId)
         {
             var teacherGuid = Guid.Parse(teacherId);

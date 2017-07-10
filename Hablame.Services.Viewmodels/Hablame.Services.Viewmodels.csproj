@@ -80,6 +80,7 @@
     <Compile Include="ConversationViewModel.cs" />
     <Compile Include="FriendListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecentConversationsViewModel.cs" />
     <Compile Include="SetupConversationViewModel.cs" />
     <Compile Include="TypedMistakeViewModel.cs" />
   </ItemGroup>

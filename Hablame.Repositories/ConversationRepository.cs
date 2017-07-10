@@ -85,5 +85,14 @@ namespace Hablame.Repositories
             {
             }
         }
+
+        public List<Domain.Entities.Conversation> GetRecentConversationsForTeacher(string teacherId)
+        {
+            var teacherGuid = Guid.Parse(teacherId);
+            var dbResponse = db.Conversations.Where(m => m.TeacherId == teacherGuid).ToList();
+            var convos = new List<Domain.Entities.Conversation>();
+
+            return Mapper.Map(dbResponse, convos);
+        }
     }
 }

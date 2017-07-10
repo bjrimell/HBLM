@@ -25,5 +25,7 @@ namespace Hablame.Services
         ConversationSettingsViewModel SetupConvoSettingsViewModel(string conversationId, string teacherId, string mistakeTypeOptionsConfigId);
 
         SetupConversationViewModel SetupConversationViewModel(string teacherId);
+
+        RecentConversationsViewModel SetupRecentConversationsViewModel(string teacherId);
     }
 }

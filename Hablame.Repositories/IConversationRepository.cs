@@ -20,5 +20,7 @@ namespace Hablame.Repositories
         MistakeTypeConfiguration GetConversationMistakeTypeSettings(Guid configId);
 
         void CreateNewMistakeTypeConfig(MistakeTypeConfiguration mistakeTypeOptionsConfiguration);
+
+        List<Conversation> GetRecentConversationsForTeacher(string teacherId);
     }
 }

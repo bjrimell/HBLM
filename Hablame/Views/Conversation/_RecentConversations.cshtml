@@ -1,0 +1,12 @@
+﻿@model Hablame.Services.Viewmodels.RecentConversationsViewModel
+
+<ul>
+    @{ 
+        foreach (var item in Model.Conversations)
+        {
+            <li>Conversation in LANGUAGE with @item.StudentId on @item.StartDateTime <a href="">View Report</a></li>
+        }
+    }
+</ul>
+
+<button type="submit" class="btn btn-default">View All</button>
