@@ -209,13 +209,13 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr>
-                                        <th><span style="color:red" class="glyphicon glyphicon-comment"></span></th>
-                                        <th><span style="color:darkseagreen" class="glyphicon glyphicon-ok-sign"></span></th>
-                                        <th>G</th>
-                                        <th>V</th>
-                                        <th>P</th>
-                                        <th><span class="glyphicon glyphicon-time"></span></th>
-                                        <th>Action</th>
+                                        <th><span style="color:red;font-size: 25px" class="glyphicon glyphicon-comment"></span></th>
+                                        <th><span style="color:darkseagreen;font-size: 25px" class="glyphicon glyphicon-ok-sign"></span></th>
+                                        <th><span style="font-size: 25px">G</span></th>
+                                        <th><span style="font-size: 25px">V</span></th>
+                                        <th><span style="font-size: 25px">P</span></th>
+                                        <th><span class="glyphicon glyphicon-time" style="font-size: 25px"></span></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -242,7 +242,7 @@
                                                     <form method="post">
                                                         <input type="hidden" name="conversationId" id="conversationId-repeat-latestSessionMistakes" value="@Model.ConversationId" />
                                                         <input type="hidden" name="mistakeId" id="mistakeId-repeat-latestSessionMistakes" value="@mistakeMade.MistakeId" />
-                                                        <button type="submit" name="submit-repeat-repeat-latestSessionMistakes" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                                        <button type="submit" name="submit-repeat-repeat-latestSessionMistakes" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-repeat"></span></button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -255,13 +255,13 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr>
-                                        <th><span style="color:red" class="glyphicon glyphicon-comment"></span></th>
-                                        <th><span style="color:darkseagreen" class="glyphicon glyphicon-ok-sign"></span></th>
-                                        <th>G</th>
-                                        <th>V</th>
-                                        <th>P</th>
-                                        <th><span class="glyphicon glyphicon-signal"></span></th>
-                                        <th>Action</th>
+                                        <th><span style="color:red;font-size: 25px" class="glyphicon glyphicon-comment"></span></th>
+                                        <th><span style="color:darkseagreen;font-size: 25px" class="glyphicon glyphicon-ok-sign"></span></th>
+                                        <th><span style="font-size: 25px">G</span></th>
+                                        <th><span style="font-size: 25px">V</span></th>
+                                        <th><span style="font-size: 25px">P</span></th>
+                                        <th><span class="glyphicon glyphicon-signal" style="font-size: 25px"></span></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -269,8 +269,8 @@
                                         foreach (var mistake in Model.MostCommonSessionMistakes)
                                         {
                                             <tr>
-                                                <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
-                                                <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
+                                                <td>@mistake.SpokenValue</td>
+                                                <td>@mistake.CorrectValue</td>
                                                 <td> @if (mistake.IsGrammar) {<span class="glyphicon glyphicon-ok"></span>}else{ <span class="glyphicon glyphicon-remove"></span>}</td>
                                                 <td>@if (mistake.IsVocab){<span class="glyphicon glyphicon-ok"></span>}else {<span class="glyphicon glyphicon-remove"></span>}</td>
                                                 <td>@if (mistake.IsPronunciation){<span class="glyphicon glyphicon-ok"></span>}else{<span class="glyphicon glyphicon-remove"></span>}</td>
@@ -279,7 +279,7 @@
                                                     <form method="post">
                                                         <input type="hidden" name="conversationId" id="conversationId-repeat-mostCommonSessionMistakes" value="@Model.ConversationId" />
                                                         <input type="hidden" name="mistakeId" id="mistakeId-repeat-mostCommonSessionMistakes" value="@mistake.Id" />
-                                                        <button type="submit" name="submit-repeat-repeat-mostCommonSessionMistakes" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                                        <button type="submit" name="submit-repeat-repeat-mostCommonSessionMistakes" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-repeat"></span></button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -292,10 +292,13 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr>
-                                        <th><span style="color:red" class="glyphicon glyphicon-comment"></span></th>
-                                        <th><span style="color:darkseagreen" class="glyphicon glyphicon-ok-sign"></span></th>
-                                        <th><span class="glyphicon glyphicon-signal"></span></th>
-                                        <th>Action</th>
+                                        <th><span style="color:red;font-size: 25px" class="glyphicon glyphicon-comment"></span></th>
+                                        <th><span style="color:darkseagreen;font-size: 25px" class="glyphicon glyphicon-ok-sign"></span></th>
+                                        <th><span style="font-size: 25px">G</span></th>
+                                        <th><span style="font-size: 25px">V</span></th>
+                                        <th><span style="font-size: 25px">P</span></th>
+                                        <th><span class="glyphicon glyphicon-signal" style="font-size: 25px"></span></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -303,14 +306,26 @@
                                         foreach (var mistake in Model.MostCommonMistakesForStudent)
                                         {
                                             <tr>
-                                                <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
-                                                <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
+                                                <td>@mistake.SpokenValue</td>
+                                                <td>@mistake.CorrectValue</td>
+                                                <td> @if (mistake.IsGrammar)
+                                                {<span class="glyphicon glyphicon-ok"></span>}
+                                                else
+                                                { <span class="glyphicon glyphicon-remove"></span>}</td>
+                                                <td>@if (mistake.IsVocab)
+                                                {<span class="glyphicon glyphicon-ok"></span>}
+                                                else
+                                                {<span class="glyphicon glyphicon-remove"></span>}</td>
+                                                <td>@if (mistake.IsPronunciation)
+                                                {<span class="glyphicon glyphicon-ok"></span>}
+                                                else
+                                                {<span class="glyphicon glyphicon-remove"></span>}</td>
                                                 <td><span class="badge">@mistake.Count</span></td>
                                                 <td>
                                                     <form method="post">
                                                         <input type="hidden" name="conversationId" id="conversationId-repeat-mostCommonMistakesForStudent" value="@Model.ConversationId" />
                                                         <input type="hidden" name="mistakeId" id="mistakeId-repeat-mostCommonMistakesForStudent" value="@mistake.Id" />
-                                                        <button type="submit" name="submit-repeat-repeat-mostCommonMistakesForStudent" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                                        <button type="submit" name="submit-repeat-repeat-mostCommonMistakesForStudent" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-repeat"></span></button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -323,10 +338,13 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr>
-                                        <th><span style="color:red" class="glyphicon glyphicon-comment"></span></th>
-                                        <th><span style="color:darkseagreen" class="glyphicon glyphicon-ok-sign"></span></th>
-                                        <th><span class="glyphicon glyphicon-signal"></span></th>
-                                        <th>Action</th>
+                                        <th><span style="color:red;font-size: 25px" class="glyphicon glyphicon-comment"></span></th>
+                                        <th><span style="color:darkseagreen;font-size: 25px" class="glyphicon glyphicon-ok-sign"></span></th>
+                                        <th><span style="font-size: 25px">G</span></th>
+                                        <th><span style="font-size: 25px">V</span></th>
+                                        <th><span style="font-size: 25px">P</span></th>
+                                        <th><span class="glyphicon glyphicon-signal" style="font-size: 25px"></span></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -334,14 +352,26 @@
                                         foreach (var mistake in Model.TopGlobalMistakesForLanguage)
                                         {
                                             <tr>
-                                                <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
-                                                <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
+                                                <td>@mistake.SpokenValue</td>
+                                                <td>@mistake.CorrectValue</td>
+                                                <td> @if (mistake.IsGrammar)
+                                                {<span class="glyphicon glyphicon-ok"></span>}
+                                                else
+                                                { <span class="glyphicon glyphicon-remove"></span>}</td>
+                                                <td>@if (mistake.IsVocab)
+                                                {<span class="glyphicon glyphicon-ok"></span>}
+                                                else
+                                                {<span class="glyphicon glyphicon-remove"></span>}</td>
+                                                <td>@if (mistake.IsPronunciation)
+                                                {<span class="glyphicon glyphicon-ok"></span>}
+                                                else
+                                                {<span class="glyphicon glyphicon-remove"></span>}</td>
                                                 <td><span class="badge">@mistake.Count</span></td>
                                                 <td>
                                                     <form method="post">
                                                         <input type="hidden" name="conversationId" id="conversationId-repeat-topGlobalMistakesForLanguage" value="@Model.ConversationId" />
                                                         <input type="hidden" name="mistakeId" id="mistakeId-repeat-topGlobalMistakesForLanguage" value="@mistake.Id" />
-                                                        <button type="submit" name="submit-repeat-repeat-topGlobalMistakesForLanguage" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                                                        <button type="submit" name="submit-repeat-repeat-topGlobalMistakesForLanguage" id="submit-mistake-repeat" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-repeat"></span></button>
                                                     </form>
                                                 </td>
                                             </tr>
