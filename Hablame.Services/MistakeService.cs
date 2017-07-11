@@ -61,7 +61,7 @@ namespace Hablame.Services
             else
             {
                 // get all the user selected mistake types that can be applied to this mistake
-                var validMistakeTypesSelected = this.GenerateValidMistakeTypes(selectedMistakeTypes, rating);
+                var validMistakeTypesSelected = this.mistakeRepository.GetSelectedMistakeTypes(selectedMistakeTypes, rating);
 
                 // Create brand new mistake
                 var mistake = new Mistake
@@ -83,17 +83,6 @@ namespace Hablame.Services
                 this.mistakeRepository.CreateNewMistake(mistake, validMistakeTypesSelected);
                 return mistake.Id;
             }
-        }
-
-        private List<MistakeType> GenerateValidMistakeTypes(IEnumerable<string> selectedMistakeTypeIds, int rating)
-        {
-            //var validSelectedMistakeTypes = new List<MistakeType>();
-
-            return this.mistakeRepository.GetSelectedMistakeTypes(selectedMistakeTypeIds, rating);
-
-            //validSelectedMistakeTypes = selectedMistakeTypes.Where(m => m.MinimumRatingLevelVisibility <= rating && m.MaximumRatingLevelVisibility >= rating).ToList();
-
-            //return validSelectedMistakeTypes;
         }
     }
 }

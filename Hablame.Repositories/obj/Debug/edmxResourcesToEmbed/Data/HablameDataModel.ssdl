@@ -146,6 +146,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakeMadeSummary' does not have a
     <Property Name="IsGrammar" Type="bit" Nullable="false" />
     <Property Name="IsVocab" Type="bit" Nullable="false" />
     <Property Name="IsPronunciation" Type="bit" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Hablame.dbo.vw_Mistakes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -171,6 +172,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByConversation' does not ha
     <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CorrectValue" Type="nvarchar(max)" />
     <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" />
     <Property Name="Count" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
@@ -185,6 +187,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByLanguage' does not have a
     <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CorrectValue" Type="nvarchar(max)" />
     <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" />
     <Property Name="Count" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
@@ -199,6 +202,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CorrectValue" Type="nvarchar(max)" />
     <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" />
     <Property Name="Count" Type="int" />
   </EntityType>
   <Association Name="FK_Language_Family">
@@ -267,7 +271,8 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     [vw_MistakeMadeSummary].[DateTime] AS [DateTime], 
     [vw_MistakeMadeSummary].[IsGrammar] AS [IsGrammar], 
     [vw_MistakeMadeSummary].[IsVocab] AS [IsVocab], 
-    [vw_MistakeMadeSummary].[IsPronunciation] AS [IsPronunciation]
+    [vw_MistakeMadeSummary].[IsPronunciation] AS [IsPronunciation], 
+    [vw_MistakeMadeSummary].[IsPraise] AS [IsPraise]
     FROM [dbo].[vw_MistakeMadeSummary] AS [vw_MistakeMadeSummary]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="vw_Mistakes" EntityType="Self.vw_Mistakes" store:Type="Views" store:Schema="dbo">
@@ -284,6 +289,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     [vw_MistakesByConversation].[SpokenValue] AS [SpokenValue], 
     [vw_MistakesByConversation].[CorrectValue] AS [CorrectValue], 
     [vw_MistakesByConversation].[ConversationId] AS [ConversationId], 
+    [vw_MistakesByConversation].[IsPraise] AS [IsPraise], 
     [vw_MistakesByConversation].[Count] AS [Count]
     FROM [dbo].[vw_MistakesByConversation] AS [vw_MistakesByConversation]</DefiningQuery>
     </EntitySet>
@@ -293,6 +299,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     [vw_MistakesByLanguage].[SpokenValue] AS [SpokenValue], 
     [vw_MistakesByLanguage].[CorrectValue] AS [CorrectValue], 
     [vw_MistakesByLanguage].[LanguageId] AS [LanguageId], 
+    [vw_MistakesByLanguage].[IsPraise] AS [IsPraise], 
     [vw_MistakesByLanguage].[Count] AS [Count]
     FROM [dbo].[vw_MistakesByLanguage] AS [vw_MistakesByLanguage]</DefiningQuery>
     </EntitySet>
@@ -302,6 +309,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
     [vw_MistakesByStudent].[SpokenValue] AS [SpokenValue], 
     [vw_MistakesByStudent].[CorrectValue] AS [CorrectValue], 
     [vw_MistakesByStudent].[StudentId] AS [StudentId], 
+    [vw_MistakesByStudent].[IsPraise] AS [IsPraise], 
     [vw_MistakesByStudent].[Count] AS [Count]
     FROM [dbo].[vw_MistakesByStudent] AS [vw_MistakesByStudent]</DefiningQuery>
     </EntitySet>

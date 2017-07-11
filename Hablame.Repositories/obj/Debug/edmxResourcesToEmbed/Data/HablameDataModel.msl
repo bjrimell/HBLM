@@ -122,6 +122,7 @@
     <EntitySetMapping Name="vw_MistakesByConversation">
       <EntityTypeMapping TypeName="HablameModel.vw_MistakesByConversation">
         <MappingFragment StoreEntitySet="vw_MistakesByConversation">
+          <ScalarProperty Name="IsPraise" ColumnName="IsPraise" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
@@ -133,6 +134,7 @@
     <EntitySetMapping Name="vw_MistakesByLanguage">
       <EntityTypeMapping TypeName="HablameModel.vw_MistakesByLanguage">
         <MappingFragment StoreEntitySet="vw_MistakesByLanguage">
+          <ScalarProperty Name="IsPraise" ColumnName="IsPraise" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
@@ -144,6 +146,7 @@
     <EntitySetMapping Name="vw_MistakesByStudent">
       <EntityTypeMapping TypeName="HablameModel.vw_MistakesByStudent">
         <MappingFragment StoreEntitySet="vw_MistakesByStudent">
+          <ScalarProperty Name="IsPraise" ColumnName="IsPraise" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="StudentId" ColumnName="StudentId" />
@@ -155,6 +158,7 @@
     <EntitySetMapping Name="vw_MistakeMadeSummary">
       <EntityTypeMapping TypeName="HablameModel.vw_MistakeMadeSummary">
         <MappingFragment StoreEntitySet="vw_MistakeMadeSummary">
+          <ScalarProperty Name="IsPraise" ColumnName="IsPraise" />
           <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
           <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
           <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />

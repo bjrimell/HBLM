@@ -209,12 +209,12 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr>
-                                        <th>Spoken</th>
-                                        <th>Correct</th>
-                                        <th>Grammar</th>
-                                        <th>Vocab</th>
-                                        <th>Pronunciation</th>
-                                        <th>When</th>
+                                        <th><span style="color:red" class="glyphicon glyphicon-comment"></span></th>
+                                        <th><span style="color:darkseagreen" class="glyphicon glyphicon-ok-sign"></span></th>
+                                        <th>G</th>
+                                        <th>V</th>
+                                        <th>P</th>
+                                        <th><span class="glyphicon glyphicon-time"></span></th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -223,8 +223,8 @@
                                         foreach (var mistakeMade in Model.LatestSessionMistakes)
                                         {
                                             <tr>
-                                                <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistakeMade.SpokenValue</td>
-                                                <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistakeMade.CorrectValue</td>
+                                                <td><strong>@mistakeMade.SpokenValue</strong></td>
+                                                <td> @mistakeMade.CorrectValue</td>
                                                 <td> @if (mistakeMade.IsGrammar)
                                                 {<span class="glyphicon glyphicon-ok"></span>}
                                                 else
@@ -255,12 +255,12 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr>
-                                        <th>Spoken</th>
-                                        <th>Correct</th>
-                                        <th>Grammar</th>
-                                        <th>Vocab</th>
-                                        <th>Pronunciation</th>
-                                        <th>Occurences</th>
+                                        <th><span style="color:red" class="glyphicon glyphicon-comment"></span></th>
+                                        <th><span style="color:darkseagreen" class="glyphicon glyphicon-ok-sign"></span></th>
+                                        <th>G</th>
+                                        <th>V</th>
+                                        <th>P</th>
+                                        <th><span class="glyphicon glyphicon-signal"></span></th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -274,7 +274,7 @@
                                                 <td> @if (mistake.IsGrammar) {<span class="glyphicon glyphicon-ok"></span>}else{ <span class="glyphicon glyphicon-remove"></span>}</td>
                                                 <td>@if (mistake.IsVocab){<span class="glyphicon glyphicon-ok"></span>}else {<span class="glyphicon glyphicon-remove"></span>}</td>
                                                 <td>@if (mistake.IsPronunciation){<span class="glyphicon glyphicon-ok"></span>}else{<span class="glyphicon glyphicon-remove"></span>}</td>
-                                                <td>@mistake.Count</td>
+                                                <td><span class="badge">@mistake.Count</span></td>
                                                 <td>
                                                     <form method="post">
                                                         <input type="hidden" name="conversationId" id="conversationId-repeat-mostCommonSessionMistakes" value="@Model.ConversationId" />
@@ -292,9 +292,9 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr>
-                                        <th>Spoken</th>
-                                        <th>Correct</th>
-                                        <th>Occurences (all-time)</th>
+                                        <th><span style="color:red" class="glyphicon glyphicon-comment"></span></th>
+                                        <th><span style="color:darkseagreen" class="glyphicon glyphicon-ok-sign"></span></th>
+                                        <th><span class="glyphicon glyphicon-signal"></span></th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -305,7 +305,7 @@
                                             <tr>
                                                 <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
                                                 <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
-                                                <td>@mistake.Count</td>
+                                                <td><span class="badge">@mistake.Count</span></td>
                                                 <td>
                                                     <form method="post">
                                                         <input type="hidden" name="conversationId" id="conversationId-repeat-mostCommonMistakesForStudent" value="@Model.ConversationId" />
@@ -323,9 +323,9 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr>
-                                        <th>Spoken</th>
-                                        <th>Correct</th>
-                                        <th>Occurences (all-time)</th>
+                                        <th><span style="color:red" class="glyphicon glyphicon-comment"></span></th>
+                                        <th><span style="color:darkseagreen" class="glyphicon glyphicon-ok-sign"></span></th>
+                                        <th><span class="glyphicon glyphicon-signal"></span></th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -336,7 +336,7 @@
                                             <tr>
                                                 <td><span style="color:red" class="glyphicon glyphicon-remove"></span> @mistake.SpokenValue</td>
                                                 <td><span style="color:darkseagreen" class="glyphicon glyphicon-ok"></span> @mistake.CorrectValue</td>
-                                                <td>@mistake.Count</td>
+                                                <td><span class="badge">@mistake.Count</span></td>
                                                 <td>
                                                     <form method="post">
                                                         <input type="hidden" name="conversationId" id="conversationId-repeat-topGlobalMistakesForLanguage" value="@Model.ConversationId" />

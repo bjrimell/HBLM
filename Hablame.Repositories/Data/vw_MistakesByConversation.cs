@@ -19,5 +19,6 @@ namespace Hablame.Repositories.Data
         public System.Guid ConversationId { get; set; }
         public Nullable<int> Count { get; set; }
         public System.Guid Id { get; set; }
+        public Nullable<bool> IsPraise { get; set; }
     }
 }

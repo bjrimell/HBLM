@@ -22,5 +22,6 @@ namespace Hablame.Repositories.Data
         public bool IsGrammar { get; set; }
         public bool IsVocab { get; set; }
         public bool IsPronunciation { get; set; }
+        public Nullable<bool> IsPraise { get; set; }
     }
 }

@@ -149,6 +149,7 @@
     <Property Name="ConversationId" Type="Guid" Nullable="false" />
     <Property Name="Count" Type="Int32" />
     <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="IsPraise" Type="Boolean" />
   </EntityType>
   <EntityType Name="vw_MistakesByLanguage">
     <Key>
@@ -161,6 +162,7 @@
     <Property Name="LanguageId" Type="Guid" Nullable="false" />
     <Property Name="Count" Type="Int32" />
     <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="IsPraise" Type="Boolean" />
   </EntityType>
   <EntityType Name="vw_MistakesByStudent">
     <Key>
@@ -173,6 +175,7 @@
     <Property Name="StudentId" Type="Guid" Nullable="false" />
     <Property Name="Count" Type="Int32" />
     <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="IsPraise" Type="Boolean" />
   </EntityType>
   <Association Name="FK_Mistake_Conversation">
     <End Type="HablameModel.Conversation" Role="Conversation" Multiplicity="1" />
@@ -216,6 +219,7 @@
     <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
     <Property Name="IsVocab" Type="Boolean" Nullable="false" />
     <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
+    <Property Name="IsPraise" Type="Boolean" />
   </EntityType>
   <EntityType Name="MistakeAssignedMistakeType">
     <Key>

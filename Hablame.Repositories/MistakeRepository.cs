@@ -51,31 +51,31 @@ namespace Hablame.Repositories
             return allMistakes;
         }
 
-        public List<Domain.Entities.Mistake> GetTopMistakesForLanguage(Guid languageId)
+        public List<Domain.Entities.Mistake> GetTopRemarksForLanguage(Guid languageId, bool isPraise)
         {
             var mistakes = new List<Domain.Entities.Mistake>();
-            var response = db.vw_MistakesByLanguage.Where(m => m.LanguageId == languageId).OrderByDescending(m => m.Count).Take(10);
+            var response = db.vw_MistakesByLanguage.Where(m => m.LanguageId == languageId && m.IsPraise == isPraise).OrderByDescending(m => m.Count).Take(10);
             return Mapper.Map(response, mistakes);
         }
 
-        public List<Domain.Entities.MistakeMade> GetLatestSessionMistakes(Guid conversationId)
+        public List<Domain.Entities.MistakeMade> GetLatestSessionRemarks(Guid conversationId, bool isPraise)
         {
             var mistakes = new List<Domain.Entities.MistakeMade>();
-            var response = db.vw_MistakeMadeSummary.Where(m => m.ConversationId == conversationId).OrderByDescending(m => m.DateTime).Take(10);
+            var response = db.vw_MistakeMadeSummary.Where(m => m.ConversationId == conversationId && m.IsPraise == isPraise).OrderByDescending(m => m.DateTime).Take(10);
             return Mapper.Map(response, mistakes);
         }
 
-        public List<Domain.Entities.Mistake> GetTopMistakesForSession(Guid conversationId)
+        public List<Domain.Entities.Mistake> GetTopRemarksForSession(Guid conversationId, bool isPraise)
         {
             var mistakes = new List<Domain.Entities.Mistake>();
-            var response = db.vw_MistakesByConversation.Where(m => m.ConversationId == conversationId).OrderByDescending(m => m.Count).Take(10);
+            var response = db.vw_MistakesByConversation.Where(m => m.ConversationId == conversationId && m.IsPraise == isPraise).OrderByDescending(m => m.Count).Take(10);
             return Mapper.Map(response, mistakes);
         }
 
-        public List<Domain.Entities.Mistake> GetTopMistakesForStudent(Guid studentId)
+        public List<Domain.Entities.Mistake> GetTopRemarksForStudent(Guid studentId, bool isPraise)
         {
             var mistakes = new List<Domain.Entities.Mistake>();
-            var response = db.vw_MistakesByStudent.Where(m => m.StudentId == studentId).OrderByDescending(m => m.Count).Take(10);
+            var response = db.vw_MistakesByStudent.Where(m => m.StudentId == studentId && m.IsPraise == isPraise).OrderByDescending(m => m.Count).Take(10);
             return Mapper.Map(response, mistakes);
         }
 
