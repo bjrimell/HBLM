@@ -37,12 +37,13 @@
                 <div class="col-lg-12">
                     <div class="input-content">
                         <div class="row">
+                            <br />
                             <!-- Praise or Mistake? -->
                             <div class="col-lg-6">
-                                <a href="#" class="btn btn-success btn-lg" data-toggle="modal" data-target="#praiseModal"><span class="glyphicon glyphicon-thumbs-up"></span> Well said!</a>
+                                <a href="#" class="btn btn-success btn-xlarge" data-toggle="modal" data-target="#praiseModal"><span class="glyphicon glyphicon-thumbs-up"></span> Well said!</a>
                             </div>
                             <div class="col-lg-6">
-                                <a href="#" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#mistakeModal"><span class="glyphicon glyphicon-thumbs-down"></span> Not quite right!</a>
+                                <a href="#" class="btn btn-danger btn-xlarge" data-toggle="modal" data-target="#mistakeModal"><span class="glyphicon glyphicon-thumbs-down"></span> Not quite right!</a>
                             </div>
                         </div>
 
@@ -100,7 +101,7 @@
                                                                                 // close and start new row
                                                                             }
                                                                             <div class="col-xs-4">
-                                                                                <input type="checkbox" data-toggle="toggle" name="SelectedMistakeTypes" value="@item.PraiseTypeList[i].Id">
+                                                                                <input type="checkbox" data-toggle="toggle" data-onstyle="success" name="SelectedMistakeTypes" value="@item.PraiseTypeList[i].Id">
                                                                                 <br />@item.PraiseTypeList[i].Title
                                                                             </div>
                                                                         }
@@ -165,7 +166,7 @@
                                                                                 // close and start new row
                                                                             }
                                                                             <div class="col-xs-4">
-                                                                                <input type="checkbox" data-toggle="toggle" name="SelectedMistakeTypes" value="@item.MistakeTypeList[i].Id">
+                                                                                <input type="checkbox" data-toggle="toggle" data-onstyle="success" name="SelectedMistakeTypes" value="@item.MistakeTypeList[i].Id">
                                                                                 <br />@item.MistakeTypeList[i].Title
                                                                             </div>
                                                                         }
@@ -215,7 +216,7 @@
                                         <th><span style="font-size: 25px">V</span></th>
                                         <th><span style="font-size: 25px">P</span></th>
                                         <th><span class="glyphicon glyphicon-time" style="font-size: 25px"></span></th>
-                                        <th></th>
+                                        <th><span class="glyphicon glyphicon-wrench" style="font-size: 25px"></span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -261,7 +262,7 @@
                                         <th><span style="font-size: 25px">V</span></th>
                                         <th><span style="font-size: 25px">P</span></th>
                                         <th><span class="glyphicon glyphicon-signal" style="font-size: 25px"></span></th>
-                                        <th></th>
+                                        <th><span class="glyphicon glyphicon-wrench" style="font-size: 25px"></span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -298,7 +299,7 @@
                                         <th><span style="font-size: 25px">V</span></th>
                                         <th><span style="font-size: 25px">P</span></th>
                                         <th><span class="glyphicon glyphicon-signal" style="font-size: 25px"></span></th>
-                                        <th></th>
+                                        <th><span class="glyphicon glyphicon-wrench" style="font-size: 25px"></span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -344,7 +345,7 @@
                                         <th><span style="font-size: 25px">V</span></th>
                                         <th><span style="font-size: 25px">P</span></th>
                                         <th><span class="glyphicon glyphicon-signal" style="font-size: 25px"></span></th>
-                                        <th></th>
+                                        <th><span class="glyphicon glyphicon-wrench" style="font-size: 25px"></span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
