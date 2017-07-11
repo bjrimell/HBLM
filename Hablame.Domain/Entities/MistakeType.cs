@@ -20,5 +20,7 @@ namespace Hablame.Domain.Entities
         public bool IsVocab { get; set; }
 
         public bool IsPronunciation { get; set; }
+
+        public bool IsPraise { get; set; }
     }
 }

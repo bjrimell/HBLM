@@ -30,8 +30,7 @@ namespace Hablame.Repositories
 
         List<MistakeType> GetSelectedMistakeTypes(IEnumerable<string> selectedMistakeTypes, int rating);
 
-        List<Mistake> GetAllMistakesByConvoId(string conversationId);
+        List<Mistake> GetAllRemarksByConvoId(string conversationId, bool isPraise);
 
-        List<Mistake> GetAllPraiseByConvoId(string conversationId);
     }
 }

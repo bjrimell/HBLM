@@ -61,7 +61,7 @@ namespace Hablame.Services.Viewmodels
 
     public class MistakeTypeOptions
     {
-        public int RatingVisibleFor { get; set; }
+        public List<MistakeType> PraiseTypeList { get; set; }
 
         public List<MistakeType> MistakeTypeList { get; set; }
     }

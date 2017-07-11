@@ -46,6 +46,7 @@
           <Property Name="DateTime" Type="datetime" Nullable="false" />
           <Property Name="Rating" Type="int" Nullable="false" />
           <Property Name="IsPronunciation" Type="bit" Nullable="false" />
+          <Property Name="IsPraise" Type="bit" />
         </EntityType>
         <EntityType Name="MistakeAssignedMistakeType">
           <Key>
@@ -77,6 +78,7 @@
           <Property Name="IsGrammar" Type="bit" Nullable="false" />
           <Property Name="IsPronunciation" Type="bit" Nullable="false" />
           <Property Name="IsVocab" Type="bit" Nullable="false" />
+          <Property Name="IsPraise" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="MistakeTypeConfiguration">
           <Key>
@@ -413,6 +415,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
           <Property Name="IsVocab" Type="Boolean" Nullable="false" />
           <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
+          <Property Name="IsPraise" Type="Boolean" />
         </EntityType>
         <EntityType Name="MistakeMade">
           <Key>
@@ -436,6 +439,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
           <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
           <Property Name="IsVocab" Type="Boolean" Nullable="false" />
+          <Property Name="IsPraise" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -647,6 +651,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySetMapping Name="Mistakes">
             <EntityTypeMapping TypeName="HablameModel.Mistake">
               <MappingFragment StoreEntitySet="Mistake">
+                <ScalarProperty Name="IsPraise" ColumnName="IsPraise" />
                 <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
                 <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
                 <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />
@@ -673,6 +678,7 @@ warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a 
           <EntitySetMapping Name="MistakeTypes">
             <EntityTypeMapping TypeName="HablameModel.MistakeType">
               <MappingFragment StoreEntitySet="MistakeType">
+                <ScalarProperty Name="IsPraise" ColumnName="IsPraise" />
                 <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
                 <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
                 <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />

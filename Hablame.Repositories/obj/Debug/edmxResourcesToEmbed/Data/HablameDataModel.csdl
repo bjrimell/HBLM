@@ -92,6 +92,7 @@
     <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
     <Property Name="IsVocab" Type="Boolean" Nullable="false" />
     <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
+    <Property Name="IsPraise" Type="Boolean" />
   </EntityType>
   <EntityType Name="MistakeMade">
     <Key>
@@ -115,6 +116,7 @@
     <Property Name="IsGrammar" Type="Boolean" Nullable="false" />
     <Property Name="IsPronunciation" Type="Boolean" Nullable="false" />
     <Property Name="IsVocab" Type="Boolean" Nullable="false" />
+    <Property Name="IsPraise" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Person">
     <Key>

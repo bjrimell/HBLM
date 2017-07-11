@@ -41,6 +41,7 @@
     <Property Name="DateTime" Type="datetime" Nullable="false" />
     <Property Name="Rating" Type="int" Nullable="false" />
     <Property Name="IsPronunciation" Type="bit" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" />
   </EntityType>
   <EntityType Name="MistakeAssignedMistakeType">
     <Key>
@@ -72,6 +73,7 @@
     <Property Name="IsGrammar" Type="bit" Nullable="false" />
     <Property Name="IsPronunciation" Type="bit" Nullable="false" />
     <Property Name="IsVocab" Type="bit" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="MistakeTypeConfiguration">
     <Key>

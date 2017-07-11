@@ -147,19 +147,11 @@ namespace Hablame.Repositories
             return Mapper.Map(response, mistakeTypes);
         }
 
-        public List<Domain.Entities.Mistake> GetAllMistakesByConvoId(string conversationId)
+        public List<Domain.Entities.Mistake> GetAllRemarksByConvoId(string conversationId, bool isPraise)
         {
             var conversationGuid = Guid.Parse(conversationId);
             var mistakes = new List<Domain.Entities.Mistake>();
-            var response = db.vw_MistakeMadeSummary.Where(m => m.ConversationId == conversationGuid);
-            return Mapper.Map(response, mistakes);
-        }
-
-        public List<Domain.Entities.Mistake> GetAllPraiseByConvoId(string conversationId)
-        {
-            var conversationGuid = Guid.Parse(conversationId);
-            var mistakes = new List<Domain.Entities.Mistake>();
-            var response = db.vw_MistakeMadeSummary.Where(m => m.ConversationId == conversationGuid);
+            var response = db.Mistakes.Where(m => m.ConversationId == conversationGuid && m.IsPraise == isPraise);
             return Mapper.Map(response, mistakes);
         }
     }

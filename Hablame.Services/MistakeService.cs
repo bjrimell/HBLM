@@ -26,12 +26,12 @@ namespace Hablame.Services
             return viewModel;
         }
 
-        public MistakeMade CreateMistakeMade(Guid conversationId, int rating, string spokenValue, string correctValue, IEnumerable<string> selectedMistakeTypes, string repeatedMistakeId)
+        public MistakeMade CreateMistakeMade(Guid conversationId, int rating, string spokenValue, string correctValue, IEnumerable<string> selectedMistakeTypes, string repeatedMistakeId, bool isPraise)
         {
             var mistakeMade = new MistakeMade
             {
                 Id = Guid.NewGuid(),
-                MistakeId = this.SetMistakeId(repeatedMistakeId, correctValue, spokenValue, rating, conversationId, selectedMistakeTypes),
+                MistakeId = this.SetMistakeId(repeatedMistakeId, correctValue, spokenValue, rating, conversationId, selectedMistakeTypes, isPraise),
                 ConversationId = conversationId,
                 DateTime = DateTime.Now,
             };
@@ -41,7 +41,7 @@ namespace Hablame.Services
             return mistakeMade;
         }
 
-        private Guid SetMistakeId(string repeatedMistakeId, string correctValue, string spokenValue, int rating, Guid conversationId, IEnumerable<string> selectedMistakeTypes)
+        private Guid SetMistakeId(string repeatedMistakeId, string correctValue, string spokenValue, int rating, Guid conversationId, IEnumerable<string> selectedMistakeTypes, bool isPraise)
         {
             // If we are repeating an existing mistake, just use that ID
             // If not, see if a matching Mistake already exists in the DB
@@ -53,7 +53,7 @@ namespace Hablame.Services
                 // early out if we know we are reusing an existing Mistake
             }
 
-            var matchingMistake = this.mistakeRepository.GetAllMistakes().Where(m => m.CorrectValue == correctValue && m.SpokenValue == spokenValue && m.Rating == rating).FirstOrDefault();
+            var matchingMistake = this.mistakeRepository.GetAllMistakes().Where(m => m.CorrectValue == correctValue && m.SpokenValue == spokenValue && m.Rating == rating && m.IsPraise == isPraise).FirstOrDefault();
             if (matchingMistake != null)
             {
                 return matchingMistake.Id;
@@ -76,7 +76,8 @@ namespace Hablame.Services
                     Rating = rating,
                     IsGrammar = validMistakeTypesSelected.Any(m => m.IsGrammar),
                     IsPronunciation = validMistakeTypesSelected.Any(m => m.IsPronunciation),
-                    IsVocab = validMistakeTypesSelected.Any(m => m.IsVocab)
+                    IsVocab = validMistakeTypesSelected.Any(m => m.IsVocab),
+                    IsPraise = isPraise
                 };
 
                 this.mistakeRepository.CreateNewMistake(mistake, validMistakeTypesSelected);
@@ -86,13 +87,13 @@ namespace Hablame.Services
 
         private List<MistakeType> GenerateValidMistakeTypes(IEnumerable<string> selectedMistakeTypeIds, int rating)
         {
-            var validSelectedMistakeTypes = new List<MistakeType>();
+            //var validSelectedMistakeTypes = new List<MistakeType>();
 
-            var selectedMistakeTypes = this.mistakeRepository.GetSelectedMistakeTypes(selectedMistakeTypeIds, rating);
+            return this.mistakeRepository.GetSelectedMistakeTypes(selectedMistakeTypeIds, rating);
 
-            validSelectedMistakeTypes = selectedMistakeTypes.Where(m => m.MinimumRatingLevelVisibility <= rating && m.MaximumRatingLevelVisibility >= rating).ToList();
+            //validSelectedMistakeTypes = selectedMistakeTypes.Where(m => m.MinimumRatingLevelVisibility <= rating && m.MaximumRatingLevelVisibility >= rating).ToList();
 
-            return validSelectedMistakeTypes;
+            //return validSelectedMistakeTypes;
         }
     }
 }

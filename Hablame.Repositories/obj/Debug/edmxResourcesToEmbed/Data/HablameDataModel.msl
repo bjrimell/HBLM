@@ -59,6 +59,7 @@
     <EntitySetMapping Name="Mistakes">
       <EntityTypeMapping TypeName="HablameModel.Mistake">
         <MappingFragment StoreEntitySet="Mistake">
+          <ScalarProperty Name="IsPraise" ColumnName="IsPraise" />
           <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
           <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
           <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />
@@ -85,6 +86,7 @@
     <EntitySetMapping Name="MistakeTypes">
       <EntityTypeMapping TypeName="HablameModel.MistakeType">
         <MappingFragment StoreEntitySet="MistakeType">
+          <ScalarProperty Name="IsPraise" ColumnName="IsPraise" />
           <ScalarProperty Name="IsVocab" ColumnName="IsVocab" />
           <ScalarProperty Name="IsPronunciation" ColumnName="IsPronunciation" />
           <ScalarProperty Name="IsGrammar" ColumnName="IsGrammar" />

@@ -42,6 +42,7 @@ namespace Hablame.Controllers
             string spokenValue,
             string correctValue,
             IEnumerable<string> SelectedMistakeTypes,
+            bool isPraise,
             int rating = 0,
             string mistakeId = null)
         {
@@ -53,9 +54,8 @@ namespace Hablame.Controllers
                 spokenValue,
                 correctValue,
                 SelectedMistakeTypes,
-                mistakeId);
-
-            //var validMistakeTypes = this.mistakeService.GenerateValidMistakeTypes(SelectedMistakeTypes, rating);
+                mistakeId,
+                isPraise);
 
             var viewModel = this.conversationService.RecreateConversationViewModel(conversationGuid, spokenValue, correctValue);
 

@@ -36,82 +36,158 @@
             <div class="row content">
                 <div class="col-lg-12">
                     <div class="input-content">
-                        <form method="post">
-                            <div class="row">
-                                <!-- Spoken value Input -->
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <h3><label for="inputlg">@Model.Student.Forename said:</label></h3>
-                                        <input class="form-control input-lg" id="spokenValue" name="spokenValue" type="text">
-                                    </div>
-                                </div>
-                                <!-- Rating Input -->
-                                <div class="col-lg-6">
-                                    <h3>Rating</h3>
-                                    <ul class="rate-area">
-                                        <input type="radio" id="5-star" name="rating" value="5" onclick="if(this.checked){showMistakeContent(false, 5)}" />
-                                        <label for="5-star" title="Amazing">5 stars</label>
-                                        <input type="radio" id="4-star" name="rating" value="4" onclick="if(this.checked){showMistakeContent(true, 4)}" />
-                                        <label for="4-star" title="Good">4 stars</label>
-                                        <input type="radio" id="3-star" name="rating" value="3" onclick="if(this.checked){showMistakeContent(true, 3)}" />
-                                        <label for="3-star" title="Average">3 stars</label>
-                                        <input type="radio" id="2-star" name="rating" value="2" onclick="if(this.checked){showMistakeContent(true, 2)}" />
-                                        <label for="2-star" title="Not Good">2 stars</label>
-                                        <input type="radio" id="1-star" name="rating" value="1" onclick="if(this.checked){showMistakeContent(true, 1)}" />
-                                        <label for="1-star" title="Bad">1 star</label>
-                                    </ul>
-                                </div>
+                        <div class="row">
+                            <!-- Praise or Mistake? -->
+                            <div class="col-lg-6">
+                                <a href="#" class="btn btn-success btn-lg" data-toggle="modal" data-target="#praiseModal"><span class="glyphicon glyphicon-thumbs-up"></span> Well said!</a>
                             </div>
-                            <div class="row">
-                                <!-- Mistake Content (hidden by default) -->
-                                <div class="col-lg-12" id="mistakeContent" hidden="hidden">
-                                    <div class="form-group">
-                                        <label for="inputlg">Suggested improvement:</label>
-                                        <input class="form-control input-lg" id="correctValue" name="correctValue" type="text">
-                                        <br />
-                                    </div>
-                                </div>
+                            <div class="col-lg-6">
+                                <a href="#" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#mistakeModal"><span class="glyphicon glyphicon-thumbs-down"></span> Not quite right!</a>
                             </div>
-                            <div class="row">
-                                <!-- Mistake Type Options -->
-                                <div id="mistakeTypeOptions" class="col-lg-12">
-                                    <!-- Mistake Category Section - note the dynamic div name-->
-                                    <!-- This section displays only the MistakeType Options for the particular rating that has been given to the student for their 'mistake' -->
-                                    <!-- 5 different divs are created, hidden by default, controlled by Jquery -->
-                                    @{
-                                        for (var i = 1; i <= 5; i++)
-                                        {
-                                            <div id="options-rating-@i" hidden="hidden">
+                        </div>
 
-                                                @foreach (var ratingSet in @Model.MistakeTypeOptions.Where(m => m.RatingVisibleFor == i))
-                                                {
-                                                    foreach (var item in ratingSet.MistakeTypeList)
-                                                    {
-                                                        <label class="checkbox-inline">
-                                                            <input type="checkbox" data-toggle="toggle" name="SelectedMistakeTypes" value="@item.Id"> <strong>@item.Title</strong>
-                                                        </label>
-                                                    }
-                                                }
-                                            </div>
-                                        }
-                                    }
+                        <div class="row">
+                            
+                            <!-- Praise! -->
+                            <div id="praiseModal" class="modal modal-lg fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Add New Praise</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <h3><label for="inputlg">@Model.Student.Forename said:</label></h3>
+                                                            <input class="form-control input-lg" id="praise-spokenValue" name="spokenValue" type="text">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <ul class="rate-area">
+                                                                <input type="radio" id="praise-5-star" name="rating" value="5" onclick="if (this.checked) { showSubmitButton(true) }" />
+                                                                <label for="praise-5-star" title="Amazing">5 stars</label>
+                                                                <input type="radio" id="praise-4-star" name="rating" value="4" onclick="if (this.checked) { showSubmitButton(true) }" />
+                                                                <label for="praise-4-star" title="Good">4 stars</label>
+                                                                <input type="radio" id="praise-3-star" name="rating" value="3" onclick="if (this.checked) { showSubmitButton(true) }" />
+                                                                <label for="praise-3-star" title="Average">3 stars</label>
+                                                                <input type="radio" id="praise-2-star" name="rating" value="2" onclick="if (this.checked) { showSubmitButton(true) }" />
+                                                                <label for="praise-2-star" title="Not Good">2 stars</label>
+                                                                <input type="radio" id="praise-1-star" name="rating" value="1" onclick="if (this.checked) { showSubmitButton(true) }" />
+                                                                <label for="praise-1-star" title="Bad">1 star</label>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            @{
+                                                                foreach (var item in @Model.MistakeTypeOptions)
+                                                                {
+                                                                    <div class="row">
+                                                                        @for (int i = 0; i < @item.PraiseTypeList.Count(); i++)
+                                                                        {
+                                                                            if (i > 0 && i % 3 == 0)
+                                                                            {
+                                                                                @:</div><div class="row">
+                                                                                // close and start new row
+                                                                            }
+                                                                            <div class="col-xs-4">
+                                                                                <input type="checkbox" data-toggle="toggle" name="SelectedMistakeTypes" value="@item.PraiseTypeList[i].Id">
+                                                                                <br />@item.PraiseTypeList[i].Title
+                                                                            </div>
+                                                                        }
+                                                                    </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="conversationId" id="praise-conversationId" value="@Model.ConversationId" />
+                                                <input type="hidden" name="isPraise" id="isPraise" value="true" />
+                                                <button type="submit" name="submit-praise" id="submit-praise" class="btn btn-lg btn-primary" disabled="disabled">SUBMIT</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div class="row">
-                                <!-- Praise Content (hidden by default) -->
-                                <div id="praiseContent" class="col-lg-12" hidden="hidden">
-                                    <h5>Great - praising your student will encourage motivation and confidence!</h5>
+
+                            <!-- Mistake Modal -->
+                            <div id="mistakeModal" class="modal modal-lg fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Add New Mistake</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <h3><label for="inputlg">@Model.Student.Forename said:</label></h3>
+                                                            <input class="form-control input-lg" id="mistake-spokenValue" name="spokenValue" type="text">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <h3><label for="inputlg">Suggested improvement:</label></h3>
+                                                            <input class="form-control input-lg" id="correctValue" name="correctValue" type="text">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            @{
+                                                                foreach (var item in @Model.MistakeTypeOptions)
+                                                                {
+                                                                    <div class="row">
+                                                                        @for (int i = 0; i < @item.MistakeTypeList.Count(); i++)
+                                                                        {
+                                                                            if (i > 0 && i % 3 == 0)
+                                                                            {
+                                                                                @:</div><div class="row">
+                                                                                // close and start new row
+                                                                            }
+                                                                            <div class="col-xs-4">
+                                                                                <input type="checkbox" data-toggle="toggle" name="SelectedMistakeTypes" value="@item.MistakeTypeList[i].Id">
+                                                                                <br />@item.MistakeTypeList[i].Title
+                                                                            </div>
+                                                                        }
+                                                                    </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="conversationId" id="mistake-conversationId" value="@Model.ConversationId" />
+                                                <input type="hidden" name="isPraise" id="isPraise" value="false" />
+                                                <button type="submit" name="submit-mistake" id="submit-mistake" class="btn btn-lg btn-primary">SUBMIT</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                            <br /> 
-                            <div class="row">
-                                <!-- Form submission content -->
-                                <div id="submitForm" class="col-lg-12">
-                                    <input type="hidden" name="conversationId" id="conversationId" value="@Model.ConversationId" />
-                                    <button type="submit" name="submit-mistake" id="submit-mistake" class="btn btn-lg btn-primary" disabled="disabled">SUBMIT</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -335,22 +411,31 @@ $(document).ready(function(){
 </script>
 
 <script>
-    function showMistakeContent(show, rating) {
+    function displayFormInputSection(praise) {
 
-        document.getElementById("mistakeContent").hidden = !show;
-        document.getElementById("praiseContent").hidden = show;
-        document.getElementById("submit-mistake").disabled = false;
-
-        // reset all rating options sections to hidden
-        document.getElementById("options-rating-1").hidden = true;
-        document.getElementById("options-rating-2").hidden = true;
-        document.getElementById("options-rating-3").hidden = true;
-        document.getElementById("options-rating-4").hidden = true;
-        document.getElementById("options-rating-5").hidden = true;
-
-        // set the selected rating's section to visible
-        document.getElementById("options-rating-" + rating).hidden = false;
+        document.getElementById("praiseForm").hidden = !praise;
+        document.getElementById("mistakeForm").hidden = praise;
     }
+</script>
+
+<script>
+    function showSubmitButton(praise) {
+        // enable the correct submit button after a rating has been chosen
+        document.getElementById("submit-mistake").disabled = !praise ? "" : "disabled";
+        document.getElementById("submit-praise").disabled = praise ? "" : "disabled";
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.submit-mistake').attr('disabled', true);
+        $('#correctValue').keyup(function () {
+            if ($(this).val().length != 0)
+                $('.submit-mistake').attr('disabled', false);
+            else
+                $('.submit-mistake').attr('disabled', true);
+        })
+    });
 </script>
 
 <script>

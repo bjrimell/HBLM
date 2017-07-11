@@ -82,6 +82,7 @@ namespace Hablame.Services
             var savedConversation = this.conversationRepository.RetrieveConversation(conversationId);
             var student = this.friendService.GetUserById(savedConversation.StudentId);
             var mistakeTypeConfig = this.conversationRepository.GetConversationMistakeTypeSettings(savedConversation.MistakeTypeOptionsConfigId);
+            var language = this.languageService.GetLanguageById(savedConversation.LanguageId);
 
             var viewModel = new ConversationViewModel
             {
@@ -94,7 +95,7 @@ namespace Hablame.Services
                 MostCommonMistakesForStudent = this.mistakeRepository.GetTopMistakesForStudent(student.Id),
                 StartDateTime = savedConversation.StartDateTime,
                 EndDateTime = savedConversation.EndDateTime,
-                Language = savedConversation.Language,
+                Language = language,
                 MistakeTypeOptions = this.GetMistakeTypeOptions(savedConversation.LanguageId),
                 MistakeTypeOptionsConfigId = savedConversation.MistakeTypeOptionsConfigId,
                 MistakeTypeConfig = mistakeTypeConfig
@@ -185,8 +186,8 @@ namespace Hablame.Services
             var viewModel = new ConversationReportViewModel
             {
                 Conversation = this.conversationRepository.GetConversationReport(conversationId),
-                MistakeList = this.mistakeRepository.GetAllMistakesByConvoId(conversationId),
-                PraiseList = this.mistakeRepository.GetAllPraiseByConvoId(conversationId)
+                MistakeList = this.mistakeRepository.GetAllRemarksByConvoId(conversationId, false),
+                PraiseList = this.mistakeRepository.GetAllRemarksByConvoId(conversationId, true)
             };
 
             return viewModel;
@@ -227,16 +228,16 @@ namespace Hablame.Services
             var response = new List<MistakeTypeOptions>();
             var allMistakes = this.mistakeRepository.GetMistakeTypes(languageId);
 
-            // Started with 1 rather than the traditional 0 as it will be used for the rating levels 1 -5
-            for (int i = 1; i <= 5; i++)
+            var praiseOptions = allMistakes.Where(m => m.IsPraise == true).ToList();
+            var mistakeOptions = allMistakes.Where(m => m.IsPraise == false).ToList();
+            var mistakeTypeOptions = new MistakeTypeOptions
             {
-                var mistakeTypeOptions = new MistakeTypeOptions
-                {
-                    RatingVisibleFor = i,
-                    MistakeTypeList = allMistakes.Where(m => m.MaximumRatingLevelVisibility >= i && m.MinimumRatingLevelVisibility <= i).ToList()
-                };
-                response.Add(mistakeTypeOptions);
-            }
+                MistakeTypeList = mistakeOptions,
+                PraiseTypeList = praiseOptions
+            };
+
+            response.Add(mistakeTypeOptions);
+
             return response;
         }
 
