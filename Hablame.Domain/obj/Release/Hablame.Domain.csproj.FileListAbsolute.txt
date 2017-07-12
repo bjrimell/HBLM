@@ -1,0 +1,9 @@
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Release\Hablame.Domain.dll
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Release\Hablame.Domain.pdb
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Release\Castle.Core.dll
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Release\Castle.Windsor.dll
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Release\Castle.Core.xml
+D:\Code\priv\language\HBLM\Hablame.Domain\bin\Release\Castle.Windsor.xml
+D:\Code\priv\language\HBLM\Hablame.Domain\obj\Release\Hablame.Domain.csprojResolveAssemblyReference.cache
+D:\Code\priv\language\HBLM\Hablame.Domain\obj\Release\Hablame.Domain.dll
+D:\Code\priv\language\HBLM\Hablame.Domain\obj\Release\Hablame.Domain.pdb

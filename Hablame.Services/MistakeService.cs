@@ -38,6 +38,9 @@ namespace Hablame.Services
 
             this.mistakeRepository.CreateNewMistakeMade(mistakeMade);
 
+            // this is added after the db insertt, because it is not needed in the db, however it is needed for messaging.
+            mistakeMade.IsPraise = isPraise;
+
             return mistakeMade;
         }
 

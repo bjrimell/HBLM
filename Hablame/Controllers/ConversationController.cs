@@ -42,7 +42,7 @@ namespace Hablame.Controllers
             string spokenValue,
             string correctValue,
             IEnumerable<string> SelectedMistakeTypes,
-            bool isPraise,
+            bool isPraise = false,
             int rating = 0,
             string mistakeId = null)
         {

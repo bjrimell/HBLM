@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HablameModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Conversation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TeacherId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+    <Property Name="EndDateTime" Type="datetime" />
+    <Property Name="DurationMinutes" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MistakeTypeOptionsConfigId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LanguageFamilyId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LanguageFamily">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mistake">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="IsGrammar" Type="bit" Nullable="false" />
+    <Property Name="IsVocab" Type="bit" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="Rating" Type="int" Nullable="false" />
+    <Property Name="IsPronunciation" Type="bit" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" />
+  </EntityType>
+  <EntityType Name="MistakeAssignedMistakeType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MistakeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MistakeMade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MistakeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="Rating" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MistakeType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MinimumRatingLevelVisibility" Type="int" Nullable="false" />
+    <Property Name="MaximumRatingLevelVisibility" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsGrammar" Type="bit" Nullable="false" />
+    <Property Name="IsPronunciation" Type="bit" Nullable="false" />
+    <Property Name="IsVocab" Type="bit" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MistakeTypeConfiguration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstMistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SecondMistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ThirdMistakeTypeId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Forename" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PremiumAccount" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_ConversationSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_ConversationSummary">
+    <Key>
+      <PropertyRef Name="StartDateTime" />
+      <PropertyRef Name="StudentForename" />
+      <PropertyRef Name="StudentSurname" />
+      <PropertyRef Name="TeacherForename" />
+      <PropertyRef Name="TeacherSurname" />
+      <PropertyRef Name="DurationMinutes" />
+      <PropertyRef Name="ConversationId" />
+      <PropertyRef Name="LanguageId" />
+      <PropertyRef Name="MistakeTypeOptionsConfigId" />
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+    <Property Name="StudentForename" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="StudentSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TeacherForename" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TeacherSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" />
+    <Property Name="ConfigurationName" Type="varchar" MaxLength="50" />
+    <Property Name="DurationMinutes" Type="int" Nullable="false" />
+    <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MistakeTypeOptionsConfigId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TeacherId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_MistakeMadeSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_MistakeMadeSummary">
+    <Key>
+      <PropertyRef Name="MistakeId" />
+      <PropertyRef Name="ConversationId" />
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="DateTime" />
+      <PropertyRef Name="IsGrammar" />
+      <PropertyRef Name="IsVocab" />
+      <PropertyRef Name="IsPronunciation" />
+    </Key>
+    <Property Name="MistakeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="IsGrammar" Type="bit" Nullable="false" />
+    <Property Name="IsVocab" Type="bit" Nullable="false" />
+    <Property Name="IsPronunciation" Type="bit" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_Mistakes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Mistakes">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="SpokenValue" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="Count" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_MistakesByConversation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_MistakesByConversation">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="ConversationId" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="ConversationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" />
+    <Property Name="Count" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_MistakesByLanguage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_MistakesByLanguage">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" />
+    <Property Name="Count" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hablame.dbo.vw_MistakesByStudent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_MistakesByStudent">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="SpokenValue" />
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SpokenValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CorrectValue" Type="nvarchar(max)" />
+    <Property Name="StudentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsPraise" Type="bit" />
+    <Property Name="Count" Type="int" />
+  </EntityType>
+  <Association Name="FK_Language_Family">
+    <End Role="LanguageFamily" Type="Self.LanguageFamily" Multiplicity="1" />
+    <End Role="Language" Type="Self.Language" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LanguageFamily">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Language">
+        <PropertyRef Name="LanguageFamilyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mistake_Conversation">
+    <End Role="Conversation" Type="Self.Conversation" Multiplicity="1" />
+    <End Role="Mistake" Type="Self.Mistake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conversation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mistake">
+        <PropertyRef Name="ConversationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="getTopMistakesByConversationId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="conversationId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="getTopMistakesByLanguageId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="languageId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <EntityContainer Name="HablameModelStoreContainer">
+    <EntitySet Name="Conversation" EntityType="Self.Conversation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LanguageFamily" EntityType="Self.LanguageFamily" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MistakeAssignedMistakeType" EntityType="Self.MistakeAssignedMistakeType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MistakeMade" EntityType="Self.MistakeMade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MistakeType" EntityType="Self.MistakeType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MistakeTypeConfiguration" EntityType="Self.MistakeTypeConfiguration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_ConversationSummary" EntityType="Self.vw_ConversationSummary" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_ConversationSummary].[StartDateTime] AS [StartDateTime], 
+    [vw_ConversationSummary].[StudentForename] AS [StudentForename], 
+    [vw_ConversationSummary].[StudentSurname] AS [StudentSurname], 
+    [vw_ConversationSummary].[TeacherForename] AS [TeacherForename], 
+    [vw_ConversationSummary].[TeacherSurname] AS [TeacherSurname], 
+    [vw_ConversationSummary].[Language] AS [Language], 
+    [vw_ConversationSummary].[ConfigurationName] AS [ConfigurationName], 
+    [vw_ConversationSummary].[DurationMinutes] AS [DurationMinutes], 
+    [vw_ConversationSummary].[ConversationId] AS [ConversationId], 
+    [vw_ConversationSummary].[LanguageId] AS [LanguageId], 
+    [vw_ConversationSummary].[MistakeTypeOptionsConfigId] AS [MistakeTypeOptionsConfigId], 
+    [vw_ConversationSummary].[StudentId] AS [StudentId], 
+    [vw_ConversationSummary].[TeacherId] AS [TeacherId]
+    FROM [dbo].[vw_ConversationSummary] AS [vw_ConversationSummary]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_MistakeMadeSummary" EntityType="Self.vw_MistakeMadeSummary" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_MistakeMadeSummary].[MistakeId] AS [MistakeId], 
+    [vw_MistakeMadeSummary].[ConversationId] AS [ConversationId], 
+    [vw_MistakeMadeSummary].[SpokenValue] AS [SpokenValue], 
+    [vw_MistakeMadeSummary].[CorrectValue] AS [CorrectValue], 
+    [vw_MistakeMadeSummary].[DateTime] AS [DateTime], 
+    [vw_MistakeMadeSummary].[IsGrammar] AS [IsGrammar], 
+    [vw_MistakeMadeSummary].[IsVocab] AS [IsVocab], 
+    [vw_MistakeMadeSummary].[IsPronunciation] AS [IsPronunciation], 
+    [vw_MistakeMadeSummary].[IsPraise] AS [IsPraise]
+    FROM [dbo].[vw_MistakeMadeSummary] AS [vw_MistakeMadeSummary]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_Mistakes" EntityType="Self.vw_Mistakes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Mistakes].[Id] AS [Id], 
+    [vw_Mistakes].[SpokenValue] AS [SpokenValue], 
+    [vw_Mistakes].[CorrectValue] AS [CorrectValue], 
+    [vw_Mistakes].[Count] AS [Count]
+    FROM [dbo].[vw_Mistakes] AS [vw_Mistakes]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_MistakesByConversation" EntityType="Self.vw_MistakesByConversation" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_MistakesByConversation].[Id] AS [Id], 
+    [vw_MistakesByConversation].[SpokenValue] AS [SpokenValue], 
+    [vw_MistakesByConversation].[CorrectValue] AS [CorrectValue], 
+    [vw_MistakesByConversation].[ConversationId] AS [ConversationId], 
+    [vw_MistakesByConversation].[IsPraise] AS [IsPraise], 
+    [vw_MistakesByConversation].[Count] AS [Count]
+    FROM [dbo].[vw_MistakesByConversation] AS [vw_MistakesByConversation]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_MistakesByLanguage" EntityType="Self.vw_MistakesByLanguage" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_MistakesByLanguage].[Id] AS [Id], 
+    [vw_MistakesByLanguage].[SpokenValue] AS [SpokenValue], 
+    [vw_MistakesByLanguage].[CorrectValue] AS [CorrectValue], 
+    [vw_MistakesByLanguage].[LanguageId] AS [LanguageId], 
+    [vw_MistakesByLanguage].[IsPraise] AS [IsPraise], 
+    [vw_MistakesByLanguage].[Count] AS [Count]
+    FROM [dbo].[vw_MistakesByLanguage] AS [vw_MistakesByLanguage]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_MistakesByStudent" EntityType="Self.vw_MistakesByStudent" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_MistakesByStudent].[Id] AS [Id], 
+    [vw_MistakesByStudent].[SpokenValue] AS [SpokenValue], 
+    [vw_MistakesByStudent].[CorrectValue] AS [CorrectValue], 
+    [vw_MistakesByStudent].[StudentId] AS [StudentId], 
+    [vw_MistakesByStudent].[IsPraise] AS [IsPraise], 
+    [vw_MistakesByStudent].[Count] AS [Count]
+    FROM [dbo].[vw_MistakesByStudent] AS [vw_MistakesByStudent]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Language_Family" Association="Self.FK_Language_Family">
+      <End Role="LanguageFamily" EntitySet="LanguageFamily" />
+      <End Role="Language" EntitySet="Language" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mistake_Conversation" Association="Self.FK_Mistake_Conversation">
+      <End Role="Conversation" EntitySet="Conversation" />
+      <End Role="Mistake" EntitySet="Mistake" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

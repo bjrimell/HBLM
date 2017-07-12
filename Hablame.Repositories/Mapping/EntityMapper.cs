@@ -50,6 +50,9 @@ namespace Hablame.Repositories.Mapping
                 cfg.CreateMap<Data.MistakeMade, Domain.Entities.MistakeMade>();
                 cfg.CreateMap<Data.vw_MistakeMadeSummary, Domain.Entities.MistakeMade>();
 
+                // User mappings
+                cfg.CreateMap<Data.Person, Domain.Entities.User>();
+
             });
         }
     }

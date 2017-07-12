@@ -126,9 +126,9 @@ namespace Hablame.Services
             {
                 viewModel.NewMistakeMade = newMistakeMade;
             }
-            
-            viewModel.MistakeAdded = newMistakeMade.Rating < 5;
-            viewModel.PraiseAdded = newMistakeMade.Rating == 5;
+
+            viewModel.MistakeAdded = !newMistakeMade.IsPraise;
+            viewModel.PraiseAdded = newMistakeMade.IsPraise;
         }
 
         public ConversationSettingsViewModel SetupConvoSettingsViewModel(string conversationId, string teacherId, string mistakeTypeOptionsConfigId)

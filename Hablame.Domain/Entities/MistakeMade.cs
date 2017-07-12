@@ -44,5 +44,6 @@ namespace Hablame.Domain.Entities
 
         public int Rating { get; set; }
 
+        public bool IsPraise { get; set; }
     }
 }

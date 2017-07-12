@@ -1,0 +1,15 @@
+﻿@model Hablame.Services.Viewmodels.FriendListViewModel
+
+@{ 
+    if (@Model.FriendList != null)
+        {
+        foreach (var friend in @Model.FriendList)
+        {
+            <ul>
+                <li>
+                    <a href="student-page-not-yet-implemented?studentId=@friend.Id">@friend.Forename @friend.Surname</a>
+                </li>
+            </ul>
+        }
+    }
+}

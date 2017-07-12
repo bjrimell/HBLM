@@ -24,7 +24,7 @@ namespace Hablame.Services
         {
             var viewModel = new FriendListViewModel();
 
-            var allUsers = this.userRepository.GetAllMockUsers();
+            var allUsers = this.userRepository.GetAllUsers();
 
             viewModel.FriendList.AddRange(allUsers);
 
@@ -34,18 +34,18 @@ namespace Hablame.Services
         public List<User> GetFriendList(Guid teacherId)
         {
             // Todo: restrict to where student has friendship with techer, don't just bring them all back
-            return this.userRepository.GetAllMockUsers();
+            return this.userRepository.GetAllUsers();
         }
 
         public User GetUserById(Guid userId)
         {
-            var allUsers = this.userRepository.GetAllMockUsers();
+            var allUsers = this.userRepository.GetAllUsers();
             return allUsers.SingleOrDefault(m => m.Id == userId);
         }
 
         public List<SelectListItem> GetFriendSelectList(Guid teacherId)
         {
-            var allUsers = this.userRepository.GetAllMockUsers();
+            var allUsers = this.userRepository.GetAllUsers();
             List<SelectListItem> items = new List<SelectListItem>();
 
             foreach (var item in allUsers)

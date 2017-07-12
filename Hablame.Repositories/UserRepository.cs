@@ -8,10 +8,15 @@ using System.Data.Common;
 using System.Xml.Serialization;
 using Hablame.Domain.Entities;
 
+using Hablame.Repositories.Data;
+using AutoMapper;
+
 namespace Hablame.Repositories
 {
     public class UserRepository : IUserRepository
     {
+        private HablameDatabaseEntities db = new HablameDatabaseEntities();
+
         private string mockUserDataPath = @"D:\Code\priv\language\HBLM\Hablame.Repositories\Content\mock\User.xml";
         public List<User> GetAllMockUsers()
         {
@@ -23,6 +28,15 @@ namespace Hablame.Repositories
             }
 
             return users;
+        }
+
+        public List<User> GetAllUsers()
+        {
+            List<User> users = new List<User>();
+
+            var dbResponse = db.People.ToList();
+
+            return Mapper.Map(dbResponse, users);
         }
     }
 }

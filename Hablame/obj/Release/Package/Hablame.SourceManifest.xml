@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\Code\priv\language\HBLM\Hablame\obj\Release\Package\PackageTmp" />
+  <setAcl path="D:\Code\priv\language\HBLM\Hablame\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\Code\priv\language\HBLM\Hablame\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>

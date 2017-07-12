@@ -1,0 +1,22 @@
+﻿@model Hablame.Services.Viewmodels.RecentConversationsViewModel
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@{
+    foreach (var item in Model.ConversationSummaries)
+    {
+        <tr>
+            <td><a href="Report?conversationId=@item.ConversationId"><span class="glyphicon glyphicon-folder-close"></span></a></td>
+            <td>Conversation in @item.Language with @item.StudentForename @item.StudentSurname on @item.StartDateTime.ToShortDateString()</td>
+        </tr>
+        }
+    }
+    </tbody>
+</table>
+
+<button type="submit" class="btn btn-default">View All</button>

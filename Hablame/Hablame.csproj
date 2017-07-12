@@ -42,6 +42,17 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="HablameDb" Order="1" xmlns="">
+          <Destination Path="Server=tcp:hablame.database.windows.net,1433%3bInitial Catalog=HablameDb%3bPersist Security Info=False%3bUser ID=hablamedatabaseuser%3bPassword=Six13228Fuck1ngBA!%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b" />
+          <Object Type="DbFullSql" Enabled="True">
+            <PreSource Path="Server=tcp:hablame.database.windows.net,1433%3bInitial Catalog=HablameDb%3bPersist Security Info=False%3bUser ID=hablamedatabaseuser%3bPassword=Six13228Fuck1ngBA!%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\HablameDb_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -238,6 +249,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\hablame - Web Deploy %2810%29.pubxml" />
+    <None Include="Properties\PublishProfiles\HBLM.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

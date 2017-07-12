@@ -10,5 +10,7 @@ namespace Hablame.Repositories
     public interface IUserRepository
     {
         List<User> GetAllMockUsers();
+
+        List<User> GetAllUsers();
     }
 }
