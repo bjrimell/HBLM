@@ -25,12 +25,16 @@ namespace Hablame.Installers
 
             container.Register(Component.For<ILanguageService>().ImplementedBy<LanguageService>().LifestylePerWebRequest());
 
+            container.Register(Component.For<ISettingsService>().ImplementedBy<SettingsService>().LifestylePerWebRequest());
+
             // Repos
             container.Register(Component.For<IUserRepository>().ImplementedBy<UserRepository>().LifestylePerWebRequest());
 
             container.Register(Component.For<IMistakeRepository>().ImplementedBy<MistakeRepository>().LifestylePerWebRequest());
 
             container.Register(Component.For<IConversationRepository>().ImplementedBy<ConversationRepository>().LifestylePerWebRequest());
+
+            container.Register(Component.For<ISettingsRepository>().ImplementedBy<SettingsRepository>().LifestylePerWebRequest());
         }
     }
 }

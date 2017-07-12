@@ -1,0 +1,51 @@
+﻿@model Hablame.Services.Viewmodels.TeacherSettingsViewModel
+
+<h3>Add New Mistake Type</h3>
+
+<form method="post">
+    <div class="form-group">
+        <label for="email">What language does this belong to?</label>
+        @Html.DropDownList("studentId", Model.AllLanguages, new { @class = "btn btn-default dropdown-toggle" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewMistakeTypeTitle)
+        @Html.TextBoxFor(model => model.NewMistakeTypeTitle)
+    </div>
+    <div class="form-group">
+        <input type="checkbox" data-toggle="toggle" data-onstyle="success" name="IsGrammar" value="true">
+        @Html.Label("Is Grammar")
+
+        <input type="checkbox" data-toggle="toggle" data-onstyle="success" name="IsVocab" value="true">
+        @Html.Label("Is Vocab")
+
+        <input type="checkbox" data-toggle="toggle" data-onstyle="success" name="IsPronunciation" value="true">
+        @Html.Label("Is Pronunciation")
+
+        <input type="checkbox" data-toggle="toggle" data-onstyle="success" name="IsPraise" value="true">
+        @Html.Label("Is Praise")
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+<h3>Create New Mistake Group</h3>
+<form method="post">
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewMistakeGroupTitle)
+        @Html.TextBoxFor(model => model.NewMistakeGroupTitle)
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+<h3>Add Mistake Type to Existing Group</h3>
+<h4>Currently restricted to 3 per group - will be 9</h4>
+<form method="post">
+    <div class="form-group">
+        <label for="email">Select Mistake Type</label>
+        @Html.DropDownList("mistakeTypeId", Model.MistakeTypesForSelect, new { @class = "btn btn-default dropdown-toggle" })
+    </div>
+    <div class="form-group">
+        <label for="email">What group do you want to add this to?</label>
+        @Html.DropDownList("mistakeGroupId", Model.MistakeTypeConfigurationsForSelectBox, new { @class = "btn btn-default dropdown-toggle" })
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

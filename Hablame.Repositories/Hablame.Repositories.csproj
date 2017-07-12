@@ -160,9 +160,11 @@
     </Compile>
     <Compile Include="IConversationRepository.cs" />
     <Compile Include="IMistakeRepository.cs" />
+    <Compile Include="ISettingsRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="Mapping\EntityMapper.cs" />
     <Compile Include="MistakeRepository.cs" />
+    <Compile Include="SettingsRepository.cs" />
     <Compile Include="UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="ILanguageService.cs" />
     <Compile Include="IMistakeService.cs" />
+    <Compile Include="ISettingsService.cs" />
     <Compile Include="LanguageService.cs" />
     <Compile Include="MistakeService.cs" />
     <Compile Include="ConversationService.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="IFriendService.cs" />
     <Compile Include="IConversationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hablame.Domain\Hablame.Domain.csproj">

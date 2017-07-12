@@ -221,6 +221,7 @@
     <Compile Include="Controllers\MistakeController.cs" />
     <Compile Include="Controllers\ConversationController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -305,6 +306,8 @@
     <Content Include="Views\Conversation\_SetupConversation.cshtml" />
     <Content Include="Views\Conversation\_RecentConversations.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Settings\_ConversationSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
